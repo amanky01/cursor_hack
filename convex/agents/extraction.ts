@@ -2,6 +2,12 @@
 
 import { z } from "zod";
 import { chat } from "../lib/llm";
+import {
+  chatTrace,
+  isChatTraceEnabled,
+  isChatTraceVerbose,
+  type ChatTurnTrace,
+} from "../lib/chatTrace";
 import type { ExtractedData } from "./types";
 
 const extractionSchema = z.object({
@@ -36,18 +42,34 @@ Rules:
 - moodScore 1-10 from tone
 `;
 
+function logExtraction(
+  trace: ChatTurnTrace | undefined,
+  payload: Record<string, unknown>
+): void {
+  if (!trace || !isChatTraceEnabled()) return;
+  chatTrace("extraction_done", { turnId: trace.turnId, ...payload });
+}
+
 export async function extractFromMessage(
-  userMessage: string
+  userMessage: string,
+  trace?: ChatTurnTrace
 ): Promise<ExtractedData> {
   const raw = await chat(
     EXTRACTION_PROMPT,
     [{ role: "user", content: userMessage }],
-    { temperature: 0, responseFormat: "json" }
+    {
+      temperature: 0,
+      responseFormat: "json",
+      trace: trace
+        ? { turnId: trace.turnId, call: "extraction" }
+        : undefined,
+    }
   );
   let parsed: unknown;
   try {
     parsed = JSON.parse(raw);
   } catch {
+    logExtraction(trace, { parseOk: false, reason: "json_parse" });
     return {
       conditions: [],
       medications: [],
@@ -60,6 +82,7 @@ export async function extractFromMessage(
   }
   const result = extractionSchema.safeParse(parsed);
   if (!result.success) {
+    logExtraction(trace, { parseOk: false, reason: "schema" });
     return {
       conditions: [],
       medications: [],
@@ -71,6 +94,24 @@ export async function extractFromMessage(
     };
   }
   const d = result.data;
+  const basePayload: Record<string, unknown> = {
+    parseOk: true,
+    crisisSignal: d.crisisSignal,
+    moodScore: d.moodScore,
+    dominantEmotion: d.dominantEmotion,
+    conditionsCount: d.conditions.length,
+    medicationsCount: d.medications.length,
+    triggersCount: d.triggers.length,
+    copingPatternsCount: d.copingPatterns.length,
+  };
+  if (isChatTraceVerbose()) {
+    basePayload.conditions = d.conditions;
+    basePayload.medications = d.medications;
+    basePayload.triggers = d.triggers;
+    basePayload.copingPatterns = d.copingPatterns;
+  }
+  logExtraction(trace, basePayload);
+
   return {
     conditions: d.conditions,
     medications: d.medications,

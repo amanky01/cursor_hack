@@ -3,6 +3,7 @@
 import styles from "@/styles/components/saathi-chat.module.css";
 
 const agentLabels: Record<string, string> = {
+  loop_agent: "Saathi",
   empathy: "Listening",
   screening: "Assessment",
   mood: "Mood log",

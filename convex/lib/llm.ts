@@ -2,10 +2,12 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
+import { chatTrace, isChatTraceEnabled } from "./chatTrace";
 
 export type ChatOptions = {
   temperature?: number;
   responseFormat?: "json" | "text";
+  trace?: { turnId: string; call: string };
 };
 
 function llmProvider(): "gemini" | "openai" {
@@ -33,6 +35,8 @@ export async function chat(
   const temperature = options?.temperature ?? 0.7;
   const wantJson = options?.responseFormat === "json";
   const provider = llmProvider();
+  const trace = options?.trace;
+  const t0 = isChatTraceEnabled() ? Date.now() : 0;
 
   if (provider === "openai") {
     const key = process.env.OPENAI_API_KEY;
@@ -55,6 +59,16 @@ export async function chat(
       ],
     });
     const text = completion.choices[0]?.message?.content ?? "";
+    if (trace) {
+      chatTrace("llm_call_end", {
+        turnId: trace.turnId,
+        call: trace.call,
+        provider: "openai",
+        model: openaiModelName(),
+        durationMs: Date.now() - t0,
+        responseFormat: wantJson ? "json" : "text",
+      });
+    }
     return text;
   }
 
@@ -89,10 +103,32 @@ export async function chat(
         },
       ],
     });
-    return result.response.text();
+    const out = result.response.text();
+    if (trace) {
+      chatTrace("llm_call_end", {
+        turnId: trace.turnId,
+        call: trace.call,
+        provider: "gemini",
+        model: geminiModelName(),
+        durationMs: Date.now() - t0,
+        responseFormat: wantJson ? "json" : "text",
+      });
+    }
+    return out;
   }
 
   const chatSession = model.startChat({ history });
   const result = await chatSession.sendMessage(last.content);
-  return result.response.text();
+  const out = result.response.text();
+  if (trace) {
+    chatTrace("llm_call_end", {
+      turnId: trace.turnId,
+      call: trace.call,
+      provider: "gemini",
+      model: geminiModelName(),
+      durationMs: Date.now() - t0,
+      responseFormat: wantJson ? "json" : "text",
+    });
+  }
+  return out;
 }

@@ -1,12 +1,22 @@
 "use node";
 
+import { randomUUID } from "crypto";
 import { v } from "convex/values";
 import { action, internalAction, type ActionCtx } from "./_generated/server";
 import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
 import { extractFromMessage } from "./agents/extraction";
-import { supervisor } from "./agents/supervisor";
 import type { PatientProfile } from "./agents/types";
+import { assertValidSubjectKey } from "./lib/anonymousId";
+import { runLoopAgent } from "./lib/chatAgentGraph";
+import {
+  anonymousIdSuffix,
+  chatTrace,
+  isChatTraceEnabled,
+  isChatTraceVerbose,
+} from "./lib/chatTrace";
+
+const CHAT_AGENT_TYPE = "loop_agent";
 
 type TurnResult = {
   reply: string;
@@ -26,13 +36,34 @@ async function executeTurn(
     language?: string;
   }
 ): Promise<TurnResult> {
+  const traceEnabled = isChatTraceEnabled();
+  const turnStart = traceEnabled ? Date.now() : 0;
+  const turnId = traceEnabled ? randomUUID() : "";
+  const trace = traceEnabled ? { turnId } : undefined;
+
+  assertValidSubjectKey(args.anonymousId);
+
+  if (traceEnabled) {
+    chatTrace("turn_start", {
+      turnId,
+      anonymousIdSuffix: anonymousIdSuffix(args.anonymousId),
+      sessionIdPresent: Boolean(args.sessionId),
+      messageLength: args.message.length,
+      ...(isChatTraceVerbose()
+        ? { messagePreview: args.message.slice(0, 80) }
+        : {}),
+    });
+  }
+
   let patient: Doc<"patients"> | null = await ctx.runQuery(
     internal.patients.getByAnonymousId,
     {
       anonymousId: args.anonymousId,
     }
   );
+  let patientCreated = false;
   if (!patient) {
+    patientCreated = true;
     await ctx.runMutation(internal.patients.createPatientInternal, {
       anonymousId: args.anonymousId,
       language: args.language,
@@ -45,8 +76,17 @@ async function executeTurn(
     throw new Error("Patient not found");
   }
 
+  if (traceEnabled) {
+    chatTrace("patient_ready", {
+      turnId,
+      patientId: patient._id,
+      patientCreated,
+    });
+  }
+
   let sessionId = args.sessionId;
   let history: { role: "user" | "assistant"; content: string }[] = [];
+  let reusedSession = false;
 
   if (sessionId) {
     const session = await ctx.runQuery(internal.sessions.getSession, {
@@ -59,9 +99,18 @@ async function executeTurn(
           content: m.content,
         })
       );
+      reusedSession = true;
     } else {
       sessionId = undefined;
     }
+  }
+
+  if (traceEnabled) {
+    chatTrace("session_history", {
+      turnId,
+      messageCount: history.length,
+      reusedSession,
+    });
   }
 
   const profile: PatientProfile = {
@@ -78,10 +127,28 @@ async function executeTurn(
     language: patient.language,
   };
 
-  const [supervisorResult, extracted] = await Promise.all([
-    supervisor(profile, history, args.message),
-    extractFromMessage(args.message),
+  if (traceEnabled) {
+    chatTrace("parallel_phase_start", { turnId });
+  }
+
+  const [{ text: assistantText }, extracted] = await Promise.all([
+    runLoopAgent({
+      profile,
+      history,
+      userMessage: args.message,
+      trace,
+    }),
+    extractFromMessage(args.message, trace),
   ]);
+
+  if (traceEnabled) {
+    chatTrace("parallel_phase_end", {
+      turnId,
+      agentType: CHAT_AGENT_TYPE,
+      extractionCrisis: extracted.crisisSignal,
+      extractionMoodScore: extracted.moodScore,
+    });
+  }
 
   let newSessionId: Id<"sessions"> | undefined = sessionId;
   if (!newSessionId) {
@@ -91,6 +158,9 @@ async function executeTurn(
     await ctx.runMutation(internal.patients.incrementSessions, {
       patientId: patient._id,
     });
+    if (traceEnabled) {
+      chatTrace("session_created", { turnId, sessionId: newSessionId });
+    }
   }
 
   if (!newSessionId) {
@@ -99,13 +169,19 @@ async function executeTurn(
 
   const sessionIdForMessages: Id<"sessions"> = newSessionId;
 
+  if (traceEnabled) {
+    chatTrace("persist_messages", { turnId, sessionId: sessionIdForMessages });
+  }
   await ctx.runMutation(internal.sessions.addMessages, {
     sessionId: sessionIdForMessages,
     userMessage: args.message,
-    assistantMessage: supervisorResult.response,
-    agentUsed: supervisorResult.agentType,
+    assistantMessage: assistantText,
+    agentUsed: CHAT_AGENT_TYPE,
   });
 
+  if (traceEnabled) {
+    chatTrace("persist_extraction", { turnId });
+  }
   await ctx.runMutation(internal.patients.updateFromExtraction, {
     patientId: patient._id,
     conditions: extracted.conditions,
@@ -117,10 +193,19 @@ async function executeTurn(
     dominantEmotion: extracted.dominantEmotion,
   });
 
+  if (traceEnabled) {
+    chatTrace("turn_end", {
+      turnId,
+      totalDurationMs: Date.now() - turnStart,
+      agentType: CHAT_AGENT_TYPE,
+      crisisDetected: extracted.crisisSignal,
+    });
+  }
+
   return {
-    reply: supervisorResult.response,
-    response: supervisorResult.response,
-    agentType: supervisorResult.agentType,
+    reply: assistantText,
+    response: assistantText,
+    agentType: CHAT_AGENT_TYPE,
     sessionId: sessionIdForMessages,
     crisisDetected: extracted.crisisSignal,
     suggestions: [] as string[],

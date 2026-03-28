@@ -8,21 +8,32 @@
  * @module
  */
 
-import type * as agents_crisisAgent from "../agents/crisisAgent.js";
-import type * as agents_empathyAgent from "../agents/empathyAgent.js";
+import type * as adminCounsellors from "../adminCounsellors.js";
 import type * as agents_extraction from "../agents/extraction.js";
-import type * as agents_moodAgent from "../agents/moodAgent.js";
-import type * as agents_resourceAgent from "../agents/resourceAgent.js";
-import type * as agents_screeningAgent from "../agents/screeningAgent.js";
-import type * as agents_supervisor from "../agents/supervisor.js";
 import type * as agents_types from "../agents/types.js";
 import type * as chatbotNode from "../chatbotNode.js";
 import type * as counsellors from "../counsellors.js";
+import type * as dashboard from "../dashboard.js";
+import type * as guestAppointments from "../guestAppointments.js";
 import type * as helplines from "../helplines.js";
 import type * as http from "../http.js";
+import type * as http_common from "../http/common.js";
+import type * as http_registerAll from "../http/registerAll.js";
+import type * as http_routes_adminCounsellorHttpRoutes from "../http/routes/adminCounsellorHttpRoutes.js";
+import type * as http_routes_adminUserRoutes from "../http/routes/adminUserRoutes.js";
+import type * as http_routes_authRoutes from "../http/routes/authRoutes.js";
+import type * as http_routes_chatbotRoutes from "../http/routes/chatbotRoutes.js";
+import type * as http_routes_counsellorHttpRoutes from "../http/routes/counsellorHttpRoutes.js";
+import type * as http_routes_health from "../http/routes/health.js";
+import type * as http_routes_stickyNotesRoutes from "../http/routes/stickyNotesRoutes.js";
+import type * as http_routes_userChatRoutes from "../http/routes/userChatRoutes.js";
 import type * as jwtNode from "../jwtNode.js";
+import type * as lib_anonymousId from "../lib/anonymousId.js";
+import type * as lib_chatAgentGraph from "../lib/chatAgentGraph.js";
+import type * as lib_chatTrace from "../lib/chatTrace.js";
 import type * as lib_llm from "../lib/llm.js";
 import type * as lib_search from "../lib/search.js";
+import type * as lib_staffAuth from "../lib/staffAuth.js";
 import type * as patientChat from "../patientChat.js";
 import type * as patients from "../patients.js";
 import type * as seed from "../seed.js";
@@ -37,21 +48,32 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  "agents/crisisAgent": typeof agents_crisisAgent;
-  "agents/empathyAgent": typeof agents_empathyAgent;
+  adminCounsellors: typeof adminCounsellors;
   "agents/extraction": typeof agents_extraction;
-  "agents/moodAgent": typeof agents_moodAgent;
-  "agents/resourceAgent": typeof agents_resourceAgent;
-  "agents/screeningAgent": typeof agents_screeningAgent;
-  "agents/supervisor": typeof agents_supervisor;
   "agents/types": typeof agents_types;
   chatbotNode: typeof chatbotNode;
   counsellors: typeof counsellors;
+  dashboard: typeof dashboard;
+  guestAppointments: typeof guestAppointments;
   helplines: typeof helplines;
   http: typeof http;
+  "http/common": typeof http_common;
+  "http/registerAll": typeof http_registerAll;
+  "http/routes/adminCounsellorHttpRoutes": typeof http_routes_adminCounsellorHttpRoutes;
+  "http/routes/adminUserRoutes": typeof http_routes_adminUserRoutes;
+  "http/routes/authRoutes": typeof http_routes_authRoutes;
+  "http/routes/chatbotRoutes": typeof http_routes_chatbotRoutes;
+  "http/routes/counsellorHttpRoutes": typeof http_routes_counsellorHttpRoutes;
+  "http/routes/health": typeof http_routes_health;
+  "http/routes/stickyNotesRoutes": typeof http_routes_stickyNotesRoutes;
+  "http/routes/userChatRoutes": typeof http_routes_userChatRoutes;
   jwtNode: typeof jwtNode;
+  "lib/anonymousId": typeof lib_anonymousId;
+  "lib/chatAgentGraph": typeof lib_chatAgentGraph;
+  "lib/chatTrace": typeof lib_chatTrace;
   "lib/llm": typeof lib_llm;
   "lib/search": typeof lib_search;
+  "lib/staffAuth": typeof lib_staffAuth;
   patientChat: typeof patientChat;
   patients: typeof patients;
   seed: typeof seed;

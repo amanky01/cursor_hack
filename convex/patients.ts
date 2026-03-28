@@ -5,9 +5,12 @@ import {
   mutation,
   query,
 } from "./_generated/server";
+import { assertValidAnonymousId } from "./lib/anonymousId";
+
 export const getOrCreatePatient = mutation({
   args: { anonymousId: v.string(), language: v.optional(v.string()) },
   handler: async (ctx, { anonymousId, language }) => {
+    assertValidAnonymousId(anonymousId);
     const existing = await ctx.db
       .query("patients")
       .withIndex("by_anonymousId", (q) => q.eq("anonymousId", anonymousId))
@@ -34,6 +37,7 @@ export const getOrCreatePatient = mutation({
 export const getProfileByAnonymousId = query({
   args: { anonymousId: v.string() },
   handler: async (ctx, { anonymousId }) => {
+    assertValidAnonymousId(anonymousId);
     return await ctx.db
       .query("patients")
       .withIndex("by_anonymousId", (q) => q.eq("anonymousId", anonymousId))

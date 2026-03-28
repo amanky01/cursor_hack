@@ -74,7 +74,12 @@ export default defineSchema({
   }).index("by_patientId", ["patientId"]),
 
   appointments: defineTable({
-    patientId: v.id("patients"),
+    patientId: v.optional(v.id("patients")),
+    guestName: v.optional(v.string()),
+    guestEmail: v.optional(v.string()),
+    guestPhone: v.optional(v.string()),
+    department: v.optional(v.string()),
+    preferredDate: v.optional(v.string()),
     counsellorId: v.string(),
     slot: v.number(),
     aiSummary: v.string(),

@@ -1,9 +1,4 @@
-export type AgentType =
-  | "empathy"
-  | "screening"
-  | "mood"
-  | "crisis"
-  | "resource";
+export type AgentType = "loop_agent";
 
 export interface PatientProfile {
   anonymousId: string;
@@ -17,11 +12,6 @@ export interface PatientProfile {
   crisisFlag: boolean;
   totalSessions: number;
   language: string;
-}
-
-export interface SupervisorResult {
-  agentType: AgentType;
-  response: string;
 }
 
 export interface ExtractedData {

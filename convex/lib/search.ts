@@ -2,6 +2,12 @@
 
 import Exa from "exa-js";
 import { ApifyClient } from "apify-client";
+import {
+  chatTrace,
+  isChatTraceEnabled,
+  isChatTraceVerbose,
+  type ChatTurnTrace,
+} from "./chatTrace";
 
 export type SearchSnippet = {
   source: "exa" | "apify";
@@ -122,13 +128,35 @@ export async function apifyWebSearch(query: string): Promise<SearchSnippet[]> {
  */
 export async function searchResources(
   query: string,
-  conditions: string[]
+  conditions: string[],
+  trace?: ChatTurnTrace
 ): Promise<string> {
+  const exaSkippedNoKey = !process.env.EXA_API_KEY?.trim();
+  const apifySkippedNoKey = !process.env.APIFY_TOKEN?.trim();
+  const enriched = `mental health ${conditions.join(" ")} ${query} India resources helpline`;
+
   const [exa, apify] = await Promise.all([
     exaSearch(query, conditions),
     apifyWebSearch(query),
   ]);
   const merged = dedupeByUrl([...exa, ...apify]).slice(0, 8);
+
+  if (trace && isChatTraceEnabled()) {
+    const payload: Record<string, unknown> = {
+      turnId: trace.turnId,
+      exaCount: exa.length,
+      apifyCount: apify.length,
+      mergedCount: merged.length,
+      exaSkippedNoKey,
+      apifySkippedNoKey,
+      enrichedQueryLength: enriched.length,
+    };
+    if (isChatTraceVerbose()) {
+      payload.enrichedQuery = enriched;
+    }
+    chatTrace("search_resources", payload);
+  }
+
   if (merged.length === 0) {
     return "No live web results retrieved (check EXA_API_KEY / APIFY_TOKEN). Use general mental-health guidance and helplines from your training.";
   }

@@ -3,8 +3,8 @@
 ## Stack
 
 - **Next.js 15** (App Router) in `src/app`.
-- **Convex** (`convex/`) — database, HTTP `/api/*`, **patient AI** (Gemini default, OpenAI optional), **Exa + Apify** search for the resource agent. **No FastAPI** for core chat.
-- **Clerk** — counsellor and admin routes (`/counsellor`, `/admin`). Set `publicMetadata.role` to `"admin"` for admins in the Clerk dashboard.
+- **Convex** (`convex/`) — database, HTTP `/api/*`, **patient AI** (LangGraph ReAct agent; Gemini default, OpenAI optional) with **Exa + Apify** as agent tools. **No FastAPI** for core chat.
+- **Clerk** — counsellor and admin routes (`/counsellor`, `/admin`). Set `publicMetadata.role` to `"admin"` for admins in the Clerk dashboard. Convex staff APIs use **Convex + Clerk**: add a Clerk JWT template named **`convex`** (audience `convex`) with claim `role` = `{{user.public_metadata.role}}`, and set **`CLERK_JWT_ISSUER_DOMAIN`** in Convex env to your Clerk **Frontend API** URL (same value as in `.env.example`).
 - **JWT** (Convex `JWT_SECRET`) — optional legacy **student** login (`/login`, `/register`).
 
 ## Environment variables
@@ -23,14 +23,16 @@
 | Variable | Purpose |
 | -------- | ------- |
 | `JWT_SECRET` | Student JWT auth (HTTP routes) — **required** for `/api/auth/login` and any route that calls `signJwt` |
+| `CLERK_JWT_ISSUER_DOMAIN` | Clerk Frontend API URL — **required** for `ConvexProviderWithClerk` and `api.adminCounsellors.*` |
 | `GEMINI_API_KEY` | Default LLM (Gemini) |
 | `OPENAI_API_KEY` | Optional; used when `LLM_PROVIDER=openai` |
 | `LLM_PROVIDER` | `gemini` (default) or `openai` |
 | `GEMINI_MODEL` | Optional override (default `gemini-2.5-flash`) |
 | `OPENAI_MODEL` | Optional override (default `gpt-4o`) |
-| `EXA_API_KEY` | Semantic search for resource agent |
-| `APIFY_TOKEN` | Apify Google Search (or custom actor) for web results |
+| `EXA_API_KEY` | Optional; `exa_search` tool in LangGraph chat agent |
+| `APIFY_TOKEN` | Optional; `apify_search` tool in LangGraph chat agent |
 | `APIFY_GOOGLE_SEARCH_ACTOR_ID` | Optional; default `apify/google-search-scraper` |
+| `CHAT_AGENT_MAX_ITERATIONS` | Optional; default `5`; caps agent tool loop via LangGraph `recursionLimit` |
 
 Set `JWT_SECRET` from the repo (dev deployment):
 
@@ -56,7 +58,8 @@ Remove reliance on **`CHATBOT_SERVICE_URL`** / **`CHATBOT_API_KEY`** for the mai
 
 - **Anonymous patient:** `localStorage.saathi_id` + Convex `patients` / `sessions` / `moodLogs`; chat via `useAction(api.patientChat.sendMessage)`.
 - **Logged-in student (JWT):** floating chat uses `/api/user/chat/ai` with `anonymousId` = `jwt:<userId>` on the server; optional `sessionId` in body (stored in `localStorage.saathi_jwt_session_id`).
-- **Staff:** Clerk; `CounsellorClerkGate` upserts `counsellors` by `clerkUserId`.
+- **Staff:** Clerk; `CounsellorClerkGate` upserts `counsellors` by `clerkUserId` (mutation requires matching signed-in Clerk user). Admin counsellor CRUD uses **`api.adminCounsellors`** (Clerk JWT), not JWT `localStorage.token`.
+- **Guest appointments:** Convex `guestAppointments` + Next `/api/appointments` via `ConvexHttpClient` (needs `NEXT_PUBLIC_CONVEX_URL`).
 
 ## Vercel
 

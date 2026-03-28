@@ -8,6 +8,10 @@ export const ensureByClerkId = mutation({
     email: v.optional(v.string()),
   },
   handler: async (ctx, { clerkUserId, name, email }) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity || identity.subject !== clerkUserId) {
+      throw new Error("Unauthorized");
+    }
     const existing = await ctx.db
       .query("counsellors")
       .withIndex("by_clerkUserId", (q) => q.eq("clerkUserId", clerkUserId))

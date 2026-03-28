@@ -4,6 +4,10 @@ import {
   internalQuery,
   query,
 } from "./_generated/server";
+import {
+  assertValidAnonymousId,
+  assertValidSubjectKey,
+} from "./lib/anonymousId";
 
 export const createSession = internalMutation({
   args: { patientId: v.id("patients") },
@@ -29,6 +33,7 @@ export const getSessionForPatient = query({
     sessionId: v.id("sessions"),
   },
   handler: async (ctx, { anonymousId, sessionId }) => {
+    assertValidSubjectKey(anonymousId);
     const patient = await ctx.db
       .query("patients")
       .withIndex("by_anonymousId", (q) => q.eq("anonymousId", anonymousId))
@@ -70,6 +75,7 @@ export const addMessages = internalMutation({
 export const getPatientSessions = query({
   args: { anonymousId: v.string() },
   handler: async (ctx, { anonymousId }) => {
+    assertValidSubjectKey(anonymousId);
     const patient = await ctx.db
       .query("patients")
       .withIndex("by_anonymousId", (q) => q.eq("anonymousId", anonymousId))
