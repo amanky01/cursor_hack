@@ -264,7 +264,7 @@ const Hero: React.FC = () => {
                     cy="160"
                     r="35"
                     fill="none"
-                    stroke="rgba(14, 165, 233, 0.1)"
+                    stroke="rgba(45, 212, 191, 0.12)"
                     strokeWidth="1"
                     className={styles.peacefulAura}
                   />
@@ -286,14 +286,14 @@ const Hero: React.FC = () => {
                     />
                     <path
                       d="M100,200 Q200,150 300,180"
-                      stroke="rgba(14, 165, 233, 0.15)"
+                      stroke="rgba(45, 212, 191, 0.16)"
                       strokeWidth="1.5"
                       fill="none"
                       className={styles.connectionLine2}
                     />
                     <path
                       d="M120,120 Q200,200 280,140"
-                      stroke="rgba(99, 102, 241, 0.14)"
+                      stroke="rgba(16, 185, 129, 0.14)"
                       strokeWidth="1"
                       fill="none"
                       className={styles.connectionLine3}

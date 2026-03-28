@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction, useQuery } from "convex/react";
+import { useAction, useMutation, useQuery } from "convex/react";
 import { api } from "@cvx/_generated/api";
 import type { Id } from "@cvx/_generated/dataModel";
 import Link from "next/link";
@@ -17,16 +17,23 @@ import TypingIndicator from "@/components/chat/TypingIndicator";
 import styles from "@/styles/components/saathi-chat.module.css";
 import uiStyles from "@/styles/components/ui/ChatInterface.module.css";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 import { getChatbotHealth } from "@/services/chat_service";
 
 type Variant = "compact" | "full";
 
 type Props = {
   variant: Variant;
+  /** Under site Layout main (e.g. /chat/memory): flat canvas + composer like /saathi */
+  layoutEmbedded?: boolean;
 };
 
-export default function MemorySaathiPanel({ variant }: Props) {
+export default function MemorySaathiPanel({
+  variant,
+  layoutEmbedded = false,
+}: Props) {
   const router = useRouter();
+  const { theme } = useTheme();
   const { user, isAuthenticated } = useAuth();
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; content: string; agentType?: string }[]
@@ -44,6 +51,7 @@ export default function MemorySaathiPanel({ variant }: Props) {
   const anonymousId = user ? `jwt:${user._id}` : "";
 
   const sendMessage = useAction(api.patientChat.sendMessage);
+  const getOrCreatePatient = useMutation(api.patients.getOrCreatePatient);
   const patientProfile = useQuery(
     api.patients.getProfileByAnonymousId,
     anonymousId ? { anonymousId } : "skip"
@@ -141,6 +149,17 @@ export default function MemorySaathiPanel({ variant }: Props) {
     }
   }, [router]);
 
+  const handleMemoryLanguage = useCallback(
+    async (language: string) => {
+      if (!user?._id) return;
+      await getOrCreatePatient({
+        anonymousId: `jwt:${user._id}`,
+        language,
+      });
+    },
+    [getOrCreatePatient, user?._id]
+  );
+
   useEffect(() => {
     let mounted = true;
     const check = async () => {
@@ -208,7 +227,54 @@ export default function MemorySaathiPanel({ variant }: Props) {
   const containerClass =
     variant === "compact"
       ? `${uiStyles.chatContainer} ${uiStyles.memoryEmbed}`
-      : `${uiStyles.chatContainer} ${uiStyles.memoryFullPage}`;
+      : layoutEmbedded
+        ? `${styles.surface} ${styles.flexColInLayout} ${styles.anonymousEmbedSurface}`
+        : `${uiStyles.chatContainer} ${uiStyles.memoryFullPage}`;
+
+  const embedShell = variant === "full" && layoutEmbedded;
+
+  const messagesClassName = embedShell
+    ? `${styles.messages} ${styles.messagesInCard}`
+    : styles.messages;
+
+  const micSlot =
+    anonymousId ? (
+      <div className={styles.voiceJournalSlot}>
+        <VoiceJournalButton
+          anonymousId={anonymousId}
+          disabled={loading}
+          onResult={(result) => {
+            setMessages((prev) => [
+              ...prev,
+              {
+                role: "user" as const,
+                content: `[Voice Journal] ${result.transcription}`,
+              },
+              {
+                role: "assistant" as const,
+                content: result.summary,
+              },
+            ]);
+            if (result.crisisDetected) setCrisisDetected(true);
+          }}
+        />
+      </div>
+    ) : undefined;
+
+  const messagesBody = (
+    <>
+      {messages.map((msg, i) => (
+        <ChatBubble
+          key={i}
+          role={msg.role}
+          content={msg.content}
+          agentType={msg.agentType}
+        />
+      ))}
+      {loading && <TypingIndicator />}
+      <div ref={bottomRef} />
+    </>
+  );
 
   if (!isAuthenticated) {
     return (
@@ -248,97 +314,76 @@ export default function MemorySaathiPanel({ variant }: Props) {
 
   return (
     <div className={containerClass}>
-      <div className={`${uiStyles.chatHeader} ${uiStyles.chatHeaderMemory}`}>
-        <div className={uiStyles.botInfo}>
-          <Bot className={uiStyles.botIcon} />
-          <div>
-            <h3>Sehat-Saathi</h3>
+      <div
+        className={`${uiStyles.memoryChromeStrip}${
+          embedShell ? ` ${styles.memoryEmbedChrome}` : ""
+        }`}
+      >
+        <div className={uiStyles.memoryBotCorner}>
+          <div className={uiStyles.memoryBotAvatarWrap}>
+            <Bot className={uiStyles.memoryBotIcon} strokeWidth={2} aria-hidden />
             <span
-              className={`${uiStyles.status} ${isOnline ? uiStyles.statusOnline : uiStyles.statusOffline}`}
-            >
-              {isOnline ? "Online" : "Offline"}
-            </span>
+              className={`${uiStyles.statusBadge} ${isOnline ? uiStyles.statusBadgeOnline : uiStyles.statusBadgeOffline}`}
+              title={isOnline ? "Online — assistant reachable" : "Offline — assistant unreachable"}
+              aria-label={isOnline ? "Status: online" : "Status: offline"}
+            />
           </div>
         </div>
-        {variant === "full" && (
+        <div className={uiStyles.memoryTopicCluster}>
+          <label htmlFor="domain-select-memory" className={uiStyles.domainLabel}>
+            Topic:
+          </label>
+          <select
+            id="domain-select-memory"
+            value={domain}
+            onChange={(e) =>
+              setDomain(
+                e.target.value as "stress" | "burnout" | "career" | "relationships"
+              )
+            }
+            className={uiStyles.domainSelect}
+            aria-label="Select conversation topic"
+          >
+            <option value="stress">Stress</option>
+            <option value="burnout">Burnout</option>
+            <option value="career">Career</option>
+            <option value="relationships">Relationships</option>
+          </select>
+        </div>
+        {variant === "full" ? (
           <SaathiHeaderToolbar
-            chrome="onGradient"
+            chrome={embedShell && theme === "dark" ? "onGradient" : "sheet"}
             mode="memory"
             onToggleMode={() => router.push("/chat")}
             centerAction="minimize"
             onCenterClick={handleLeaveFullPageChat}
             onClose={handleCloseFullPageChat}
             showHomeLink
+            languageMenu={{ onSelectLanguage: handleMemoryLanguage }}
+            className={`${uiStyles.memoryHeaderToolbar}${
+              embedShell ? ` ${styles.anonymousHeaderToolbar}` : ""
+            }`}
             onMemoryClick={() => setMemoryOpen(true)}
             memoryHasContent={Boolean(patientProfile?.memoryNote)}
           />
-        )}
-      </div>
-
-      <div className={uiStyles.domainBar}>
-        <label htmlFor="domain-select-memory" className={uiStyles.domainLabel}>
-          Topic:
-        </label>
-        <select
-          id="domain-select-memory"
-          value={domain}
-          onChange={(e) =>
-            setDomain(
-              e.target.value as "stress" | "burnout" | "career" | "relationships"
-            )
-          }
-          className={uiStyles.domainSelect}
-          aria-label="Select conversation topic"
-        >
-          <option value="stress">Stress</option>
-          <option value="burnout">Burnout</option>
-          <option value="career">Career</option>
-          <option value="relationships">Relationships</option>
-        </select>
+        ) : null}
       </div>
 
       {crisisDetected && <CrisisBanner />}
 
-      <div className={styles.messages}>
-        {messages.map((msg, i) => (
-          <ChatBubble
-            key={i}
-            role={msg.role}
-            content={msg.content}
-            agentType={msg.agentType}
-          />
-        ))}
-        {loading && <TypingIndicator />}
-        <div ref={bottomRef} />
-      </div>
-
-      <ChatInput
-        onSend={handleSend}
-        disabled={loading}
-        micSlot={
-          anonymousId ? (
-            <VoiceJournalButton
-              anonymousId={anonymousId}
-              disabled={loading}
-              onResult={(result) => {
-                setMessages((prev) => [
-                  ...prev,
-                  {
-                    role: "user" as const,
-                    content: `[Voice Journal] ${result.transcription}`,
-                  },
-                  {
-                    role: "assistant" as const,
-                    content: result.summary,
-                  },
-                ]);
-                if (result.crisisDetected) setCrisisDetected(true);
-              }}
-            />
-          ) : undefined
-        }
-      />
-
+      {embedShell ? (
+        <div className={styles.anonymousMainShell}>
+          <div className={styles.anonymousChatCard}>
+            <div className={messagesClassName}>{messagesBody}</div>
+            <ChatInput onSend={handleSend} disabled={loading} micSlot={micSlot} />
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className={messagesClassName}>{messagesBody}</div>
+          <ChatInput onSend={handleSend} disabled={loading} micSlot={micSlot} />
+        </>
+      )}
       {memoryOpen && anonymousId && (
         <MemoryDrawer
           anonymousId={anonymousId}

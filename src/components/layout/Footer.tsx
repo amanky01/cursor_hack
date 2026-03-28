@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
           <div className={styles.brandSection}>
             <div className={styles.logo}>
               <Link href="/" className={styles.logoLink}>
-                <Heart className={styles.logoIcon} />
+                <Heart className={styles.logoIcon} size={20} strokeWidth={2} aria-hidden />
                 <span className={styles.logoText}>Sehat-Saathi</span>
               </Link>
             </div>
@@ -55,15 +55,15 @@ const Footer: React.FC = () => {
             </p>
             <div className={styles.contactInfo}>
               <div className={styles.contactItem}>
-                <Mail size={16} />
+                <Mail size={14} strokeWidth={2} aria-hidden />
                 <span>support@sehatsaathi.com</span>
               </div>
               <div className={styles.contactItem}>
-                <Phone size={16} />
+                <Phone size={14} strokeWidth={2} aria-hidden />
                 <span>+1 (555) 123-4567</span>
               </div>
               <div className={styles.contactItem}>
-                <MapPin size={16} />
+                <MapPin size={14} strokeWidth={2} aria-hidden />
                 <span>123 University Ave, College Town</span>
               </div>
             </div>
@@ -127,7 +127,7 @@ const Footer: React.FC = () => {
                   className={styles.socialLink}
                   aria-label={social.name}
                 >
-                  <Icon size={20} />
+                  <Icon size={16} strokeWidth={2} />
                 </a>
               );
             })}

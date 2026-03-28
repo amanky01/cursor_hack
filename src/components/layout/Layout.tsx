@@ -1,13 +1,18 @@
 "use client";
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { motion, useReducedMotion } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
 import NatureBackground from '../ui/NatureBackground';
-import SaathiChatDock from '../saathi/SaathiChatDock';
 import { pageEnter } from '@/animations/variants';
 import styles from '../../styles/components/layout/Layout.module.css';
+
+/** Client-only: uses Convex `useMutation` — skip SSR when Convex URL is absent at build time. */
+const SaathiChatDock = dynamic(() => import('../saathi/SaathiChatDock'), {
+  ssr: false,
+});
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -15,6 +20,8 @@ interface LayoutProps {
   description?: string;
   keywords?: string;
   header?: React.ReactNode; // allow custom header override
+  /** Hide the marketing site footer (e.g. full-page Saathi chat). */
+  hideFooter?: boolean;
 }
 
 const Layout: React.FC<LayoutProps> = ({
@@ -23,6 +30,7 @@ const Layout: React.FC<LayoutProps> = ({
   description: _description = 'A comprehensive digital platform for health and wellness—supportive care for people and families of all ages.',
   keywords: _keywords = 'mental health, psychological intervention, college students, therapy, counseling, mindfulness, CBT',
   header,
+  hideFooter = false,
 }) => {
   const reduceMotion = useReducedMotion();
 
@@ -38,7 +46,7 @@ const Layout: React.FC<LayoutProps> = ({
         >
           {children}
         </motion.main>
-        <Footer />
+        {!hideFooter ? <Footer /> : null}
         <SaathiChatDock />
       </div>
     </>

@@ -55,7 +55,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--secondary-600);
+  background: var(--primary-600);
   color: white;
   border: none;
   border-radius: var(--radius-lg);
@@ -66,7 +66,7 @@
 }
 
 .actionButton:hover {
-  background: var(--secondary-700);
+  background: var(--primary-700);
   transform: translateY(-1px);
 }
 

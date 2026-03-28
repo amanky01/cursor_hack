@@ -41,6 +41,7 @@ export default function SaathiPage() {
       <Layout
         title="Saathi - Sehat-Saathi"
         description="Anonymous mental health companion — configure Convex to enable chat."
+        hideFooter
       >
         <main className={`${styles.onboarding} ${styles.onboardingInLayout}`}>
           <div className={styles.onboardingInner}>
@@ -61,6 +62,7 @@ export default function SaathiPage() {
     <Layout
       title="Saathi - Sehat-Saathi"
       description="A safe, anonymous space to talk about how you feel. No account needed."
+      hideFooter
     >
       <div className={styles.saathiLayoutHost}>
         {phase === "checking" ? (
@@ -90,7 +92,7 @@ export default function SaathiPage() {
                   <div className={styles.saathiBrand}>
                     <div className={styles.saathiBrandIcons} aria-hidden>
                       <Heart size={20} strokeWidth={2} color="var(--primary-500)" />
-                      <Activity size={20} strokeWidth={2} color="var(--secondary-500)" />
+                      <Activity size={20} strokeWidth={2} color="var(--primary-500)" />
                     </div>
                     <h1 className={styles.saathiTitle}>Sehat Saathi</h1>
                     <p className={styles.saathiScript}>सेहत साथی · صحت ساتھی</p>

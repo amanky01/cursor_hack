@@ -14,8 +14,10 @@ import VoiceJournalButton from "@/components/saathi/VoiceJournalButton";
 import SaathiHeaderToolbar from "@/components/saathi/SaathiHeaderToolbar";
 import SaathiLanguageGate from "@/components/saathi/SaathiLanguageGate";
 import TypingIndicator from "@/components/chat/TypingIndicator";
+import { useTheme } from "@/context/ThemeContext";
+import { getChatbotHealth } from "@/services/chat_service";
 import styles from "@/styles/components/saathi-chat.module.css";
-import { Activity } from "lucide-react";
+import { Bot } from "lucide-react";
 
 const WELCOME =
   "Namaste. I am Saathi, your mental health companion. This is a private space — you can share anything here. How are you feeling today?";
@@ -41,6 +43,7 @@ export default function AnonymousSaathiPanel({
   onNeedsLanguageChange,
 }: Props) {
   const router = useRouter();
+  const { theme } = useTheme();
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; content: string; agentType?: string }[]
   >([]);
@@ -51,6 +54,7 @@ export default function AnonymousSaathiPanel({
   const [missingConvex, setMissingConvex] = useState(false);
   const [needsLanguage, setNeedsLanguage] = useState(false);
   const [memoryOpen, setMemoryOpen] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
   const bottomRef = useRef<HTMLDivElement>(null);
   const languageSyncSkipRef = useRef(true);
 
@@ -179,6 +183,20 @@ export default function AnonymousSaathiPanel({
     }
   }, [languageSyncNonce, syncIdAndWelcome]);
 
+  useEffect(() => {
+    let mounted = true;
+    const check = async () => {
+      const ok = await getChatbotHealth();
+      if (mounted) setIsOnline(ok);
+    };
+    void check();
+    const id = setInterval(check, 10000);
+    return () => {
+      mounted = false;
+      clearInterval(id);
+    };
+  }, []);
+
   const handleLanguageReady = () => {
     syncIdAndWelcome();
   };
@@ -294,7 +312,7 @@ export default function AnonymousSaathiPanel({
     variant === "full"
       ? `${styles.surface} ${
           layoutEmbedded
-            ? styles.flexColInLayout
+            ? `${styles.flexColInLayout} ${styles.anonymousEmbedSurface}`
             : `${styles.flexColScreen} ${styles.surfaceGradientScreen}`
         }`
       : `${styles.surface} ${styles.flexColCompact}`;
@@ -304,23 +322,78 @@ export default function AnonymousSaathiPanel({
     messages.length === 0 &&
     (variant === "full" || (variant === "compact" && hideCompactLanguageStrip));
 
+  const embedChatCard = variant === "full" && layoutEmbedded;
+
+  const messagesClassName = embedChatCard
+    ? `${styles.messages} ${styles.messagesInCard}`
+    : styles.messages;
+
+  const micSlot =
+    anonymousId ? (
+      <div className={styles.voiceJournalSlot}>
+        <VoiceJournalButton
+          anonymousId={anonymousId}
+          disabled={loading || needsLanguage}
+          onResult={(result) => {
+            setMessages((prev) => [
+              ...prev,
+              {
+                role: "user" as const,
+                content: `[Voice Journal] ${result.transcription}`,
+              },
+              {
+                role: "assistant" as const,
+                content: result.summary,
+              },
+            ]);
+            if (result.crisisDetected) setCrisisDetected(true);
+          }}
+        />
+      </div>
+    ) : undefined;
+
+  const messagesBody = (
+    <>
+      {showLangHeaderHint ? (
+        <p
+          className={`${styles.langEmptyHint} ${embedChatCard ? styles.langEmptyHintInCard : ""}`}
+        >
+          Hover or tap the <strong>language icon</strong> in the header to open a compact menu —
+          then choose your language to begin.
+        </p>
+      ) : null}
+      {messages.map((msg, i) => (
+        <ChatBubble
+          key={i}
+          role={msg.role}
+          content={msg.content}
+          agentType={msg.agentType}
+        />
+      ))}
+      {loading && <TypingIndicator />}
+      <div ref={bottomRef} />
+    </>
+  );
+
   return (
     <div className={surfaceClass}>
       {variant === "full" && (
-        <header className={`${styles.header} ${styles.headerSurfaceGradient}`}>
-          <div className={styles.headerLead}>
-            <div className={styles.headerAvatar} aria-hidden>
-              <span className={styles.headerHeartbeat}>
-                <Activity size={20} strokeWidth={2.5} />
-              </span>
-            </div>
-            <div className={styles.headerBrand}>
-              <p className={styles.headerTitle}>Saathi • Your Health Companion</p>
-              <p className={styles.headerSub}>Mental health companion · Anonymous</p>
+        <header className={styles.anonymousHeaderStrip}>
+          <div className={styles.anonymousBotCorner}>
+            <div className={styles.anonymousBotAvatarWrap}>
+              <Bot className={styles.anonymousBotIcon} strokeWidth={2} aria-hidden />
+              <span
+                className={`${styles.anonStatusDot} ${isOnline ? styles.anonStatusOnline : styles.anonStatusOffline}`}
+                title={isOnline ? "Online — assistant reachable" : "Offline — assistant unreachable"}
+                aria-label={isOnline ? "Status: online" : "Status: offline"}
+              />
             </div>
           </div>
           <SaathiHeaderToolbar
             mode="anonymous"
+            chrome={
+              layoutEmbedded && theme === "dark" ? "onGradient" : "sheet"
+            }
             onToggleMode={() => router.push("/chat/memory")}
             centerAction="minimize"
             onCenterClick={handleLeaveFullPageChat}
@@ -331,6 +404,7 @@ export default function AnonymousSaathiPanel({
               needsAttention: needsLanguage,
             }}
             showHomeLink
+            className={styles.anonymousHeaderToolbar}
             onMemoryClick={anonymousId ? () => setMemoryOpen(true) : undefined}
             memoryHasContent={Boolean(patientProfile?.memoryNote)}
           />
@@ -345,54 +419,19 @@ export default function AnonymousSaathiPanel({
 
       {crisisDetected && <CrisisBanner />}
 
-      <div className={styles.messages}>
-        {showLangHeaderHint ? (
-          <p className={styles.langEmptyHint}>
-            Hover or tap the <strong>language icon</strong> in the header to open a compact menu —
-            then choose your language to begin.
-          </p>
-        ) : null}
-        {messages.map((msg, i) => (
-          <ChatBubble
-            key={i}
-            role={msg.role}
-            content={msg.content}
-            agentType={msg.agentType}
-          />
-        ))}
-        {loading && <TypingIndicator />}
-        <div ref={bottomRef} />
-      </div>
-
-      <ChatInput
-        onSend={handleSend}
-        disabled={loading || needsLanguage}
-        micSlot={
-          anonymousId ? (
-            <div className={styles.voiceJournalSlot}>
-              <VoiceJournalButton
-                anonymousId={anonymousId}
-                disabled={loading || needsLanguage}
-                onResult={(result) => {
-                  setMessages((prev) => [
-                    ...prev,
-                    {
-                      role: "user" as const,
-                      content: `[Voice Journal] ${result.transcription}`,
-                    },
-                    {
-                      role: "assistant" as const,
-                      content: result.summary,
-                    },
-                  ]);
-                  if (result.crisisDetected) setCrisisDetected(true);
-                }}
-              />
-            </div>
-          ) : undefined
-        }
-      />
-
+      {embedChatCard ? (
+        <div className={styles.anonymousMainShell}>
+          <div className={styles.anonymousChatCard}>
+            <div className={messagesClassName}>{messagesBody}</div>
+            <ChatInput onSend={handleSend} disabled={loading || needsLanguage} micSlot={micSlot} />
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className={messagesClassName}>{messagesBody}</div>
+          <ChatInput onSend={handleSend} disabled={loading || needsLanguage} micSlot={micSlot} />
+        </>
+      )}
       {memoryOpen && anonymousId && (
         <MemoryDrawer
           anonymousId={anonymousId}

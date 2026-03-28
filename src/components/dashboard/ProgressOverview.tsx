@@ -53,7 +53,7 @@ const ProgressOverview: React.FC = () => {
         change: "Extracted from recent chats",
         trend: "up" as const,
         icon: Target,
-        color: "var(--secondary-500)",
+        color: "var(--primary-600)",
       },
       {
         title: "Safety",

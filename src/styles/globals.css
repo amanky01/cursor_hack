@@ -7,7 +7,8 @@
   --footer-text: #cbd5e1;
   --footer-muted: #94a3b8;
   --glass-bg: rgba(255, 255, 255, 0.55);
-  --glass-border: rgba(255, 255, 255, 0.45);
+  /* Slightly tinted so frosted panels read a clearer edge */
+  --glass-border: rgba(51, 65, 85, 0.16);
 
   /* Primary — Emerald / Teal */
   --primary-50: #ecfdf5;
@@ -36,8 +37,9 @@
   /* Neutrals — Slate */
   --gray-50: #f8fafc;
   --gray-100: #f1f5f9;
-  --gray-200: #e2e8f0;
-  --gray-300: #cbd5e1;
+  /* Neutrals: slightly darker 200–300 so default outlines stand out */
+  --gray-200: #cfd8e3;
+  --gray-300: #c4ced9;
   --gray-400: #94a3b8;
   --gray-500: #64748b;
   --gray-600: #475569;
@@ -133,7 +135,7 @@
   --card-bg: #1e293b;
   --color-on-accent: #f8fafc;
   --glass-bg: rgba(30, 41, 59, 0.65);
-  --glass-border: rgba(148, 163, 184, 0.2);
+  --glass-border: rgba(148, 163, 184, 0.38);
   --footer-bg: #020617;
   --footer-text: #cbd5e1;
   --footer-muted: #94a3b8;
@@ -165,13 +167,35 @@
 /* Nature / layout layers: light theme uses pale primary tints; dark must not (they stay :root values). */
 [data-theme="dark"] .gradientWaves {
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--card-bg) 35%, var(--page-bg)) 0%, transparent 14%, transparent 86%, color-mix(in srgb, var(--page-bg) 70%, #022c22) 100%),
-    radial-gradient(circle at 22% 78%, rgba(16, 185, 129, 0.08) 0%, transparent 52%),
-    radial-gradient(circle at 78% 18%, rgba(14, 165, 233, 0.06) 0%, transparent 52%),
-    linear-gradient(165deg, var(--page-bg) 0%, #0c1526 38%, #0f172a 62%, var(--card-bg) 100%);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    radial-gradient(circle at 18% 72%, rgba(45, 212, 191, 0.12) 0%, transparent 48%),
+    radial-gradient(circle at 82% 22%, rgba(16, 185, 129, 0.1) 0%, transparent 46%),
+    linear-gradient(
+      180deg,
+      #0f172a 0%,
+      #0a1f1d 24%,
+      #064e3b 48%,
+      #1e293b 74%,
+      #0f172a 100%
+    );
+  background-size: 100% 100%, 100% 100%, 100% 320%;
   opacity: 1;
-  animation: none;
+  animation: appDarkShellShift 28s ease-in-out infinite;
+}
+
+@keyframes appDarkShellShift {
+  0%, 100% {
+    background-position: 0% 0%, 0% 0%, 0% 0%;
+  }
+  50% {
+    background-position: 0% 0%, 0% 0%, 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="dark"] .gradientWaves {
+    animation: none;
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+  }
 }
 
 [data-theme="dark"] .floatingLeaf {
@@ -685,11 +709,11 @@ a:focus-visible {
   pointer-events: none;
   z-index: -2;
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--primary-50) 55%, var(--page-bg)) 0%, transparent 12%, transparent 88%, color-mix(in srgb, var(--gray-50) 80%, var(--secondary-100)) 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--primary-50) 55%, var(--page-bg)) 0%, transparent 12%, transparent 88%, color-mix(in srgb, var(--gray-50) 80%, var(--primary-100)) 100%),
     radial-gradient(circle at 20% 80%, var(--primary-200) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, var(--secondary-200) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, var(--primary-200) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, var(--primary-100) 0%, transparent 50%),
-    linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-100) 50%, var(--gray-50) 100%);
+    linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 50%, var(--gray-50) 100%);
   background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
   animation: gradientWaves 20s ease-in-out infinite;
   opacity: 0.42;

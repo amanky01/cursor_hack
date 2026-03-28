@@ -112,7 +112,7 @@ const Header: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link href="/" className={styles.logoLink}>
-            <Heart className={styles.logoIcon} size={22} strokeWidth={2} />
+            <Heart className={styles.logoIcon} size={24} strokeWidth={2} />
             <span className={styles.logoText}>Sehat-Saathi</span>
           </Link>
         </div>
@@ -129,7 +129,7 @@ const Header: React.FC = () => {
                     title={item.description}
                     aria-label={item.name}
                   >
-                    <IconComponent size={15} strokeWidth={2} aria-hidden />
+                    <IconComponent size={20} strokeWidth={2} aria-hidden />
                     <span className={styles.navLinkLabel}>{item.name}</span>
                   </Link>
                 </li>
@@ -146,11 +146,11 @@ const Header: React.FC = () => {
               {user?.role === 'admin' && (
                 <>
                   <Link href="/admin" className={styles.authButton} aria-label="Admin">
-                    <Shield size={18} aria-hidden />
+                    <Shield size={20} strokeWidth={2} aria-hidden />
                     <span className={styles.authButtonLabel}>Admin</span>
                   </Link>
                   <Link href="/admin/counsellors" className={styles.authButton} aria-label="Counsellors">
-                    <Shield size={18} aria-hidden />
+                    <Shield size={20} strokeWidth={2} aria-hidden />
                     <span className={styles.authButtonLabel}>Counsellors</span>
                   </Link>
                 </>
@@ -169,7 +169,7 @@ const Header: React.FC = () => {
                 className={`${styles.authButton} ${styles.primary}`}
                 aria-label="Log out"
               >
-                <LogOut size={18} aria-hidden />
+                <LogOut size={20} strokeWidth={2} aria-hidden />
                 <span className={styles.authButtonLabel}>Logout</span>
               </button>
             </>
@@ -232,7 +232,7 @@ const Header: React.FC = () => {
                 className={`${styles.authButton} ${styles.primary}`}
                 aria-label="Start my journey"
               >
-                <UserPlus size={16} strokeWidth={2} aria-hidden />
+                <UserPlus size={20} strokeWidth={2} aria-hidden />
                 <span className={styles.authButtonLabel}>Start My Journey</span>
               </Link>
             </>
@@ -244,7 +244,7 @@ const Header: React.FC = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X size={26} strokeWidth={2} /> : <Menu size={26} strokeWidth={2} />}
         </button>
         </div>
       </div>
@@ -263,7 +263,7 @@ const Header: React.FC = () => {
                       className={`${styles.mobileNavLink} ${isActive(item.href) ? styles.active : ''}`}
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <IconComponent size={18} />
+                      <IconComponent size={22} strokeWidth={2} aria-hidden />
                       <div>
                         <span>{item.name}</span>
                         <small>{item.description}</small>
@@ -283,7 +283,7 @@ const Header: React.FC = () => {
                         className={styles.mobileAuthButton}
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <Shield size={18} />
+                        <Shield size={22} strokeWidth={2} aria-hidden />
                         Admin
                       </Link>
                       <Link
@@ -291,7 +291,7 @@ const Header: React.FC = () => {
                         className={styles.mobileAuthButton}
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <Shield size={18} />
+                        <Shield size={22} strokeWidth={2} aria-hidden />
                         Counsellors
                       </Link>
                     </>
@@ -301,7 +301,7 @@ const Header: React.FC = () => {
                     className={styles.mobileAuthButton}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <User size={18} />
+                    <User size={22} strokeWidth={2} aria-hidden />
                     {user?.firstName || 'Profile'}
                   </Link>
                   <button 
@@ -338,7 +338,7 @@ const Header: React.FC = () => {
                     className={styles.mobileAuthButton}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <Shield size={18} />
+                    <Shield size={22} strokeWidth={2} aria-hidden />
                     Staff portal
                   </Link>
                   <Link
@@ -346,7 +346,7 @@ const Header: React.FC = () => {
                     className={`${styles.mobileAuthButton} ${styles.primary}`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <UserPlus size={18} />
+                    <UserPlus size={22} strokeWidth={2} aria-hidden />
                     Start My Journey
                   </Link>
                 </>
