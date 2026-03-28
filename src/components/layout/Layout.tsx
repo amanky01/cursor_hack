@@ -6,7 +6,6 @@ import Header from './Header';
 import Footer from './Footer';
 import NatureBackground from '../ui/NatureBackground';
 import SaathiChatDock from '../saathi/SaathiChatDock';
-import ChatButton from '../ui/ChatButton';
 import { pageEnter } from '@/animations/variants';
 import styles from '../../styles/components/layout/Layout.module.css';
 
