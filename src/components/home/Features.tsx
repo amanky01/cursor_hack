@@ -19,7 +19,7 @@ const Features: React.FC = () => {
     {
       icon: Users,
       title: 'Supportive Community',
-      description: 'Connect with understanding peers who truly get it. You\'ll find kindness and encouragement here.',
+      description: 'Connect with others who truly get it—kids, adults, and elders all welcome. Kindness and encouragement for everyone.',
       color: 'var(--secondary-500)',
     },
     {
@@ -37,7 +37,7 @@ const Features: React.FC = () => {
     {
       icon: Smartphone,
       title: 'Easy Access, Anywhere',
-      description: 'Take your healing journey with you. Our gentle platform works beautifully on any device.',
+      description: 'Take your health and wellness journey with you. Our gentle platform works beautifully on any device, for every age.',
       color: 'var(--primary-600)',
     },
   ];

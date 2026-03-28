@@ -1,5 +1,5 @@
 .header {
-  background: white;
+  background: var(--card-bg);
   border-bottom: 1px solid var(--gray-200);
   padding: var(--spacing-lg) 0;
 }

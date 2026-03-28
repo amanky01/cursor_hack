@@ -1,5 +1,12 @@
 /* Global CSS Variables */
 :root {
+  /* Shared surfaces (light UI only) */
+  --card-bg: #ffffff;
+  --color-on-accent: #ffffff;
+  --footer-bg: #0a0a0a;
+  --footer-text: #cbd5e1;
+  --footer-muted: #9aa5a1;
+
   /* Primary Colors - New Suggested Palette */
   --primary-50: #f0f9f0;
   --primary-100: #e0f2e0;

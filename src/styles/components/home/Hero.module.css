@@ -61,6 +61,15 @@
   margin-bottom: var(--spacing-lg);
 }
 
+.heroTagline {
+  font-size: 0.95rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-top: calc(-1 * var(--spacing-sm));
+  margin-bottom: var(--spacing-md);
+  letter-spacing: 0.02em;
+}
+
 .buttons {
   display: flex;
   gap: var(--spacing-md);
@@ -114,7 +123,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  background: white;
+  background: var(--card-bg);
   color: var(--gray-700);
   padding: var(--spacing-md) var(--spacing-xl);
   border: 2px solid var(--gray-300);

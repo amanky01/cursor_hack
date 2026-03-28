@@ -35,7 +35,7 @@
 
 .mission {
   padding: var(--spacing-3xl) 0;
-  background: white;
+  background: var(--card-bg);
 }
 
 .missionContent {
@@ -82,7 +82,7 @@
 }
 
 .valueCard {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   text-align: center;
@@ -152,7 +152,7 @@
 
 .team {
   padding: var(--spacing-3xl) 0;
-  background: white;
+  background: var(--card-bg);
 }
 
 .teamHeader {

@@ -1,5 +1,5 @@
 .interventionModules {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
@@ -41,7 +41,7 @@
 .moduleCard:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  background: white;
+  background: var(--card-bg);
 }
 
 .cardHeader {

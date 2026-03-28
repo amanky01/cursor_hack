@@ -20,8 +20,8 @@ const CTA: React.FC = () => {
               Ready to Begin Your Healing Journey?
             </h2>
             <p className={styles.subtitle}>
-              You don't have to do this alone. Join thousands of students who've found peace, 
-              strength, and support in their mental health journey. Take the first gentle step today.
+              You do not have to do this alone. Join thousands of people who have found peace,
+              strength, and support on their health and wellness journey. Take the first gentle step today.
             </p>
             
             <div className={styles.benefits}>

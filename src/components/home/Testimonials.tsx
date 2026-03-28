@@ -6,32 +6,32 @@ const Testimonials: React.FC = () => {
   const testimonials = [
     {
       name: 'Sarah Chen',
-      university: 'Stanford University',
-      program: 'Computer Science',
+      university: 'Bay Area',
+      program: 'Parent & professional',
       rating: 5,
-      text: 'Sehat-Saathi helped me manage my anxiety during finals week. The mindfulness exercises and CBT techniques were incredibly effective. I feel more confident and in control of my mental health.',
+      text: 'Sehat-Saathi helped me manage my anxiety during a stressful time. The mindfulness exercises and CBT techniques were incredibly effective. I feel more confident and in control of my well-being.',
       avatar: 'SC',
     },
     {
       name: 'Michael Rodriguez',
-      university: 'UCLA',
-      program: 'Psychology',
+      university: 'Southern California',
+      program: 'Wellness seeker',
       rating: 5,
-      text: 'As a psychology student, I was skeptical about digital interventions. But Sehat-Saathi exceeded my expectations. The evidence-based approach and personalized tracking made a real difference in my stress levels.',
+      text: 'I was skeptical about digital health tools at first. Sehat-Saathi exceeded my expectations—the evidence-based approach and personalized tracking made a real difference in my stress levels.',
       avatar: 'MR',
     },
     {
       name: 'Emily Johnson',
-      university: 'Harvard University',
-      program: 'Pre-Med',
+      university: 'New England',
+      program: 'Caregiver',
       rating: 5,
-      text: 'The peer support community on Sehat-Saathi has been invaluable. Connecting with other pre-med students who understand the pressure has helped me feel less alone in my journey.',
+      text: 'The supportive community on Sehat-Saathi has been invaluable. Connecting with others who understand has helped me feel less alone in my journey.',
       avatar: 'EJ',
     },
     {
       name: 'David Kim',
-      university: 'MIT',
-      program: 'Engineering',
+      university: 'Midwest',
+      program: 'Retiree & volunteer',
       rating: 5,
       text: 'The progress tracking feature helped me see real improvements in my mood and stress levels over time. The data-driven approach gave me confidence that the interventions were working.',
       avatar: 'DK',
@@ -42,9 +42,9 @@ const Testimonials: React.FC = () => {
     <section className={styles.testimonials}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>What Students Are Saying</h2>
+          <h2 className={styles.title}>What People Are Saying</h2>
           <p className={styles.subtitle}>
-            Real stories from college students who have transformed their mental health with Sehat-Saathi.
+            Real stories from individuals and families who have found support with Sehat-Saathi.
           </p>
         </div>
 

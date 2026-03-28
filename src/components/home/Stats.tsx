@@ -7,14 +7,14 @@ const Stats: React.FC = () => {
     {
       icon: Users,
       value: '10,000+',
-      label: 'Students Helped',
-      description: 'College students across 50+ universities',
+      label: 'People Helped',
+      description: 'Individuals and families across multiple communities',
     },
     {
       icon: Heart,
       value: '95%',
       label: 'Satisfaction Rate',
-      description: 'Students report improved mental health',
+      description: 'Users report improved well-being and peace of mind',
     },
     {
       icon: TrendingUp,
@@ -34,9 +34,9 @@ const Stats: React.FC = () => {
     <section className={styles.stats}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Trusted by Students Nationwide</h2>
+          <h2 className={styles.title}>Trusted by People Nationwide</h2>
           <p className={styles.subtitle}>
-            Join thousands of college students who have transformed their mental health journey with Sehat-Saathi.
+            Join thousands of people improving their health and well-being with Sehat-Saathi.
           </p>
         </div>
 
