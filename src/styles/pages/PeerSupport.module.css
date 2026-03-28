@@ -225,7 +225,8 @@
 }
 
 .panelDrawer {
-  background: var(--white, #fff);
+  /* Match drawer / theme; avoid hardcoded white (breaks dark mode). */
+  background: transparent;
   border: none;
   border-radius: 0;
   padding: 0;
@@ -764,6 +765,10 @@
   border-bottom-color: rgba(45, 212, 191, 0.12);
 }
 
+[data-theme="dark"] .drawerBody {
+  color: var(--gray-900);
+}
+
 [data-theme="dark"] .tabs {
   background: rgba(15, 23, 42, 0.55);
   border-color: rgba(148, 163, 184, 0.25);
@@ -797,6 +802,11 @@
   border-color: rgba(148, 163, 184, 0.28);
 }
 
+[data-theme="dark"] .drawerBody .card {
+  background: #1e232e;
+  border-color: rgba(45, 212, 191, 0.18);
+}
+
 [data-theme="dark"] .btnSecondary {
   background: rgba(51, 65, 85, 0.55);
   color: var(--gray-800);
@@ -820,7 +830,11 @@
 }
 
 [data-theme="dark"] .inviteHint {
-  color: var(--gray-500);
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .inviteHint strong {
+  color: var(--gray-800);
 }
 
 .peerEmptyHint {
