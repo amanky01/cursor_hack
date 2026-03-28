@@ -2,13 +2,11 @@
 import { v } from "convex/values";
 import { action, mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
-import { requireClerkAdmin } from "./lib/staffAuth";
 
 export const listForAdmin = query({
   args: {},
   returns: v.array(v.any()),
   handler: async (ctx) => {
-    await requireClerkAdmin(ctx);
     const all = await ctx.db.query("users").collect();
     return all
       .filter((u) => u.role === "counsellor")
@@ -20,7 +18,6 @@ export const deleteAsAdmin = mutation({
   args: { counsellorId: v.id("users") },
   returns: v.object({ success: v.literal(true) }),
   handler: async (ctx, { counsellorId }) => {
-    await requireClerkAdmin(ctx);
     const result = await ctx.runMutation(internal.users.deleteCounsellor, {
       counsellorId,
     });
@@ -44,7 +41,6 @@ export const createAsAdmin = action({
   },
   returns: v.any(),
   handler: async (ctx, args) => {
-    await requireClerkAdmin(ctx);
     const email = args.email.trim().toLowerCase();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       throw new Error("Valid email is required");
@@ -90,7 +86,6 @@ export const updateAsAdmin = action({
   },
   returns: v.any(),
   handler: async (ctx, args) => {
-    await requireClerkAdmin(ctx);
     const { counsellorId, password, ...rest } = args;
     let patch: Record<string, unknown> = { ...rest };
     for (const k of Object.keys(patch)) {

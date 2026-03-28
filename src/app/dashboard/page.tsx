@@ -7,6 +7,7 @@ import ProgressOverview from '@/components/dashboard/ProgressOverview';
 import InterventionModules from '@/components/dashboard/InterventionModules';
 import RecentActivity from '@/components/dashboard/RecentActivity';
 import QuickActions from '@/components/dashboard/QuickActions';
+import ProfileCompletion from '@/components/dashboard/ProfileCompletion';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import styles from '@/styles/pages/Dashboard.module.css';
 
@@ -15,7 +16,7 @@ const DashboardPage: React.FC = () => {
     <ProtectedRoute>
       <Layout
         title="Dashboard - Sehat-Saathi"
-        description="Your personal mental health dashboard with progress tracking and intervention modules."
+        description="Your personal mental health dashboard with quick links to Saathi, appointments, tools, and resources."
       >
       <div className={styles.dashboard}>
         <DashboardHeader />
@@ -28,6 +29,7 @@ const DashboardPage: React.FC = () => {
           </div>
           
           <div className={styles.sidebar}>
+            <ProfileCompletion />
             <QuickActions />
           </div>
         </div>

@@ -17,14 +17,14 @@ export default function SaathiChatDock() {
   const [mode, setMode] = useState<ChatMode>("anonymous");
   const reduceMotion = useReducedMotion();
 
-  if (pathname === "/chat" || pathname === "/chat/memory") {
+  if (pathname === "/saathi" || pathname === "/chat/memory") {
     return null;
   }
 
   const handleMaximize = () => {
     setOpen(false);
     if (mode === "anonymous") {
-      router.push("/chat");
+      router.push("/saathi");
     } else {
       router.push("/chat/memory");
     }

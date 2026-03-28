@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { useAction, useQuery } from "convex/react";
 import { api } from "@cvx/_generated/api";
 import Layout from "@/components/layout/Layout";
@@ -80,7 +81,8 @@ type ResourceResult = {
   topic: string;
 };
 
-const ResourcesPage: React.FC = () => {
+function ResourcesPageInner() {
+  const searchParams = useSearchParams();
   const [showAssessments, setShowAssessments] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTopic, setActiveTopic] = useState("");
@@ -90,6 +92,14 @@ const ResourcesPage: React.FC = () => {
 
   const searchResources = useAction(api.resources.searchResources);
   const cachedTopics = useQuery(api.resourcesDb.listTopics);
+
+  useEffect(() => {
+    const assessments = searchParams.get("assessments");
+    const tool = searchParams.get("tool");
+    if (assessments === "1" || tool === "assessments") {
+      setShowAssessments(true);
+    }
+  }, [searchParams]);
 
   const doSearch = useCallback(
     async (query: string) => {
@@ -307,6 +317,36 @@ const ResourcesPage: React.FC = () => {
       </div>
     </Layout>
   );
-};
+}
 
-export default ResourcesPage;
+function ResourcesPageFallback() {
+  return (
+    <Layout
+      title="Resources - Sehat-Saathi"
+      description="Search our Exa-powered library of curated mental health resources, articles, and self-help guides."
+    >
+      <div className={styles.resources}>
+        <section className={styles.hero}>
+          <div className={styles.container}>
+            <div className={styles.heroContent}>
+              <Loader2
+                size={40}
+                className={styles.spinnerInline}
+                aria-hidden
+              />
+              <p className={styles.heroSubtitle}>Loading resources…</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </Layout>
+  );
+}
+
+export default function ResourcesPage() {
+  return (
+    <Suspense fallback={<ResourcesPageFallback />}>
+      <ResourcesPageInner />
+    </Suspense>
+  );
+}

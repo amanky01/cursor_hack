@@ -1,4 +1,5 @@
 .surface {
+  position: relative;
   background: rgba(248, 246, 242, 0.92);
   color: #2d2d2d;
   transition: background 0.3s ease, color 0.3s ease;
@@ -21,6 +22,35 @@
   flex: 1;
   min-height: 0;
   height: 100%;
+}
+
+/* Full-height Saathi under site Layout (header/footer): avoid double 100vh */
+.saathiLayoutHost {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+.flexColInLayout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+.chatMain {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.onboardingInLayout {
+  min-height: min(560px, calc(100dvh - 9rem));
 }
 
 .header {
@@ -247,8 +277,14 @@
 
 .inputRow {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 10px;
+}
+
+.voiceJournalSlot {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 .textareaWrap {
@@ -583,6 +619,107 @@
 }
 
 .saathiHomeLink:hover {
+  color: var(--primary-700);
+}
+
+/* Language overlay (full Saathi in site layout) */
+.langOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+  animation: langOverlayIn 0.22s ease-out;
+}
+
+@keyframes langOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.langOverlayBackdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+[data-theme="dark"] .langOverlayBackdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.langOverlayCard {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: 1.35rem 1.35rem 1.15rem;
+  border-radius: 18px;
+  background: var(--card-bg, #fff);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+}
+
+[data-theme="dark"] .langOverlayCard {
+  border-color: rgba(52, 211, 153, 0.25);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.langOverlayTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  font-family: var(--font-family-heading, inherit);
+}
+
+[data-theme="dark"] .langOverlayTitle {
+  color: #f8fafc;
+}
+
+.langOverlaySub {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  color: var(--gray-600);
+  line-height: 1.45;
+}
+
+[data-theme="dark"] .langOverlaySub {
+  color: #94a3b8;
+}
+
+.langOverlayClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--gray-500);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.langOverlayClose:hover {
+  background: rgba(16, 185, 129, 0.12);
   color: var(--primary-700);
 }
 

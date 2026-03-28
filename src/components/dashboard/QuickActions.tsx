@@ -1,6 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import { Plus, Calendar, MessageCircle, BookOpen, BarChart3 } from 'lucide-react';
+import {
+  Stethoscope,
+  Calendar,
+  MessageCircle,
+  BookOpen,
+  Brain,
+} from 'lucide-react';
 import styles from '../../styles/components/dashboard/QuickActions.module.css';
 
 const QuickActions: React.FC = () => {
@@ -8,36 +14,36 @@ const QuickActions: React.FC = () => {
     {
       title: 'Health tools',
       description: 'Symptom check, medicines & more',
-      icon: Plus,
+      icon: Stethoscope,
       href: '/health',
       color: 'var(--primary-500)',
     },
     {
-      title: 'Schedule Session',
-      description: 'Plan your next session',
+      title: 'Appointments',
+      description: 'Book or manage healthcare visits',
       icon: Calendar,
-      href: '/schedule',
+      href: '/appointments',
       color: 'var(--secondary-500)',
     },
     {
-      title: 'Connect with Peers',
-      description: 'Join the support community',
+      title: 'Talk to Saathi',
+      description: 'Chat with your mental health companion',
       icon: MessageCircle,
-      href: '/community',
+      href: '/saathi',
       color: 'var(--success-500)',
     },
     {
-      title: 'Read Resources',
-      description: 'Access mental health articles',
+      title: 'Read resources',
+      description: 'Articles, guides & self-assessments',
       icon: BookOpen,
       href: '/resources',
       color: 'var(--warning-500)',
     },
     {
-      title: 'View Progress',
-      description: 'Check your detailed analytics',
-      icon: BarChart3,
-      href: '/progress',
+      title: 'Chat memory',
+      description: 'Mood trends & conversation highlights',
+      icon: Brain,
+      href: '/chat/memory',
       color: 'var(--error-500)',
     },
   ];
@@ -50,10 +56,10 @@ const QuickActions: React.FC = () => {
       </div>
 
       <div className={styles.actionsList}>
-        {actions.map((action, index) => {
+        {actions.map((action) => {
           const Icon = action.icon;
           return (
-            <Link key={index} href={action.href} className={styles.actionItem}>
+            <Link key={action.href} href={action.href} className={styles.actionItem}>
               <div className={styles.actionIcon} style={{ backgroundColor: `${action.color}15` }}>
                 <Icon size={20} style={{ color: action.color }} />
               </div>

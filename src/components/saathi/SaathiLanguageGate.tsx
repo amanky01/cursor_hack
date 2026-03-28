@@ -15,9 +15,18 @@ const LANGUAGES = [
 type Props = {
   onReady: () => void;
   compact?: boolean;
+  /** When false, only the grid is shown — for overlay dialogs with their own title */
+  showHeading?: boolean;
+  /** Show iCall line when heading is hidden (e.g. language overlay) */
+  showFooterCrisis?: boolean;
 };
 
-export default function SaathiLanguageGate({ onReady, compact }: Props) {
+export default function SaathiLanguageGate({
+  onReady,
+  compact,
+  showHeading = true,
+  showFooterCrisis = false,
+}: Props) {
   const getOrCreate = useMutation(api.patients.getOrCreatePatient);
 
   const handleStart = async (language: string) => {
@@ -36,18 +45,19 @@ export default function SaathiLanguageGate({ onReady, compact }: Props) {
     <div
       className={`${styles.langGate} ${compact ? styles.langGateCompact : styles.langGateCenter}`}
     >
-      {compact ? (
-        <p className={styles.langPromptCompact}>
-          Choose your language / زبان منتخب کریں
-        </p>
-      ) : (
-        <div className={styles.langPromptRow}>
-          <Globe className={styles.langPromptIcon} size={20} strokeWidth={2} aria-hidden />
-          <p className={styles.langPrompt}>
+      {showHeading &&
+        (compact ? (
+          <p className={styles.langPromptCompact}>
             Choose your language / زبان منتخب کریں
           </p>
-        </div>
-      )}
+        ) : (
+          <div className={styles.langPromptRow}>
+            <Globe className={styles.langPromptIcon} size={20} strokeWidth={2} aria-hidden />
+            <p className={styles.langPrompt}>
+              Choose your language / زبان منتخب کریں
+            </p>
+          </div>
+        ))}
       <div className={styles.langGrid}>
         {LANGUAGES.map((lang) => (
           <button
@@ -60,7 +70,7 @@ export default function SaathiLanguageGate({ onReady, compact }: Props) {
           </button>
         ))}
       </div>
-      {!compact && (
+      {((!compact && showHeading) || showFooterCrisis) && (
         <p className={styles.langCrisis}>
           In crisis right now?{" "}
           <a href="tel:9152987821" className={styles.langCrisisLink}>

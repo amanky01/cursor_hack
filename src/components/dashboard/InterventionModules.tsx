@@ -1,79 +1,59 @@
 import React from 'react';
 import Link from 'next/link';
-import { Brain, Heart, Users, BookOpen, Play, CheckCircle } from 'lucide-react';
+import { Brain, Heart, Users, BookOpen, ArrowRight } from 'lucide-react';
 import styles from '../../styles/components/dashboard/InterventionModules.module.css';
 
 const InterventionModules: React.FC = () => {
   const modules = [
     {
-      id: 'cbt',
-      title: 'Cognitive Behavioral Therapy',
-      description: 'Learn to identify and change negative thought patterns',
+      id: 'saathi',
+      title: 'Talk with Saathi',
+      description:
+        'Explore thoughts and feelings in a private chat. Not a substitute for therapy, but a supportive space.',
       icon: Brain,
-      progress: 75,
-      duration: '6 weeks',
+      href: '/saathi',
+      cta: 'Open Saathi',
       color: 'var(--primary-500)',
-      status: 'in-progress',
     },
     {
-      id: 'mindfulness',
-      title: 'Mindfulness & Meditation',
-      description: 'Develop present-moment awareness and stress reduction',
+      id: 'wellbeing-tools',
+      title: 'Calm & body tools',
+      description:
+        'Breathing exercises and on-device wellness tools to ease stress in the moment.',
       icon: Heart,
-      progress: 45,
-      duration: '4 weeks',
+      href: '/health',
+      cta: 'Go to health tools',
       color: 'var(--secondary-500)',
-      status: 'in-progress',
     },
     {
-      id: 'social-support',
-      title: 'Social Support Network',
-      description: 'Build connections and peer support relationships',
+      id: 'human-support',
+      title: 'Reach someone',
+      description:
+        'Contact the team or book care when you want a real person in the loop.',
       icon: Users,
-      progress: 0,
-      duration: '8 weeks',
+      href: '/contact',
+      cta: 'Contact & help',
       color: 'var(--success-500)',
-      status: 'not-started',
     },
     {
-      id: 'stress-management',
-      title: 'Stress Management',
-      description: 'Techniques for managing academic and personal stress',
+      id: 'learn-screen',
+      title: 'Learn & screen',
+      description:
+        'Curated reads plus optional PHQ-9, GAD-7, and GHQ-12 self-checks (informational only).',
       icon: BookOpen,
-      progress: 100,
-      duration: '3 weeks',
+      href: '/resources?assessments=1',
+      cta: 'Resources & assessments',
       color: 'var(--warning-500)',
-      status: 'completed',
     },
   ];
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return <CheckCircle size={20} className={styles.completedIcon} />;
-      case 'in-progress':
-        return <Play size={20} className={styles.inProgressIcon} />;
-      default:
-        return <Play size={20} className={styles.notStartedIcon} />;
-    }
-  };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return 'Completed';
-      case 'in-progress':
-        return 'In Progress';
-      default:
-        return 'Start Module';
-    }
-  };
 
   return (
     <div className={styles.interventionModules}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Intervention Modules</h2>
-        <p className={styles.subtitle}>Continue your mental health journey</p>
+        <h2 className={styles.title}>Ways to support your mental health</h2>
+        <p className={styles.subtitle}>
+          Pick what fits today — each link goes to a real feature in Sehat-Saathi
+        </p>
       </div>
 
       <div className={styles.grid}>
@@ -82,7 +62,10 @@ const InterventionModules: React.FC = () => {
           return (
             <div key={module.id} className={styles.moduleCard}>
               <div className={styles.cardHeader}>
-                <div className={styles.iconContainer} style={{ backgroundColor: `${module.color}15` }}>
+                <div
+                  className={styles.iconContainer}
+                  style={{ backgroundColor: `${module.color}15` }}
+                >
                   <Icon size={28} style={{ color: module.color }} />
                 </div>
                 <div className={styles.moduleInfo}>
@@ -91,32 +74,14 @@ const InterventionModules: React.FC = () => {
                 </div>
               </div>
 
-              <div className={styles.progressSection}>
-                <div className={styles.progressHeader}>
-                  <span className={styles.progressLabel}>Progress</span>
-                  <span className={styles.progressValue}>{module.progress}%</span>
-                </div>
-                <div className={styles.progressBar}>
-                  <div 
-                    className={styles.progressFill}
-                    style={{ 
-                      width: `${module.progress}%`,
-                      backgroundColor: module.color
-                    }}
-                  />
-                </div>
-              </div>
-
               <div className={styles.cardFooter}>
-                <div className={styles.duration}>
-                  <span className={styles.durationText}>{module.duration}</span>
-                </div>
-                <Link 
-                  href="/resources"
-                  className={`${styles.actionButton} ${styles[module.status]}`}
+                <Link
+                  href={module.href}
+                  className={styles.ctaLink}
+                  style={{ color: module.color }}
                 >
-                  {getStatusIcon(module.status)}
-                  {getStatusText(module.status)}
+                  {module.cta}
+                  <ArrowRight size={18} aria-hidden />
                 </Link>
               </div>
             </div>

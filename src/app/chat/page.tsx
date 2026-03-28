@@ -1,7 +1,5 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import AnonymousSaathiPanel from "@/components/saathi/AnonymousSaathiPanel";
-
-export default function AnonymousChatPage() {
-  return <AnonymousSaathiPanel variant="full" />;
+export default function AnonymousChatRedirectPage() {
+  redirect("/saathi");
 }

@@ -77,112 +77,28 @@
   line-height: 1.5;
 }
 
-.progressSection {
-  margin-bottom: var(--spacing-lg);
-}
-
-.progressHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-sm);
-}
-
-.progressLabel {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--gray-700);
-}
-
-.progressValue {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--gray-900);
-}
-
-.progressBar {
-  width: 100%;
-  height: 8px;
-  background: var(--gray-200);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.progressFill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width var(--transition-normal);
-}
-
 .cardFooter {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-top: auto;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--gray-200);
 }
 
-.duration {
-  display: flex;
-  align-items: center;
-}
-
-.durationText {
-  font-size: 0.85rem;
-  color: var(--gray-600);
-  font-weight: 500;
-}
-
-.actionButton {
-  display: flex;
+.ctaLink {
+  display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
-  text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
-  transition: all var(--transition-fast);
-  border: none;
-  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--transition-fast), gap var(--transition-fast);
 }
 
-.actionButton.completed {
-  background: var(--success-100);
-  color: var(--success-700);
-}
-
-.actionButton.completed:hover {
-  background: var(--success-200);
-}
-
-.actionButton.in-progress {
-  background: var(--primary-100);
-  color: var(--primary-700);
-}
-
-.actionButton.in-progress:hover {
-  background: var(--primary-200);
-}
-
-.actionButton.not-started {
-  background: var(--gray-100);
-  color: var(--gray-700);
-}
-
-.actionButton.not-started:hover {
-  background: var(--gray-200);
-}
-
-.completedIcon {
-  color: var(--success-600);
-}
-
-.inProgressIcon {
-  color: var(--primary-600);
-}
-
-.notStartedIcon {
-  color: var(--gray-600);
+.ctaLink:hover {
+  opacity: 0.85;
+  gap: var(--spacing-sm);
 }
 
 /* Responsive Design */
@@ -218,12 +134,11 @@
   }
 
   .cardFooter {
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    align-items: stretch;
+    justify-content: stretch;
   }
 
-  .actionButton {
+  .ctaLink {
     justify-content: center;
+    width: 100%;
   }
 }

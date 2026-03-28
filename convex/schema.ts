@@ -20,6 +20,10 @@ export default defineSchema({
     qualifications: v.optional(v.string()),
     specialization: v.optional(v.array(v.string())),
     availability: v.optional(v.union(v.string(), v.array(v.string()))),
+    // Extended profile (optional, filled after signup)
+    occupation: v.optional(v.string()),
+    ageGroup: v.optional(v.string()),
+    bio: v.optional(v.string()),
   }).index("by_email", ["email"]),
 
   stickyNotes: defineTable({

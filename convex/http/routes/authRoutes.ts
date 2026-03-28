@@ -186,37 +186,25 @@ export function registerAuthRoutes(http: HttpRouter): void {
           typeof body.firstName === "string" ? body.firstName.trim() : "";
         const lastName =
           typeof body.lastName === "string" ? body.lastName.trim() : "";
-        const university =
-          typeof body.university === "string" ? body.university.trim() : "";
-        const program =
-          typeof body.program === "string" ? body.program.trim() : "";
         const email = validateEmail(body.email);
         const password = typeof body.password === "string" ? body.password : "";
         if (!firstName)
           errors.push({ msg: "First name is required", path: "firstName" });
         if (!lastName)
           errors.push({ msg: "Last name is required", path: "lastName" });
-        if (!university)
-          errors.push({ msg: "University is required", path: "university" });
-        if (!program)
-          errors.push({ msg: "Program is required", path: "program" });
         if (!email)
           errors.push({ msg: "Valid email is required", path: "email" });
         if (!password.trim())
-          errors.push({ msg: "password is required", path: "password" });
+          errors.push({ msg: "Password is required", path: "password" });
         if (errors.length) {
           return json(
-            { success: false, message: "Field is required", errors },
+            { success: false, message: "Please fill all required fields", errors },
             400
           );
         }
-        const contactNo = Number(body.contactNo);
-        if (Number.isNaN(contactNo)) {
-          return json(
-            { success: false, message: "Contact number must be valid" },
-            400
-          );
-        }
+        // contactNo is optional now
+        const rawContact = body.contactNo !== undefined ? Number(body.contactNo) : undefined;
+        const contactNo = rawContact !== undefined && !Number.isNaN(rawContact) ? rawContact : undefined;
         const passwordHash = await ctx.runAction(internal.jwtNode.hashPassword, {
           password,
         });
@@ -226,12 +214,18 @@ export function registerAuthRoutes(http: HttpRouter): void {
           firstName,
           lastName,
           contactNo,
-          university,
-          program,
+          university:
+            typeof body.university === "string" ? body.university.trim() : undefined,
+          program:
+            typeof body.program === "string" ? body.program.trim() : undefined,
           branch:
             typeof body.branch === "string" ? body.branch.trim() : undefined,
           semester:
             typeof body.semester === "string" ? body.semester.trim() : undefined,
+          occupation:
+            typeof body.occupation === "string" ? body.occupation.trim() : undefined,
+          ageGroup:
+            typeof body.ageGroup === "string" ? body.ageGroup.trim() : undefined,
         });
         if (!result.ok) {
           return json(

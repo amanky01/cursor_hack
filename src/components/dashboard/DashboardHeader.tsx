@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Bell, Settings, User } from 'lucide-react';
+import Link from 'next/link';
+import { Calendar, LifeBuoy, User } from 'lucide-react';
 import styles from '../../styles/components/dashboard/DashboardHeader.module.css';
 import { useAuth } from '../../context/AuthContext';
 
@@ -8,12 +9,14 @@ const DashboardHeader: React.FC = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    setCurrentDate(new Date().toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }));
+    setCurrentDate(
+      new Date().toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    );
   }, []);
 
   return (
@@ -24,23 +27,28 @@ const DashboardHeader: React.FC = () => {
             Welcome back, {user?.firstName || 'User'}!
           </h1>
           <p className={styles.subtitle}>
-            <Calendar size={16} />
+            <Calendar size={16} aria-hidden />
             {currentDate}
           </p>
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.actionButton}>
-            <Bell size={20} />
-            <span className={styles.notificationBadge}>3</span>
-          </button>
-          <button className={styles.actionButton}>
-            <Settings size={20} />
-          </button>
-          <button className={styles.profileButton}>
-            <User size={20} />
+          <Link
+            href="/contact"
+            className={styles.iconLink}
+            title="Help and contact"
+            aria-label="Help and contact"
+          >
+            <LifeBuoy size={20} aria-hidden />
+          </Link>
+          <Link
+            href="/dashboard/profile"
+            className={styles.profileLink}
+            aria-label="Your profile"
+          >
+            <User size={20} aria-hidden />
             <span>{user?.firstName || 'Profile'}</span>
-          </button>
+          </Link>
         </div>
       </div>
     </header>

@@ -191,6 +191,15 @@
   }
 }
 
+.errorMessage {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  font-size: 0.9rem;
+}
+
 .authFooter {
   text-align: center;
   margin-top: var(--spacing-xl);

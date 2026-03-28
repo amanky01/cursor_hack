@@ -41,56 +41,40 @@
   gap: var(--spacing-md);
 }
 
-.actionButton {
-  position: relative;
+.iconLink {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
   background: var(--gray-100);
-  border: none;
   border-radius: var(--radius-lg);
   color: var(--gray-600);
-  cursor: pointer;
+  text-decoration: none;
   transition: all var(--transition-fast);
 }
 
-.actionButton:hover {
+.iconLink:hover {
   background: var(--gray-200);
   color: var(--gray-800);
 }
 
-.notificationBadge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  background: var(--error-500);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 10px;
-  min-width: 18px;
-  text-align: center;
-}
-
-.profileButton {
+.profileLink {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
   background: var(--primary-600);
   color: white;
-  border: none;
   border-radius: var(--radius-lg);
   padding: var(--spacing-sm) var(--spacing-md);
   font-weight: 500;
-  cursor: pointer;
+  text-decoration: none;
   transition: all var(--transition-fast);
 }
 
-.profileButton:hover {
+.profileLink:hover {
   background: var(--primary-700);
+  color: white;
 }
 
 /* Responsive Design */
@@ -111,17 +95,17 @@
     gap: var(--spacing-sm);
   }
 
-  .actionButton {
+  .iconLink {
     width: 40px;
     height: 40px;
   }
 
-  .profileButton {
+  .profileLink {
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: 0.9rem;
   }
 
-  .profileButton span {
+  .profileLink span {
     display: none;
   }
 }

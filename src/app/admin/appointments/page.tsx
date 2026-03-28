@@ -4,18 +4,28 @@ import React, { useState } from "react";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@cvx/_generated/api";
-import type { Doc, Id } from "@cvx/_generated/dataModel";
 
-type AppointmentAdminRow = Doc<"appointments"> & { counsellorName: string | null };
-type CounsellorOption = { _id: Id<"users">; firstName: string; lastName: string };
+const ACCENT = "#1d4ed8";
+const ACCENT_LIGHT = "#eff6ff";
+const ACCENT_BORDER = "#bfdbfe";
 
-const thStyle: React.CSSProperties = { textAlign: "left", padding: "10px 12px", color: "#6b7280", fontWeight: 600, fontSize: 13, borderBottom: "2px solid #e5e7eb" };
-const tdStyle: React.CSSProperties = { padding: "10px 12px", borderBottom: "1px solid #f3f4f6", fontSize: 14 };
-const statusColors: Record<string, { color: string; bg: string }> = {
-  pending: { color: "#ca8a04", bg: "#fefce8" },
-  confirmed: { color: "#2563eb", bg: "#eff6ff" },
-  completed: { color: "#16a34a", bg: "#f0fdf4" },
-  cancelled: { color: "#dc2626", bg: "#fef2f2" },
+const th: React.CSSProperties = {
+  textAlign: "left",
+  padding: "9px 12px",
+  background: ACCENT_LIGHT,
+  color: "#1e40af",
+  fontWeight: 700,
+  fontSize: 12,
+  textTransform: "uppercase",
+  letterSpacing: "0.05em",
+};
+const td: React.CSSProperties = { padding: "9px 12px", borderBottom: "1px solid #e0eaff", fontSize: 13 };
+
+const STATUS_META: Record<string, { color: string; bg: string; border: string }> = {
+  pending:   { color: "#92400e", bg: "#fef3c7", border: "#fcd34d" },
+  confirmed: { color: "#1e40af", bg: "#dbeafe", border: "#93c5fd" },
+  completed: { color: "#065f46", bg: "#d1fae5", border: "#6ee7b7" },
+  cancelled: { color: "#991b1b", bg: "#fee2e2", border: "#fca5a5" },
 };
 
 export default function AdminAppointmentsPage() {
@@ -24,91 +34,122 @@ export default function AdminAppointmentsPage() {
   const assignCounsellor = useMutation(api.guestAppointments.assignCounsellor);
   const [filter, setFilter] = useState<string>("all");
 
-  const filtered = appointments?.filter(
-    (a: AppointmentAdminRow) => filter === "all" || a.status === filter
-  );
+  const filtered = appointments?.filter((a) => filter === "all" || a.status === filter);
 
-  const handleAssign = async (appointmentId: Id<"appointments">, counsellorId: string) => {
-    try {
-      await assignCounsellor({ appointmentId, counsellorId });
-    } catch (err) {
-      console.error("Failed to assign counsellor:", err);
-    }
+  const counts = appointments
+    ? {
+        all: appointments.length,
+        pending: appointments.filter((a) => a.status === "pending").length,
+        confirmed: appointments.filter((a) => a.status === "confirmed").length,
+        completed: appointments.filter((a) => a.status === "completed").length,
+        cancelled: appointments.filter((a) => a.status === "cancelled").length,
+      }
+    : null;
+
+  const handleAssign = async (appointmentId: string, counsellorId: string) => {
+    if (!counsellorId) return;
+    await assignCounsellor({ appointmentId: appointmentId as any, counsellorId }).catch(console.error);
   };
 
   return (
     <AdminLayout title="Appointments - Admin" description="Manage all appointments">
       <div style={{ display: "grid", gap: 20 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <h1 style={{ margin: 0, fontSize: "1.5rem" }}>All Appointments</h1>
-          <div style={{ display: "flex", gap: 8 }}>
-            {["all", "pending", "confirmed", "completed", "cancelled"].map((s) => (
+
+        {/* Header */}
+        <div>
+          <h1 style={{ margin: "0 0 4px", fontSize: "1.3rem", color: "#1e3a5f" }}>Appointment Management</h1>
+          <p style={{ margin: 0, fontSize: 12, color: "#6b7280" }}>Assign counsellors and track appointment statuses</p>
+        </div>
+
+        {/* Filter tabs */}
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {(["all", "pending", "confirmed", "completed", "cancelled"] as const).map((s) => {
+            const active = filter === s;
+            return (
               <button
                 key={s}
                 onClick={() => setFilter(s)}
                 style={{
-                  padding: "6px 14px",
+                  padding: "6px 16px",
                   borderRadius: 8,
-                  border: filter === s ? "2px solid #2563eb" : "1px solid #d1d5db",
-                  background: filter === s ? "#eff6ff" : "#fff",
-                  color: filter === s ? "#2563eb" : "#374151",
+                  border: active ? `2px solid ${ACCENT}` : `1px solid ${ACCENT_BORDER}`,
+                  background: active ? ACCENT_LIGHT : "#fff",
+                  color: active ? ACCENT : "#374151",
                   fontSize: 13,
-                  fontWeight: 600,
+                  fontWeight: 700,
                   cursor: "pointer",
                   textTransform: "capitalize",
                 }}
               >
-                {s}
+                {s} {counts ? <span style={{ opacity: 0.7 }}>({counts[s]})</span> : ""}
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
         {!filtered ? (
           <p style={{ color: "#6b7280" }}>Loading appointments...</p>
         ) : filtered.length === 0 ? (
-          <p style={{ color: "#9ca3af" }}>No appointments found.</p>
+          <div style={{ padding: 32, textAlign: "center", background: "#fff", borderRadius: 12, border: `1px solid ${ACCENT_BORDER}` }}>
+            <p style={{ color: "#9ca3af", margin: 0 }}>No appointments in this category.</p>
+          </div>
         ) : (
-          <div style={{ overflowX: "auto" }}>
+          <div style={{ background: "#fff", borderRadius: 12, border: `1px solid ${ACCENT_BORDER}`, overflow: "hidden" }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
                 <tr>
-                  <th style={thStyle}>Name</th>
-                  <th style={thStyle}>Email</th>
-                  <th style={thStyle}>Department</th>
-                  <th style={thStyle}>Preferred Date</th>
-                  <th style={thStyle}>Status</th>
-                  <th style={thStyle}>Assigned Counsellor</th>
-                  <th style={thStyle}>Notes</th>
+                  <th style={th}>Patient</th>
+                  <th style={th}>Email</th>
+                  <th style={th}>Department</th>
+                  <th style={th}>Preferred Date</th>
+                  <th style={th}>Status</th>
+                  <th style={th}>Counsellor</th>
+                  <th style={th}>Notes</th>
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((a: AppointmentAdminRow) => {
-                  const sc = statusColors[a.status] || statusColors.pending;
+                {filtered.map((a) => {
+                  const sm = STATUS_META[a.status] ?? STATUS_META.pending;
                   return (
                     <tr key={a._id}>
-                      <td style={tdStyle}>{a.guestName || "—"}</td>
-                      <td style={tdStyle}>{a.guestEmail || "—"}</td>
-                      <td style={tdStyle}>{a.department || "—"}</td>
-                      <td style={tdStyle}>{a.preferredDate || "—"}</td>
-                      <td style={tdStyle}>
-                        <span style={{ display: "inline-block", padding: "2px 10px", borderRadius: 12, fontSize: 12, fontWeight: 600, color: sc.color, background: sc.bg, textTransform: "capitalize" }}>
+                      <td style={{ ...td, fontWeight: 600 }}>{a.guestName || "—"}</td>
+                      <td style={{ ...td, color: "#6b7280" }}>{a.guestEmail || "—"}</td>
+                      <td style={td}>{a.department || "—"}</td>
+                      <td style={td}>{a.preferredDate || "—"}</td>
+                      <td style={td}>
+                        <span style={{
+                          display: "inline-block",
+                          padding: "2px 10px",
+                          borderRadius: 10,
+                          fontSize: 11,
+                          fontWeight: 700,
+                          color: sm.color,
+                          background: sm.bg,
+                          border: `1px solid ${sm.border}`,
+                          textTransform: "capitalize",
+                        }}>
                           {a.status}
                         </span>
                       </td>
-                      <td style={tdStyle}>
+                      <td style={td}>
                         {a.counsellorName ? (
-                          <span>{a.counsellorName}</span>
+                          <span style={{ color: ACCENT, fontWeight: 600 }}>{a.counsellorName}</span>
                         ) : (
                           <select
                             defaultValue=""
-                            onChange={(e) => {
-                              if (e.target.value) handleAssign(a._id, e.target.value as string);
+                            onChange={(e) => handleAssign(a._id, e.target.value)}
+                            style={{
+                              padding: "4px 8px",
+                              borderRadius: 6,
+                              border: `1px solid ${ACCENT_BORDER}`,
+                              fontSize: 12,
+                              color: ACCENT,
+                              background: ACCENT_LIGHT,
+                              cursor: "pointer",
                             }}
-                            style={{ padding: "4px 8px", borderRadius: 6, border: "1px solid #d1d5db", fontSize: 13 }}
                           >
-                            <option value="">Assign...</option>
-                            {counsellors?.map((c: CounsellorOption) => (
+                            <option value="">Assign counsellor…</option>
+                            {counsellors?.map((c) => (
                               <option key={c._id} value={c._id}>
                                 {c.firstName} {c.lastName}
                               </option>
@@ -116,7 +157,9 @@ export default function AdminAppointmentsPage() {
                           </select>
                         )}
                       </td>
-                      <td style={tdStyle}>{a.notes || "—"}</td>
+                      <td style={{ ...td, color: "#6b7280", maxWidth: 160, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {a.notes || "—"}
+                      </td>
                     </tr>
                   );
                 })}

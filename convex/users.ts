@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { internalMutation, internalQuery } from "./_generated/server";
+import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import type { Id } from "./_generated/dataModel";
 
 function sanitizeUser(doc: {
@@ -17,6 +17,9 @@ function sanitizeUser(doc: {
   qualifications?: string;
   specialization?: string[];
   availability?: string | string[];
+  occupation?: string;
+  ageGroup?: string;
+  bio?: string;
 }) {
   const {
     passwordHash: _p,
@@ -50,11 +53,13 @@ export const createStudent = internalMutation({
     passwordHash: v.string(),
     firstName: v.string(),
     lastName: v.string(),
-    contactNo: v.number(),
-    university: v.string(),
-    program: v.string(),
+    contactNo: v.optional(v.number()),
+    university: v.optional(v.string()),
+    program: v.optional(v.string()),
     branch: v.optional(v.string()),
     semester: v.optional(v.string()),
+    occupation: v.optional(v.string()),
+    ageGroup: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const email = args.email.trim().toLowerCase();
@@ -76,6 +81,8 @@ export const createStudent = internalMutation({
       program: args.program,
       branch: args.branch,
       semester: args.semester,
+      occupation: args.occupation,
+      ageGroup: args.ageGroup,
     });
     const doc = await ctx.db.get(id);
     if (!doc) throw new Error("insert failed");
@@ -236,6 +243,49 @@ export const deleteCounsellor = internalMutation({
     }
     await ctx.db.delete(counsellorId);
     return { ok: true as const };
+  },
+});
+
+/** Public query — returns a user's profile (no passwordHash) for the profile page. */
+export const getProfile = query({
+  args: { userId: v.id("users") },
+  handler: async (ctx, { userId }) => {
+    const user = await ctx.db.get(userId);
+    if (!user) return null;
+    const { passwordHash: _p, ...safe } = user;
+    return safe;
+  },
+});
+
+/** Mutation to update optional profile fields after signup. */
+export const updateProfile = mutation({
+  args: {
+    userId: v.id("users"),
+    firstName: v.optional(v.string()),
+    lastName: v.optional(v.string()),
+    contactNo: v.optional(v.number()),
+    university: v.optional(v.string()),
+    program: v.optional(v.string()),
+    branch: v.optional(v.string()),
+    semester: v.optional(v.string()),
+    occupation: v.optional(v.string()),
+    ageGroup: v.optional(v.string()),
+    bio: v.optional(v.string()),
+  },
+  handler: async (ctx, { userId, ...fields }) => {
+    const user = await ctx.db.get(userId);
+    if (!user) return { ok: false as const };
+    const patch: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(fields)) {
+      if (v !== undefined) patch[k] = v;
+    }
+    if (Object.keys(patch).length > 0) {
+      await ctx.db.patch(userId, patch);
+    }
+    const updated = await ctx.db.get(userId);
+    if (!updated) return { ok: false as const };
+    const { passwordHash: _p, ...safe } = updated;
+    return { ok: true as const, user: safe };
   },
 });
 

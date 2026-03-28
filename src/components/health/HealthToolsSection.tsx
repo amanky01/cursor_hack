@@ -11,6 +11,7 @@ import {
   Heart,
   Brain,
   Shield,
+  Building2,
 } from "lucide-react";
 import MotionSection from "@/components/ui/MotionSection";
 import { staggerContainer, fadeUpItem } from "@/animations/variants";
@@ -46,6 +47,13 @@ const tools = [
     description: "Upload a photo; we run OCR and match to our reference list.",
     Icon: Camera,
     accent: "camera" as const,
+  },
+  {
+    href: "/health/hospitals",
+    title: "Hospital Finder",
+    description: "Search nearby hospitals, explore doctors by specialty, and find contact details.",
+    Icon: Building2,
+    accent: "pulse" as const,
   },
 ];
 

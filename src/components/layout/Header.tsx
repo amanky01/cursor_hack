@@ -1,33 +1,62 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Heart, User, UserPlus, Home, Info, BookOpen, MessageCircle, LogOut, Shield, Stethoscope } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Heart,
+  User,
+  UserPlus,
+  Home,
+  Info,
+  BookOpen,
+  MessageCircle,
+  LogOut,
+  Shield,
+  Stethoscope,
+  LayoutDashboard,
+} from 'lucide-react';
 import styles from '../../styles/components/layout/Header.module.css';
 import { useAuth } from '@/context/AuthContext';
 import ThemeToggle from './ThemeToggle';
+
+const BASE_NAV = [
+  { name: 'My Space', href: '/', icon: Home, description: 'Your personal sanctuary' },
+  {
+    name: 'Saathi',
+    href: '/saathi',
+    icon: MessageCircle,
+    description: 'Saathi • Your Health Companion — talk privately, no account',
+  },
+  { name: 'Our Story', href: '/about', icon: Info, description: 'Why we care' },
+  { name: 'Health Tools', href: '/health', icon: Stethoscope, description: 'Symptoms, medicines & care' },
+  { name: 'Guides', href: '/resources', icon: BookOpen, description: 'Help & resources' },
+  { name: 'Reach Out', href: '/contact', icon: MessageCircle, description: 'We\'re here for you' },
+] as const;
+
+const DASHBOARD_ITEM = {
+  name: 'Dashboard',
+  href: '/dashboard',
+  icon: LayoutDashboard,
+  description: 'Progress, interventions, and your mental health journey',
+} as const;
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const { user, isAuthenticated, logout } = useAuth();
 
-  const navigation = [
-    { name: 'My Space', href: '/', icon: Home, description: 'Your personal sanctuary' },
-    {
-      name: 'Saathi',
-      href: '/saathi',
-      icon: MessageCircle,
-      description: 'Saathi • Your Health Companion — talk privately, no account',
-    },
-    { name: 'Our Story', href: '/about', icon: Info, description: 'Why we care' },
-    { name: 'Health Tools', href: '/health', icon: Stethoscope, description: 'Symptoms, medicines & care' },
-    { name: 'Guides', href: '/resources', icon: BookOpen, description: 'Help & resources' },
-    { name: 'Reach Out', href: '/contact', icon: MessageCircle, description: 'We\'re here for you' },
-  ];
+  const navigation = useMemo(() => {
+    if (user?.role === 'student') {
+      return [BASE_NAV[0], DASHBOARD_ITEM, ...BASE_NAV.slice(1)];
+    }
+    return [...BASE_NAV];
+  }, [user?.role]);
 
-  const isActive = (href: string) => pathname === href;
+  const isActive = (href: string) =>
+    href === '/dashboard' ? pathname === '/dashboard' || pathname.startsWith('/dashboard/') : pathname === href;
 
   return (
     <header className={styles.header}>
@@ -87,7 +116,7 @@ const Header: React.FC = () => {
             </>
           ) : (
             <>
-              <Link href="/sign-in" className={styles.authButton} title="Counsellor / Admin">
+              <Link href="/staff" className={styles.authButton} title="Admin or counsellor sign-in">
                 <Shield size={16} strokeWidth={2} />
                 Staff
               </Link>
@@ -178,12 +207,12 @@ const Header: React.FC = () => {
               ) : (
                 <>
                   <Link
-                    href="/sign-in"
+                    href="/staff"
                     className={styles.mobileAuthButton}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <Shield size={18} />
-                    Staff sign-in
+                    Staff portal
                   </Link>
                   <Link
                     href="/register"

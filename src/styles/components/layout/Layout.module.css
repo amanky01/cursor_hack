@@ -7,6 +7,9 @@
 .main {
   flex: 1;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 /* Ensure proper spacing between sections */

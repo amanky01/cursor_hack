@@ -3,6 +3,7 @@
 import { useAction, useMutation } from "convex/react";
 import { api } from "@cvx/_generated/api";
 import { useCallback, useRef, useState } from "react";
+import { Mic } from "lucide-react";
 
 interface Props {
   anonymousId: string;
@@ -180,32 +181,24 @@ export default function VoiceJournalButton({
       onClick={startRecording}
       disabled={disabled || !anonymousId}
       title="Record voice journal"
+      aria-label="Record voice journal"
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        width: 32,
-        height: 32,
+        width: 44,
+        height: 44,
         borderRadius: "50%",
-        border: "1px solid #d1d5db",
-        background: "#fff",
+        border: "2px solid rgba(16, 185, 129, 0.45)",
+        background: "linear-gradient(180deg, #fff 0%, #f0fdf4 100%)",
+        color: "var(--primary-600, #059669)",
         cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.5 : 1,
+        opacity: disabled ? 0.45 : 1,
+        boxShadow: "0 2px 10px rgba(5, 150, 105, 0.12)",
+        transition: "transform 0.15s ease, box-shadow 0.15s ease",
       }}
     >
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M12 1a4 4 0 0 0-4 4v7a4 4 0 0 0 8 0V5a4 4 0 0 0-4-4Z"
-          fill="#7c6fcd"
-        />
-        <path
-          d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4m-4 0h8"
-          stroke="#7c6fcd"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      <Mic size={20} strokeWidth={2.25} aria-hidden />
     </button>
   );
 }

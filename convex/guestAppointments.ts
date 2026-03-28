@@ -10,6 +10,7 @@ export const createGuest = mutation({
     department: v.string(),
     preferredDate: v.string(),
     notes: v.optional(v.string()),
+    counsellorId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const name = args.name.trim();
@@ -29,7 +30,7 @@ export const createGuest = mutation({
       department,
       preferredDate,
       notes: args.notes?.trim(),
-      counsellorId: "",
+      counsellorId: args.counsellorId ?? "",
       slot: Date.now(),
       aiSummary: "",
       status: "pending",
