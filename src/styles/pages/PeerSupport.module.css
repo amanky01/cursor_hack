@@ -13,7 +13,7 @@
   flex-direction: column;
   flex: 1;
   min-height: min(720px, calc(100vh - 6rem));
-  background: var(--white, #fff);
+  background: var(--card-bg);
   border: 1px solid var(--gray-200);
   border-radius: var(--radius-lg, 12px);
   overflow: hidden;
@@ -27,7 +27,7 @@
   gap: var(--spacing-md);
   padding: var(--spacing-md) var(--spacing-lg);
   border-bottom: 1px solid var(--gray-200);
-  background: var(--gray-50, #f9fafb);
+  background: var(--gray-100);
   flex-wrap: wrap;
 }
 
@@ -68,7 +68,7 @@
   box-sizing: border-box;
   border-radius: var(--radius-md, 8px);
   border: 1px solid var(--gray-200);
-  background: var(--white, #fff);
+  background: var(--card-bg);
   color: var(--gray-700);
   cursor: pointer;
   transition:
@@ -84,15 +84,15 @@
 }
 
 .iconBtn:focus-visible {
-  outline: 2px solid var(--primary-500, #3b82f6);
+  outline: 2px solid var(--primary-500);
   outline-offset: 2px;
 }
 
 .iconBtnActive {
   composes: iconBtn;
-  border-color: var(--primary-300, #93c5fd);
-  background: var(--primary-50, #eff6ff);
-  color: var(--primary-700, #1d4ed8);
+  border-color: var(--primary-400);
+  background: color-mix(in srgb, var(--primary-500) 14%, var(--card-bg));
+  color: var(--primary-700);
 }
 
 .iconBtn svg {
@@ -114,7 +114,7 @@
   font-weight: 700;
   line-height: 1.1rem;
   text-align: center;
-  border: 2px solid var(--white, #fff);
+  border: 2px solid var(--card-bg);
 }
 
 .chatMain {
@@ -178,7 +178,7 @@
   bottom: 0;
   width: min(440px, 100vw);
   max-width: 100%;
-  background: var(--white, #fff);
+  background: var(--card-bg);
   z-index: 1001;
   display: flex;
   flex-direction: column;
@@ -276,20 +276,20 @@
 }
 
 .tab:hover {
-  background: var(--white, #fff);
+  background: var(--card-bg);
   color: var(--gray-900);
 }
 
 .tabActive {
   composes: tab;
-  background: var(--white, #fff);
+  background: var(--card-bg);
   border-color: var(--gray-200);
   color: var(--gray-900);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .panel {
-  background: var(--white, #fff);
+  background: var(--card-bg);
   border: 1px solid var(--gray-200);
   border-radius: var(--radius-lg, 12px);
   padding: var(--spacing-lg);
@@ -339,7 +339,7 @@
   padding: 0.85rem 1rem;
   border: 1px solid var(--gray-200);
   border-radius: var(--radius-md, 10px);
-  background: var(--white, #fff);
+  background: var(--card-bg);
   cursor: pointer;
   text-align: left;
   transition: border-color 0.15s ease, background 0.15s ease;
@@ -347,16 +347,16 @@
 
 .radioCard:hover {
   border-color: var(--gray-300);
-  background: var(--gray-50, #f9fafb);
+  background: var(--gray-50);
 }
 
 .radioCard:has(input:checked) {
-  border-color: var(--primary-400, #60a5fa);
-  background: var(--primary-50, #eff6ff);
+  border-color: var(--primary-400);
+  background: color-mix(in srgb, var(--primary-500) 12%, var(--card-bg));
 }
 
 .radioCard:has(input:focus-visible) {
-  outline: 2px solid var(--primary-500, #3b82f6);
+  outline: 2px solid var(--primary-500);
   outline-offset: 2px;
 }
 
@@ -365,7 +365,7 @@
   flex-shrink: 0;
   width: 1.05rem;
   height: 1.05rem;
-  accent-color: var(--primary-600, #2563eb);
+  accent-color: var(--primary-600);
 }
 
 .radioCardBody {
@@ -444,8 +444,8 @@
 
 .btnPrimary {
   composes: btn;
-  background: var(--primary-600, #2563eb);
-  color: white;
+  background: var(--primary-600);
+  color: var(--color-on-accent, #fff);
 }
 
 .btnPrimary:disabled {
@@ -524,6 +524,7 @@
   overflow: hidden;
   max-height: 420px;
   overflow-y: auto;
+  background: var(--gray-100);
 }
 
 .convItem {
@@ -531,19 +532,23 @@
   text-align: left;
   padding: 0.75rem 1rem;
   border: none;
-  border-bottom: 1px solid var(--gray-100);
-  background: white;
+  border-bottom: 1px solid var(--gray-200);
+  border-left: 3px solid transparent;
+  background: var(--card-bg);
   cursor: pointer;
   font-size: 0.9rem;
+  color: var(--gray-900);
+  box-sizing: border-box;
 }
 
 .convItem:hover {
-  background: var(--gray-50);
+  background: var(--gray-100);
 }
 
 .convItemActive {
   composes: convItem;
-  background: var(--primary-50, #eff6ff);
+  background: color-mix(in srgb, var(--primary-500) 16%, var(--card-bg));
+  border-left-color: var(--primary-400);
 }
 
 .convPreview {
@@ -553,6 +558,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+[data-theme="dark"] .convPreview {
+  color: var(--gray-400);
 }
 
 .thread {
@@ -571,6 +580,9 @@
   justify-content: space-between;
   gap: 0.5rem;
   flex-wrap: wrap;
+  background: var(--card-bg);
+  color: var(--gray-900);
+  font-weight: 600;
 }
 
 .threadMessages {
@@ -580,7 +592,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  background: var(--gray-50);
+  background: var(--gray-100);
+}
+
+.threadMessages > p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .threadMessages > p {
+  color: #94a3b8;
 }
 
 .msgRow {
@@ -599,14 +621,15 @@
   border-radius: 12px;
   font-size: 0.9rem;
   line-height: 1.45;
-  background: white;
+  background: var(--card-bg);
   border: 1px solid var(--gray-200);
+  color: var(--gray-900);
 }
 
 .msgBubbleMine {
   composes: msgBubble;
-  background: var(--primary-600, #2563eb);
-  color: white;
+  background: var(--primary-600);
+  color: var(--color-on-accent, #fff);
   border-color: var(--primary-600);
 }
 
@@ -621,7 +644,7 @@
   gap: 0.5rem;
   padding: 0.75rem;
   border-top: 1px solid var(--gray-200);
-  background: white;
+  background: var(--card-bg);
 }
 
 .threadInput input {
@@ -629,6 +652,12 @@
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--gray-300);
   border-radius: var(--radius-md, 8px);
+  background: var(--card-bg);
+  color: var(--gray-900);
+}
+
+.threadInput input::placeholder {
+  color: var(--gray-500);
 }
 
 .inviteHint {
@@ -640,4 +669,189 @@
 .userIdInput {
   font-family: ui-monospace, monospace;
   font-size: 0.8rem;
+}
+
+/* --- Dark mode: flat chat canvas + teal edges (matches Saathi embed) --- */
+[data-theme="dark"] .page {
+  background: transparent;
+}
+
+[data-theme="dark"] .chatShell {
+  border-color: rgba(45, 212, 191, 0.22);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .chatTopBar {
+  border-bottom-color: rgba(45, 212, 191, 0.14);
+}
+
+[data-theme="dark"] .convList {
+  background: #1e232e;
+  border-color: rgba(45, 212, 191, 0.18);
+}
+
+[data-theme="dark"] .convItem {
+  background: transparent;
+  border-bottom-color: rgba(51, 65, 85, 0.9);
+}
+
+[data-theme="dark"] .convItem:hover {
+  background: rgba(45, 212, 191, 0.07);
+}
+
+[data-theme="dark"] .convItemActive {
+  background: rgba(45, 212, 191, 0.12);
+}
+
+[data-theme="dark"] .thread {
+  border-color: rgba(45, 212, 191, 0.18);
+  background: var(--card-bg);
+}
+
+[data-theme="dark"] .threadHeader {
+  border-bottom-color: rgba(45, 212, 191, 0.14);
+}
+
+[data-theme="dark"] .threadMessages {
+  background: #1e232e;
+}
+
+[data-theme="dark"] .msgBubble {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+[data-theme="dark"] .msgBubble .msgTime {
+  color: rgba(148, 163, 184, 0.95);
+}
+
+[data-theme="dark"] .msgBubbleMine .msgTime {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+[data-theme="dark"] .threadInput {
+  background: var(--card-bg);
+  border-top-color: rgba(45, 212, 191, 0.14);
+}
+
+[data-theme="dark"] .threadInput input {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(148, 163, 184, 0.38);
+}
+
+[data-theme="dark"] .bannerCompact {
+  color: #fde68a;
+  background: rgba(120, 53, 15, 0.42);
+  border-bottom-color: rgba(251, 191, 36, 0.35);
+}
+
+[data-theme="dark"] .errorBar {
+  background: rgba(127, 29, 29, 0.4);
+  border-bottom-color: rgba(248, 113, 113, 0.35);
+  color: #fecaca;
+}
+
+[data-theme="dark"] .overlayBackdrop {
+  background: rgba(0, 0, 0, 0.58);
+}
+
+[data-theme="dark"] .drawer {
+  border-left: 1px solid rgba(45, 212, 191, 0.15);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] .drawerHeader {
+  border-bottom-color: rgba(45, 212, 191, 0.12);
+}
+
+[data-theme="dark"] .tabs {
+  background: rgba(15, 23, 42, 0.55);
+  border-color: rgba(148, 163, 184, 0.25);
+}
+
+[data-theme="dark"] .field > label,
+[data-theme="dark"] .fieldLabel {
+  color: var(--gray-800);
+}
+
+[data-theme="dark"] .field input,
+[data-theme="dark"] .field textarea,
+[data-theme="dark"] .field select {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(148, 163, 184, 0.38);
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .settingsSummary {
+  background: rgba(15, 23, 42, 0.45);
+  border-color: rgba(148, 163, 184, 0.28);
+}
+
+[data-theme="dark"] .settingsSummaryRow,
+[data-theme="dark"] .settingsSummaryLabel {
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .card {
+  background: rgba(15, 23, 42, 0.35);
+  border-color: rgba(148, 163, 184, 0.28);
+}
+
+[data-theme="dark"] .btnSecondary {
+  background: rgba(51, 65, 85, 0.55);
+  color: var(--gray-800);
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+[data-theme="dark"] .btnDanger {
+  background: rgba(127, 29, 29, 0.28);
+  color: #fecaca;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+[data-theme="dark"] .iconBtnActive {
+  color: var(--primary-300);
+}
+
+[data-theme="dark"] .successBanner {
+  background: rgba(6, 78, 59, 0.45);
+  border-color: rgba(52, 211, 153, 0.35);
+  color: #a7f3d0;
+}
+
+[data-theme="dark"] .inviteHint {
+  color: var(--gray-500);
+}
+
+.peerEmptyHint {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--gray-600);
+}
+
+.peerEmptyHint strong {
+  color: var(--gray-800);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .peerEmptyHint {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .peerEmptyHint strong {
+  color: #e2e8f0;
+}
+
+.peerEmptyHintCenter {
+  composes: peerEmptyHint;
+  padding: 1.5rem;
+  align-self: center;
+  margin: auto;
+  text-align: center;
+  max-width: 20rem;
+}
+
+.peerEmptyHintTight {
+  composes: peerEmptyHint;
+  padding: 1rem;
 }
