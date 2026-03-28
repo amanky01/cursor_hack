@@ -1,13 +1,18 @@
 "use client";
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { motion, useReducedMotion } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
 import NatureBackground from '../ui/NatureBackground';
-import SaathiChatDock from '../saathi/SaathiChatDock';
 import { pageEnter } from '@/animations/variants';
 import styles from '../../styles/components/layout/Layout.module.css';
+
+/** Client-only: uses Convex `useMutation` — skip SSR when Convex URL is absent at build time. */
+const SaathiChatDock = dynamic(() => import('../saathi/SaathiChatDock'), {
+  ssr: false,
+});
 
 interface LayoutProps {
   children: React.ReactNode;
