@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
             <div className={styles.logo}>
               <Link href="/" className={styles.logoLink}>
                 <Heart className={styles.logoIcon} />
-                <span className={styles.logoText}>Mann Mitra</span>
+                <span className={styles.logoText}>Sehat Sathi</span>
               </Link>
             </div>
             <p className={styles.brandDescription}>
@@ -112,7 +112,7 @@ const Footer: React.FC = () => {
         {/* Bottom Section */}
         <div className={styles.footerBottom}>
           <div className={styles.copyright}>
-            <p>&copy; {currentYear} Mann Mitra. All rights reserved.</p>
+            <p>&copy; {currentYear} Sehat Sathi. All rights reserved.</p>
           </div>
           <div className={styles.socialLinks}>
             {socialLinks.map((social) => {

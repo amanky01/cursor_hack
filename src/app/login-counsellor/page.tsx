@@ -41,7 +41,7 @@ const CounsellorLoginPage: React.FC = () => {
   };
 
   return (
-    <Layout title="Counsellor Login - Mann Mitra" description="Counsellor sign-in">
+    <Layout title="Counsellor Login - Sehat Sathi" description="Counsellor sign-in">
       <div className={styles.authContainer}>
         <div className={styles.authCard}>
           <div className={styles.authHeader}>

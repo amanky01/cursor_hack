@@ -41,7 +41,7 @@ const AdminLoginPage: React.FC = () => {
   };
 
   return (
-    <Layout title="Admin Login - Mann Mitra" description="Admin sign-in">
+    <Layout title="Admin Login - Sehat Sathi" description="Admin sign-in">
       <div className={styles.authContainer}>
         <div className={styles.authCard}>
           <div className={styles.authHeader}>

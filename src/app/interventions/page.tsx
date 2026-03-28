@@ -69,7 +69,7 @@ const InterventionsPage: React.FC = () => {
 
   return (
     <Layout
-      title="Interventions - Mann Mitra"
+      title="Interventions - Sehat Sathi"
       description="Explore our evidence-based psychological interventions designed specifically for college students."
     >
       <div className={styles.interventions}>

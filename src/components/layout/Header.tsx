@@ -28,7 +28,7 @@ const Header: React.FC = () => {
         <div className={styles.logo}>
           <Link href="/" className={styles.logoLink}>
             <Heart className={styles.logoIcon} />
-            <span className={styles.logoText}>Mann Mitra</span>
+            <span className={styles.logoText}>Sehat Sathi</span>
           </Link>
         </div>
 
