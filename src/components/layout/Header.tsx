@@ -16,10 +16,10 @@ const Header: React.FC = () => {
   const navigation = [
     { name: 'My Space', href: '/', icon: Home, description: 'Your personal sanctuary' },
     {
-      name: 'Saathi (anonymous)',
-      href: '/saathi',
+      name: 'Saathi',
+      href: '/chat',
       icon: MessageCircle,
-      description: 'Talk privately — no account',
+      description: 'Talk to your mental health companion',
     },
     { name: 'Our Story', href: '/about', icon: Info, description: 'Why we care' },
     { name: 'Health Tools', href: '/health', icon: Stethoscope, description: 'Symptoms, medicines & care' },

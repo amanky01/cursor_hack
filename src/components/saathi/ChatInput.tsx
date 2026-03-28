@@ -6,9 +6,10 @@ import styles from "@/styles/components/saathi-chat.module.css";
 interface Props {
   onSend: (text: string) => void;
   disabled?: boolean;
+  micSlot?: React.ReactNode;
 }
 
-export default function ChatInput({ onSend, disabled }: Props) {
+export default function ChatInput({ onSend, disabled, micSlot }: Props) {
   const [text, setText] = useState("");
 
   const handleSend = () => {
@@ -33,6 +34,7 @@ export default function ChatInput({ onSend, disabled }: Props) {
           rows={1}
           className={styles.textarea}
         />
+        {micSlot}
         <button
           type="button"
           onClick={handleSend}

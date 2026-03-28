@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction } from "convex/react";
+import { useAction, useQuery } from "convex/react";
 import { api } from "@cvx/_generated/api";
 import type { Id } from "@cvx/_generated/dataModel";
 import Link from "next/link";
@@ -8,6 +8,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ChatBubble from "@/components/saathi/ChatBubble";
 import ChatInput from "@/components/saathi/ChatInput";
 import CrisisBanner from "@/components/saathi/CrisisBanner";
+import MoodSparkline from "@/components/saathi/MoodSparkline";
+import VoiceJournalButton from "@/components/saathi/VoiceJournalButton";
 import SaathiLanguageGate from "@/components/saathi/SaathiLanguageGate";
 import styles from "@/styles/components/saathi-chat.module.css";
 
@@ -33,6 +35,10 @@ export default function AnonymousSaathiPanel({ variant }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const sendMessage = useAction(api.patientChat.sendMessage);
+  const moodData = useQuery(
+    api.moodLogs.getRecentForPatient,
+    anonymousId ? { anonymousId } : "skip"
+  );
 
   const syncIdAndWelcome = useCallback(() => {
     const id = localStorage.getItem("saathi_id") ?? "";
@@ -70,6 +76,14 @@ export default function AnonymousSaathiPanel({ variant }: Props) {
 
   const handleLanguageReady = () => {
     syncIdAndWelcome();
+  };
+
+  const handleChangeLanguage = () => {
+    localStorage.removeItem("saathi_id");
+    setAnonymousId("");
+    setNeedsLanguage(true);
+    setMessages([]);
+    setSessionId(undefined);
   };
 
   const handleSend = async (text: string) => {
@@ -129,7 +143,7 @@ export default function AnonymousSaathiPanel({ variant }: Props) {
           Set <code>NEXT_PUBLIC_CONVEX_URL</code> in <code>.env.local</code> to
           enable anonymous chat.
         </p>
-        <Link href="/saathi" style={{ color: "#7c6fcd" }}>
+        <Link href="/chat" style={{ color: "#7c6fcd" }}>
           Back to Saathi
         </Link>
       </div>
@@ -166,8 +180,9 @@ export default function AnonymousSaathiPanel({ variant }: Props) {
               Mental health companion · Anonymous
             </p>
           </div>
-          <Link
-            href="/saathi"
+          <button
+            type="button"
+            onClick={handleChangeLanguage}
             style={{
               fontSize: 12,
               color: "#7c6fcd",
@@ -175,15 +190,22 @@ export default function AnonymousSaathiPanel({ variant }: Props) {
               borderRadius: 999,
               padding: "4px 12px",
               marginRight: 8,
-              textDecoration: "none",
+              background: "transparent",
+              cursor: "pointer",
             }}
           >
             Language
-          </Link>
+          </button>
           <Link href="/" style={{ fontSize: 12, color: "#6b6b6b" }}>
             Home
           </Link>
         </header>
+      )}
+
+      {moodData && moodData.length >= 2 && (
+        <div style={{ padding: "6px 16px", borderBottom: "1px solid #e8e4de", background: "#fff" }}>
+          <MoodSparkline data={moodData} />
+        </div>
       )}
 
       {needsLanguage && (
@@ -219,7 +241,32 @@ export default function AnonymousSaathiPanel({ variant }: Props) {
         <div ref={bottomRef} />
       </div>
 
-      <ChatInput onSend={handleSend} disabled={loading || needsLanguage} />
+      <ChatInput
+        onSend={handleSend}
+        disabled={loading || needsLanguage}
+        micSlot={
+          anonymousId ? (
+            <VoiceJournalButton
+              anonymousId={anonymousId}
+              disabled={loading || needsLanguage}
+              onResult={(result) => {
+                setMessages((prev) => [
+                  ...prev,
+                  {
+                    role: "user" as const,
+                    content: `[Voice Journal] ${result.transcription}`,
+                  },
+                  {
+                    role: "assistant" as const,
+                    content: result.summary,
+                  },
+                ]);
+                if (result.crisisDetected) setCrisisDetected(true);
+              }}
+            />
+          ) : undefined
+        }
+      />
     </div>
   );
 }
