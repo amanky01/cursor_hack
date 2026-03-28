@@ -759,13 +759,7 @@ function PeerSupportPageContent() {
               <div className={`${styles.chatLayout} ${styles.chatLayoutFull}`}>
                 <div className={styles.convList}>
                   {conversations.length === 0 ? (
-                    <div
-                      style={{
-                        padding: 16,
-                        fontSize: 14,
-                        color: "var(--gray-600, #666)",
-                      }}
-                    >
+                    <div className={styles.peerEmptyHintTight}>
                       No conversations yet. Open{" "}
                       <strong>Find peers</strong> or check{" "}
                       <strong>Requests</strong>.
@@ -790,16 +784,7 @@ function PeerSupportPageContent() {
                 </div>
                 <div className={styles.thread}>
                   {!activeConvId ? (
-                    <div
-                      style={{
-                        padding: 24,
-                        color: "var(--gray-600, #666)",
-                        alignSelf: "center",
-                        margin: "auto",
-                        textAlign: "center",
-                        maxWidth: 320,
-                      }}
-                    >
+                    <div className={styles.peerEmptyHintCenter}>
                       Select a conversation on the left, or use{" "}
                       <strong>Find peers</strong> to start one.
                     </div>
