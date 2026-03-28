@@ -1,5 +1,5 @@
 .widget {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-2xl);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-lg);
@@ -60,7 +60,7 @@
   padding: var(--spacing-lg);
   border: 2px solid var(--gray-200);
   border-radius: var(--radius-xl);
-  background: white;
+  background: var(--card-bg);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   min-width: 100px;

@@ -47,8 +47,8 @@ const Footer: React.FC = () => {
               </Link>
             </div>
             <p className={styles.brandDescription}>
-              Empowering college students with evidence-based psychological interventions 
-              and mental health support through our comprehensive digital platform.
+              Empowering people and families with evidence-based support for physical health,
+              mental wellness, and caring guidance—an inclusive digital platform for everyone.
             </p>
             <p className={styles.medicalDisclaimer}>
               This platform provides general medical information and is not a substitute for professional medical advice.

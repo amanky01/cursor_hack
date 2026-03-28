@@ -16,9 +16,12 @@ const Hero: React.FC = () => {
               <span className={styles.highlight}> Healing & Growth</span>
             </h1>
             <p className={styles.subtitle}>
-              A gentle, supportive place where college students can find peace, build resilience, 
-              and discover their inner strength. You're not alone in this journey - we're here 
-              to walk alongside you with compassion and care.
+              A gentle, supportive place where people and families can find peace, build resilience,
+              and discover strength at any age. You are not alone—we are here to walk alongside you
+              with compassion and care on your health and wellness journey.
+            </p>
+            <p className={styles.heroTagline}>
+              For all ages • General health • Mental wellness • Medical guidance
             </p>
             <RotatingAffirmation />
             <div className={styles.buttons}>
@@ -38,7 +41,7 @@ const Hero: React.FC = () => {
               </div>
               <div className={styles.trustItem}>
                 <Users size={20} />
-                <span>10,000+ Students Supported</span>
+                <span>10,000+ People Supported</span>
               </div>
               <div className={styles.trustItem}>
                 <Brain size={20} />

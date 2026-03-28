@@ -18,7 +18,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({
   children,
   title: _title = 'Sehat-Saathi - Digital Psychological Intervention Platform',
-  description: _description = 'A comprehensive digital platform providing psychological interventions and mental health support for college students.',
+  description: _description = 'A comprehensive digital platform for health and wellness—supportive care for people and families of all ages.',
   keywords: _keywords = 'mental health, psychological intervention, college students, therapy, counseling, mindfulness, CBT',
   header,
 }) => {

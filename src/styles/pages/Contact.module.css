@@ -35,7 +35,7 @@
 
 .contactInfo {
   padding: var(--spacing-3xl) 0;
-  background: white;
+  background: var(--card-bg);
 }
 
 .contactGrid {
@@ -118,7 +118,7 @@
 .formContainer {
   max-width: 800px;
   margin: 0 auto;
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-2xl);
   padding: var(--spacing-3xl);
   box-shadow: var(--shadow-lg);
@@ -238,7 +238,7 @@
 
 .faq {
   padding: var(--spacing-3xl) 0;
-  background: white;
+  background: var(--card-bg);
 }
 
 .faqHeader {

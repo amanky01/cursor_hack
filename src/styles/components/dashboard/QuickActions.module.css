@@ -1,5 +1,5 @@
 .quickActions {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);

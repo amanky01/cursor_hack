@@ -61,7 +61,7 @@
 }
 
 .quickLinkCard {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
@@ -82,7 +82,7 @@
 
 .quickLinkCard.urgent {
   border-color: var(--warning-300);
-  background: linear-gradient(135deg, var(--warning-50), white);
+  background: linear-gradient(135deg, var(--warning-50), var(--card-bg));
 }
 
 .quickLinkCard.urgent:hover {
@@ -124,7 +124,7 @@
 
 .resourceCategories {
   padding: var(--spacing-3xl) 0;
-  background: white;
+  background: var(--card-bg);
 }
 
 .categoriesGrid {
@@ -134,7 +134,7 @@
 }
 
 .categoryCard {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
@@ -197,7 +197,7 @@
 }
 
 .resourceItem:hover {
-  background: white;
+  background: var(--card-bg);
   border-color: var(--primary-200);
   transform: translateX(4px);
 }

@@ -11,11 +11,13 @@ export const metadata: Metadata = {
     template: "%s | Sehat-Saathi",
   },
   description:
-    "A comprehensive digital platform providing psychological interventions and mental health support for college students.",
+    "A comprehensive digital platform for general healthcare and wellness—support for individuals and families, every age, every day.",
   keywords: [
+    "health",
+    "wellness",
     "mental health",
-    "psychological intervention",
-    "college students",
+    "families",
+    "healthcare",
     "therapy",
     "counseling",
   ],

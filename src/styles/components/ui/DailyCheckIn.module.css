@@ -1,5 +1,5 @@
 .checkInWidget {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-xl);
   border: 1px solid var(--gray-200);
@@ -85,7 +85,7 @@
   padding: var(--spacing-md);
   border: 2px solid var(--gray-200);
   border-radius: var(--radius-lg);
-  background: white;
+  background: var(--card-bg);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -167,7 +167,7 @@
 .noteInput:focus {
   outline: none;
   border-color: var(--primary-300);
-  background: white;
+  background: var(--card-bg);
   box-shadow: 0 0 0 3px rgba(168, 195, 160, 0.1);
 }
 

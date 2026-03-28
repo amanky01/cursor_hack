@@ -44,7 +44,7 @@
 }
 
 .assessmentCard {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-xl);
   padding: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -157,7 +157,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: var(--card-bg);
   padding: 1rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--gray-200);

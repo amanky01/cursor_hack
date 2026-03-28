@@ -1,6 +1,6 @@
 .footer {
-  background: var(--gray-900);
-  color: var(--gray-300);
+  background: var(--footer-bg);
+  color: var(--footer-text);
   margin-top: auto;
 }
 
@@ -52,13 +52,13 @@
 }
 
 .brandDescription {
-  color: var(--gray-400);
+  color: var(--footer-muted);
   line-height: 1.6;
   margin-bottom: var(--spacing-lg);
 }
 
 .medicalDisclaimer {
-  color: var(--gray-500);
+  color: var(--footer-muted);
   line-height: 1.5;
   margin-bottom: var(--spacing-lg);
   font-size: 0.85rem;
@@ -74,7 +74,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  color: var(--gray-400);
+  color: var(--footer-muted);
   font-size: 0.9rem;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .link {
-  color: var(--gray-400);
+  color: var(--footer-muted);
   text-decoration: none;
   font-size: 0.9rem;
   transition: color var(--transition-fast);
@@ -127,11 +127,11 @@
   justify-content: space-between;
   align-items: center;
   padding-top: var(--spacing-xl);
-  border-top: 1px solid var(--gray-800);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .copyright {
-  color: var(--gray-500);
+  color: var(--footer-muted);
   font-size: 0.9rem;
 }
 
@@ -146,8 +146,8 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: var(--gray-800);
-  color: var(--gray-400);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--footer-muted);
   border-radius: var(--radius-md);
   text-decoration: none;
   transition: all var(--transition-fast);
