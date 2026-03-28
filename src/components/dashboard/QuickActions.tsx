@@ -23,7 +23,7 @@ const QuickActions: React.FC = () => {
       description: 'Book or manage healthcare visits',
       icon: Calendar,
       href: '/appointments',
-      color: 'var(--secondary-500)',
+      color: 'var(--primary-600)',
     },
     {
       title: 'Talk to Saathi',

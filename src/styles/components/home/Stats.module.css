@@ -2,8 +2,8 @@
   padding: var(--spacing-3xl) 0;
   background: linear-gradient(
     135deg,
-    var(--primary-100) 0%,
-    var(--secondary-100) 42%,
+    var(--primary-50) 0%,
+    var(--primary-100) 42%,
     var(--primary-200) 100%
   );
   background-size: 200% 200%;
@@ -151,7 +151,7 @@
 .iconContainer {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, var(--primary-100), rgba(186, 230, 253, 0.65));
+  background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
   border-radius: var(--radius-xl);
   display: flex;
   align-items: center;
@@ -163,7 +163,7 @@
 
 .statCard:hover .iconContainer {
   transform: scale(1.1);
-  background: linear-gradient(135deg, var(--primary-200), var(--secondary-100));
+  background: linear-gradient(135deg, var(--primary-200), var(--primary-100));
 }
 
 [data-theme="dark"] .iconContainer {

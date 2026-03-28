@@ -183,7 +183,7 @@
 }
 
 .viewResultsButton {
-  background: var(--secondary-600);
+  background: var(--primary-600);
   color: white;
   border: none;
   border-radius: var(--radius-lg);
@@ -194,7 +194,7 @@
 }
 
 .viewResultsButton:hover {
-  background: var(--secondary-700);
+  background: var(--primary-700);
   transform: translateY(-1px);
 }
 

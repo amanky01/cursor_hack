@@ -62,7 +62,7 @@
 }
 
 .logoIcon {
-  color: var(--secondary-500);
+  color: var(--primary-500);
 }
 
 .logoText {
@@ -70,7 +70,7 @@
   overflow: visible;
   white-space: nowrap;
   flex-shrink: 0;
-  background: linear-gradient(135deg, var(--primary-600), var(--secondary-500));
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-400));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -124,13 +124,13 @@
   text-decoration: none;
   color: var(--gray-600);
   font-weight: 500;
-  padding: 6px 8px;
+  padding: 8px 10px;
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   white-space: nowrap;
   line-height: 1.2;
 }
@@ -149,7 +149,7 @@
 /* Desktop: icon-first nav; label expands on hover / keyboard focus */
 @media (min-width: 769px) {
   .navLink {
-    gap: 2px;
+    gap: 4px;
   }
 
   .navLinkLabel {
@@ -266,7 +266,7 @@
 }
 
 .themeToggleIcon {
-  font-size: 1.125rem;
+  font-size: 1.35rem;
   line-height: 1;
 }
 

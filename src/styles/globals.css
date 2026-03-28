@@ -707,11 +707,11 @@ a:focus-visible {
   pointer-events: none;
   z-index: -2;
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--primary-50) 55%, var(--page-bg)) 0%, transparent 12%, transparent 88%, color-mix(in srgb, var(--gray-50) 80%, var(--secondary-100)) 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--primary-50) 55%, var(--page-bg)) 0%, transparent 12%, transparent 88%, color-mix(in srgb, var(--gray-50) 80%, var(--primary-100)) 100%),
     radial-gradient(circle at 20% 80%, var(--primary-200) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, var(--secondary-200) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, var(--primary-200) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, var(--primary-100) 0%, transparent 50%),
-    linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-100) 50%, var(--gray-50) 100%);
+    linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 50%, var(--gray-50) 100%);
   background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
   animation: gradientWaves 20s ease-in-out infinite;
   opacity: 0.42;

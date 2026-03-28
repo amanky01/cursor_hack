@@ -28,7 +28,7 @@
   background: linear-gradient(
     135deg,
     var(--primary-100) 0%,
-    var(--secondary-200) 38%,
+    var(--primary-200) 38%,
     var(--primary-200) 72%,
     var(--primary-50) 100%
   );
@@ -197,7 +197,7 @@
 .contactIcon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, var(--primary-100), var(--secondary-100));
+  background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
   border-radius: var(--radius-xl);
   display: flex;
   align-items: center;
@@ -295,7 +295,7 @@
 .textarea:focus {
   outline: none;
   border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.18);
 }
 
 .textarea {
@@ -319,7 +319,7 @@
 .select:focus {
   outline: none;
   border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.18);
 }
 
 [data-theme="dark"] .healthFlow .input:focus,

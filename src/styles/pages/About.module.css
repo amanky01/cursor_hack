@@ -37,7 +37,7 @@
   background: linear-gradient(
     135deg,
     var(--primary-100) 0%,
-    var(--secondary-200) 38%,
+    var(--primary-200) 38%,
     var(--primary-200) 72%,
     var(--primary-50) 100%
   );
@@ -200,7 +200,7 @@
 .valueIcon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, var(--primary-100), var(--secondary-100));
+  background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
   border-radius: var(--radius-xl);
   display: flex;
   align-items: center;
@@ -226,7 +226,7 @@
   background: linear-gradient(
     135deg,
     var(--primary-100) 0%,
-    var(--secondary-100) 42%,
+    var(--primary-100) 42%,
     var(--primary-200) 100%
   );
   background-size: 200% 200%;

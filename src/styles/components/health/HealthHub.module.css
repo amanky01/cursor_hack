@@ -397,7 +397,7 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-400), var(--secondary-400));
+  background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
   opacity: 0.5;
   z-index: 1;
 }

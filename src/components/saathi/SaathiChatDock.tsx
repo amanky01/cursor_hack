@@ -17,7 +17,7 @@ type ChatMode = "anonymous" | "memory";
 export default function SaathiChatDock() {
   const pathname = usePathname();
   const router = useRouter();
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
   const getOrCreatePatient = useMutation(api.patients.getOrCreatePatient);
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<ChatMode>("anonymous");
@@ -47,6 +47,17 @@ export default function SaathiChatDock() {
     setDockNeedsLanguage(true);
     setLangNonce((n) => n + 1);
   }, []);
+
+  const handleDockMemoryLanguage = useCallback(
+    async (language: string) => {
+      if (!user?._id) return;
+      await getOrCreatePatient({
+        anonymousId: `jwt:${user._id}`,
+        language,
+      });
+    },
+    [getOrCreatePatient, user?._id]
+  );
 
   useEffect(() => {
     if (!open || isLoading) return;
@@ -174,7 +185,9 @@ export default function SaathiChatDock() {
                         onRequestClear: handleDockClearLanguage,
                         needsAttention: dockNeedsLanguage,
                       }
-                    : undefined
+                    : mode === "memory" && isAuthenticated && user
+                      ? { onSelectLanguage: handleDockMemoryLanguage }
+                      : undefined
                 }
               />
             </div>

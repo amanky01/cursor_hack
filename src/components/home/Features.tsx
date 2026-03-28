@@ -30,7 +30,7 @@ const Features: React.FC = () => {
       title: "Your Privacy Matters",
       description:
         "We protect your health journey with strong security. Your information stays confidential.",
-      color: "var(--secondary-600)",
+      color: "var(--primary-700)",
     },
     {
       icon: Users,
@@ -44,7 +44,7 @@ const Features: React.FC = () => {
       title: "Celebrate Your Progress",
       description:
         "Track wellbeing over time and notice the small wins that add up to real change.",
-      color: "var(--secondary-500)",
+      color: "var(--primary-400)",
     },
     {
       icon: Clock,

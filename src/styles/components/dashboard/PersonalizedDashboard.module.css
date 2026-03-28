@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, var(--primary-50), var(--secondary-100));
+  background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
   border-radius: var(--radius-2xl);
   padding: var(--spacing-xl);
   position: relative;
@@ -57,7 +57,7 @@
 .heartIcon {
   width: 80px;
   height: 80px;
-  color: var(--secondary-500);
+  color: var(--primary-500);
   animation: gentlePulse 4s ease-in-out infinite;
 }
 
@@ -149,7 +149,7 @@
 
 /* Mood Response */
 .moodResponse {
-  background: linear-gradient(135deg, var(--primary-100), var(--secondary-100));
+  background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
   border-radius: var(--radius-2xl);
   padding: var(--spacing-xl);
   text-align: center;
@@ -215,7 +215,7 @@
 }
 
 .actionCard {
-  background: linear-gradient(135deg, var(--primary-50), var(--secondary-50));
+  background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
   border-radius: var(--radius-xl);
   padding: var(--spacing-lg);
   text-align: center;
@@ -281,7 +281,7 @@
 
 /* Affirmation Banner */
 .affirmationBanner {
-  background: linear-gradient(135deg, var(--secondary-200), var(--primary-200));
+  background: linear-gradient(135deg, var(--primary-200), var(--primary-300));
   border-radius: var(--radius-2xl);
   padding: var(--spacing-lg);
   text-align: center;

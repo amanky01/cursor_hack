@@ -23,7 +23,7 @@ const InterventionModules: React.FC = () => {
       icon: Heart,
       href: '/health',
       cta: 'Go to health tools',
-      color: 'var(--secondary-500)',
+      color: 'var(--primary-600)',
     },
     {
       id: 'human-support',

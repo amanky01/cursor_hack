@@ -26,7 +26,7 @@ const AssessmentResults: React.FC<AssessmentResultsProps> = ({ results, onBack, 
         return 'var(--success-500)';
       case 'mild':
       case 'mild distress':
-        return 'var(--secondary-500)';
+        return 'var(--primary-500)';
       case 'moderate':
       case 'moderate distress':
         return 'var(--warning-500)';

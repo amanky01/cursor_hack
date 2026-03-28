@@ -12,22 +12,22 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--spacing-3xl) var(--spacing-md) var(--spacing-xl);
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
 }
 
 .footerContent {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: var(--spacing-3xl);
-  margin-bottom: var(--spacing-3xl);
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
 }
 
 .brandSection {
-  max-width: 400px;
+  max-width: 360px;
 }
 
 .logo {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
 }
 
 .logoLink {
@@ -37,7 +37,7 @@
   text-decoration: none;
   color: white;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   transition: color var(--transition-fast);
 }
 
@@ -46,11 +46,11 @@
 }
 
 .logoIcon {
-  color: var(--secondary-400);
+  color: var(--primary-400);
 }
 
 .logoText {
-  background: linear-gradient(135deg, var(--primary-400), var(--secondary-400));
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-300));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -58,15 +58,16 @@
 
 .brandDescription {
   color: var(--footer-muted);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-lg);
+  line-height: 1.5;
+  margin: 0 0 var(--spacing-sm);
+  font-size: 0.8125rem;
 }
 
 .medicalDisclaimer {
   color: var(--footer-muted);
-  line-height: 1.5;
-  margin-bottom: var(--spacing-lg);
-  font-size: 0.85rem;
+  line-height: 1.45;
+  margin: 0 0 var(--spacing-sm);
+  font-size: 0.75rem;
 }
 
 .contactInfo {
@@ -78,9 +79,9 @@
 .contactItem {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
   color: var(--footer-muted);
-  font-size: 0.9rem;
+  font-size: 0.75rem;
 }
 
 .contactItem svg {
@@ -91,7 +92,7 @@
 .linksSection {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-xl);
+  gap: var(--spacing-md);
 }
 
 .linksGroup {
@@ -101,9 +102,11 @@
 
 .linksTitle {
   color: white;
-  font-size: 1.125rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .linksList {
@@ -112,15 +115,15 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: 2px;
 }
 
 .link {
   color: var(--footer-muted);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.8125rem;
   transition: color var(--transition-fast);
-  padding: var(--spacing-xs) 0;
+  padding: 2px 0;
 }
 
 .link:hover {
@@ -131,26 +134,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: var(--spacing-xl);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .copyright {
   color: var(--footer-muted);
-  font-size: 0.9rem;
+  font-size: 0.75rem;
+}
+
+.copyright p {
+  margin: 0;
 }
 
 .socialLinks {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
 }
 
 .socialLink {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   background: rgba(255, 255, 255, 0.08);
   color: var(--footer-muted);
   border-radius: var(--radius-md);
@@ -168,22 +175,22 @@
 @media (max-width: 1024px) {
   .footerContent {
     grid-template-columns: 1fr;
-    gap: var(--spacing-2xl);
+    gap: var(--spacing-lg);
   }
 
   .linksSection {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
   }
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: var(--spacing-2xl) var(--spacing-sm) var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-sm);
   }
 
   .footerContent {
-    gap: var(--spacing-xl);
+    gap: var(--spacing-md);
   }
 
   .linksSection {
@@ -204,35 +211,35 @@
 
 @media (max-width: 480px) {
   .container {
-    padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-sm);
   }
 
   .logoText {
-    font-size: 1.25rem;
-  }
-
-  .brandDescription {
-    font-size: 0.9rem;
-  }
-
-  .contactItem {
-    font-size: 0.85rem;
-  }
-
-  .linksTitle {
     font-size: 1rem;
   }
 
+  .brandDescription {
+    font-size: 0.75rem;
+  }
+
+  .contactItem {
+    font-size: 0.7rem;
+  }
+
+  .linksTitle {
+    font-size: 0.75rem;
+  }
+
   .link {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
 
   .copyright {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
   }
 
   .socialLink {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
   }
 }

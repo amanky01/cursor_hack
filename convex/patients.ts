@@ -5,12 +5,12 @@ import {
   mutation,
   query,
 } from "./_generated/server";
-import { assertValidAnonymousId } from "./lib/anonymousId";
+import { assertValidAnonymousId, assertValidSubjectKey } from "./lib/anonymousId";
 
 export const getOrCreatePatient = mutation({
   args: { anonymousId: v.string(), language: v.optional(v.string()) },
   handler: async (ctx, { anonymousId, language }) => {
-    assertValidAnonymousId(anonymousId);
+    assertValidSubjectKey(anonymousId);
     const existing = await ctx.db
       .query("patients")
       .withIndex("by_anonymousId", (q) => q.eq("anonymousId", anonymousId))

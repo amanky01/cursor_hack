@@ -37,7 +37,7 @@ const AssessmentSelector: React.FC = () => {
       title: 'GAD-7 Anxiety Screening',
       description: 'Generalized Anxiety Disorder 7-item scale for anxiety severity assessment.',
       icon: Brain,
-      color: 'var(--secondary-500)',
+      color: 'var(--primary-600)',
       questions: 7,
       timeEstimate: '2-3 minutes',
       purpose: 'Evaluate anxiety symptoms over the past 2 weeks'

@@ -15,6 +15,8 @@ interface LayoutProps {
   description?: string;
   keywords?: string;
   header?: React.ReactNode; // allow custom header override
+  /** Hide the marketing site footer (e.g. full-page Saathi chat). */
+  hideFooter?: boolean;
 }
 
 const Layout: React.FC<LayoutProps> = ({
@@ -23,6 +25,7 @@ const Layout: React.FC<LayoutProps> = ({
   description: _description = 'A comprehensive digital platform for health and wellness—supportive care for people and families of all ages.',
   keywords: _keywords = 'mental health, psychological intervention, college students, therapy, counseling, mindfulness, CBT',
   header,
+  hideFooter = false,
 }) => {
   const reduceMotion = useReducedMotion();
 
@@ -38,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({
         >
           {children}
         </motion.main>
-        <Footer />
+        {!hideFooter ? <Footer /> : null}
         <SaathiChatDock />
       </div>
     </>
