@@ -176,7 +176,7 @@ export default function AppointmentsPage() {
               <div className={styles.formHeader}>
                 <h2 className={styles.formTitle}>Your details</h2>
                 <p className={styles.formSubtitle}>
-                  Hospitals come from Apify via Convex (<code className={styles.inlineCode}>APIFY_TOKEN</code>
+                  Hospitals come from Apify via Convex (<code className={styles.inlineCode}>APIFY_API_KEY</code>
                   ). The first load can take up to a minute while places are fetched. Optional on Convex:{" "}
                   <code className={styles.inlineCode}>APIFY_HOSPITAL_SEARCH_QUERY</code> (e.g. hospitals in
                   Mumbai). Doctors use your appointment API when configured.

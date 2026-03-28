@@ -30,7 +30,7 @@
 | `GEMINI_MODEL` | Optional override (default `gemini-2.5-flash`) |
 | `OPENAI_MODEL` | Optional override (default `gpt-4o`) |
 | `EXA_API_KEY` | Optional; `exa_search` tool in LangGraph chat agent |
-| `APIFY_TOKEN` | Optional; `apify_search` tool in LangGraph chat agent |
+| `APIFY_API_KEY` | Optional; `apify_search` tool + hospitals (Apify REST, no apify-client) |
 | `APIFY_GOOGLE_SEARCH_ACTOR_ID` | Optional; default `apify/google-search-scraper` |
 | `CHAT_AGENT_MAX_ITERATIONS` | Optional; default `5`; caps agent tool loop via LangGraph `recursionLimit` |
 

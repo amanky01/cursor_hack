@@ -25,6 +25,27 @@
   animation: slideUp 0.3s ease-out;
 }
 
+.memoryEmbed {
+  max-width: none;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  border-radius: 0;
+  box-shadow: none;
+  animation: none;
+}
+
+.memoryFullPage {
+  max-width: none;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+  animation: none;
+}
+
 @keyframes slideUp {
   from {
     opacity: 0;

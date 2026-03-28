@@ -2,20 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMutation } from "convex/react";
-import { api } from "@cvx/_generated/api";
+import SaathiLanguageGate from "@/components/saathi/SaathiLanguageGate";
 import styles from "@/styles/components/saathi-chat.module.css";
-
-const LANGUAGES = [
-  { code: "en", label: "English" },
-  { code: "hi", label: "हिंदी" },
-  { code: "ur", label: "اردو" },
-  { code: "ks", label: "کٲشُر" },
-] as const;
 
 export default function SaathiOnboardingPage() {
   const router = useRouter();
-  const getOrCreate = useMutation(api.patients.getOrCreatePatient);
 
   if (!process.env.NEXT_PUBLIC_CONVEX_URL) {
     return (
@@ -32,18 +23,6 @@ export default function SaathiOnboardingPage() {
       </main>
     );
   }
-
-  const handleStart = async (language: string) => {
-    let id =
-      typeof crypto !== "undefined" && crypto.randomUUID
-        ? crypto.randomUUID()
-        : `saathi_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-    const existing = localStorage.getItem("saathi_id");
-    if (existing) id = existing;
-    else localStorage.setItem("saathi_id", id);
-    await getOrCreate({ anonymousId: id, language });
-    router.push("/chat");
-  };
 
   return (
     <main className={styles.onboarding}>
@@ -93,28 +72,14 @@ export default function SaathiOnboardingPage() {
         </div>
 
         <div style={{ marginBottom: 24 }}>
-          <p style={{ fontSize: 14, color: "#6b6b6b", marginBottom: 12 }}>
-            Choose your language / زبان منتخب کریں
-          </p>
-          <div className={styles.langGrid}>
-            {LANGUAGES.map((lang) => (
-              <button
-                key={lang.code}
-                type="button"
-                onClick={() => void handleStart(lang.code)}
-                className={styles.langBtn}
-              >
-                {lang.label}
-              </button>
-            ))}
-          </div>
+          <SaathiLanguageGate
+            onReady={() => router.push("/chat")}
+            compact={false}
+          />
         </div>
 
         <p style={{ fontSize: 12, color: "#8a8a8a" }}>
-          In crisis right now?{" "}
-          <a href="tel:9152987821" style={{ color: "#7c6fcd" }}>
-            Call iCall: 9152987821
-          </a>
+          You can also open chat anytime from the chat icon (bottom-right).
         </p>
       </div>
     </main>

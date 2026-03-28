@@ -85,7 +85,7 @@ export function mapRawApifyItemToHospital(
 
 /**
  * Fetches mapped hospitals via Convex HTTP (`/api/apify/hospitals` → Convex rewrite).
- * Apify runs on Convex using `APIFY_TOKEN` and dataset/actor env vars on the deployment.
+ * Apify runs on Convex using `APIFY_API_KEY` and dataset/actor env vars on the deployment.
  */
 export async function fetchHospitals(): Promise<AppointmentHospitalOption[]> {
   let res: Response;

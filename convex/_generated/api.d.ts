@@ -30,6 +30,7 @@ import type * as http_routes_stickyNotesRoutes from "../http/routes/stickyNotesR
 import type * as http_routes_userChatRoutes from "../http/routes/userChatRoutes.js";
 import type * as jwtNode from "../jwtNode.js";
 import type * as lib_anonymousId from "../lib/anonymousId.js";
+import type * as lib_apifyRest from "../lib/apifyRest.js";
 import type * as lib_chatAgentGraph from "../lib/chatAgentGraph.js";
 import type * as lib_chatTrace from "../lib/chatTrace.js";
 import type * as lib_hospitalMap from "../lib/hospitalMap.js";
@@ -72,6 +73,7 @@ declare const fullApi: ApiFromModules<{
   "http/routes/userChatRoutes": typeof http_routes_userChatRoutes;
   jwtNode: typeof jwtNode;
   "lib/anonymousId": typeof lib_anonymousId;
+  "lib/apifyRest": typeof lib_apifyRest;
   "lib/chatAgentGraph": typeof lib_chatAgentGraph;
   "lib/chatTrace": typeof lib_chatTrace;
   "lib/hospitalMap": typeof lib_hospitalMap;

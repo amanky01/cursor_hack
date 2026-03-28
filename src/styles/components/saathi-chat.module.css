@@ -9,6 +9,14 @@
   min-height: 100vh;
 }
 
+.flexColCompact {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+
 .header {
   display: flex;
   align-items: center;

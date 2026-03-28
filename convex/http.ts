@@ -7,7 +7,7 @@ import { registerAllHttpRoutes } from "./http/registerAll";
 const http = httpRouter();
 registerAllHttpRoutes(http);
 
-// Hospitals from Apify (uses APIFY_TOKEN on Convex); used by Next /api rewrites.
+// Hospitals from Apify (uses APIFY_API_KEY on Convex); used by Next /api rewrites.
 http.route({
   path: "/api/apify/hospitals",
   method: "GET",

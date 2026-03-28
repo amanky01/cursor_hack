@@ -4,7 +4,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import NatureBackground from '../ui/NatureBackground';
-import ChatButton from '../ui/ChatButton';
+import SaathiChatDock from '../saathi/SaathiChatDock';
 import styles from '../../styles/components/layout/Layout.module.css';
 
 interface LayoutProps {
@@ -31,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({
           {children}
         </main>
         <Footer />
-        <ChatButton />
+        <SaathiChatDock />
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 "use node";
 
 import Exa from "exa-js";
-import { ApifyClient } from "apify-client";
+import { apifyListDatasetItems, apifyRunActorSync } from "./apifyRest";
 import {
   chatTrace,
   isChatTraceEnabled,
@@ -79,19 +79,26 @@ export async function exaSearch(
  * Apify Google Search Scraper (or override via APIFY_GOOGLE_SEARCH_ACTOR_ID).
  */
 export async function apifyWebSearch(query: string): Promise<SearchSnippet[]> {
-  const token = process.env.APIFY_TOKEN;
-  if (!token) return [];
+  const apiKey = process.env.APIFY_API_KEY?.trim();
+  if (!apiKey) return [];
   const actorId =
     process.env.APIFY_GOOGLE_SEARCH_ACTOR_ID?.trim() ||
     "apify/google-search-scraper";
-  const client = new ApifyClient({ token });
   try {
-    const run = await client.actor(actorId).call({
-      queries: `${query} mental health India Kashmir helpline`,
-      maxPagesPerQuery: 1,
-      resultsPerPage: 4,
+    const { datasetId: outDatasetId } = await apifyRunActorSync(
+      apiKey,
+      actorId,
+      {
+        queries: `${query} mental health India Kashmir helpline`,
+        maxPagesPerQuery: 1,
+        resultsPerPage: 4,
+      },
+      120
+    );
+    const items = await apifyListDatasetItems(apiKey, outDatasetId, {
+      clean: false,
+      limit: 100,
     });
-    const { items } = await client.dataset(run.defaultDatasetId).listItems();
     type ApifyItem = {
       title?: string;
       url?: string;
@@ -100,7 +107,7 @@ export async function apifyWebSearch(query: string): Promise<SearchSnippet[]> {
       searchResult?: { title?: string; url?: string };
     };
     const out: SearchSnippet[] = [];
-    for (const raw of items ?? []) {
+    for (const raw of items) {
       const item = raw as ApifyItem;
       const sr = item.searchResult;
       const title =
@@ -132,7 +139,7 @@ export async function searchResources(
   trace?: ChatTurnTrace
 ): Promise<string> {
   const exaSkippedNoKey = !process.env.EXA_API_KEY?.trim();
-  const apifySkippedNoKey = !process.env.APIFY_TOKEN?.trim();
+  const apifySkippedNoKey = !process.env.APIFY_API_KEY?.trim();
   const enriched = `mental health ${conditions.join(" ")} ${query} India resources helpline`;
 
   const [exa, apify] = await Promise.all([
@@ -158,7 +165,7 @@ export async function searchResources(
   }
 
   if (merged.length === 0) {
-    return "No live web results retrieved (check EXA_API_KEY / APIFY_TOKEN). Use general mental-health guidance and helplines from your training.";
+    return "No live web results retrieved (check EXA_API_KEY / APIFY_API_KEY). Use general mental-health guidance and helplines from your training.";
   }
   return merged
     .map(

@@ -19,12 +19,20 @@ const LoginPageInner: React.FC = () => {
   const searchParams = useSearchParams();
   const { login, isLoading, isAuthenticated } = useAuth();
   
-  // Redirect if already authenticated
+  // Redirect if already authenticated (optional returnUrl must be same-origin path)
   useEffect(() => {
     if (isAuthenticated) {
-      router.push('/dashboard');
+      const raw = searchParams.get('returnUrl');
+      const next =
+        raw &&
+        raw.startsWith('/') &&
+        !raw.startsWith('//') &&
+        !raw.includes('://')
+          ? raw
+          : '/dashboard';
+      router.push(next);
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, router, searchParams]);
   
   // Check for registration success message
   useEffect(() => {
