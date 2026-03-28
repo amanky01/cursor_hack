@@ -3,6 +3,8 @@
 import { useAction, useMutation } from "convex/react";
 import { api } from "@cvx/_generated/api";
 import { useCallback, useRef, useState } from "react";
+import { Mic } from "lucide-react";
+import styles from "@/styles/components/saathi-chat.module.css";
 
 interface Props {
   anonymousId: string;
@@ -179,33 +181,11 @@ export default function VoiceJournalButton({
       type="button"
       onClick={startRecording}
       disabled={disabled || !anonymousId}
+      className={styles.voiceJournalBtn}
       title="Record voice journal"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: 32,
-        height: 32,
-        borderRadius: "50%",
-        border: "1px solid #d1d5db",
-        background: "#fff",
-        cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.5 : 1,
-      }}
+      aria-label="Record voice journal"
     >
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M12 1a4 4 0 0 0-4 4v7a4 4 0 0 0 8 0V5a4 4 0 0 0-4-4Z"
-          fill="#7c6fcd"
-        />
-        <path
-          d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4m-4 0h8"
-          stroke="#7c6fcd"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      <Mic size={18} strokeWidth={2.25} aria-hidden />
     </button>
   );
 }

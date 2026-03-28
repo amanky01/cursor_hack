@@ -5,7 +5,7 @@ import { Globe } from "lucide-react";
 import { api } from "@cvx/_generated/api";
 import styles from "@/styles/components/saathi-chat.module.css";
 
-const LANGUAGES = [
+export const SAATHI_LANGUAGES = [
   { code: "en", label: "English" },
   { code: "hi", label: "हिंदी" },
   { code: "ur", label: "اردو" },
@@ -49,7 +49,7 @@ export default function SaathiLanguageGate({ onReady, compact }: Props) {
         </div>
       )}
       <div className={styles.langGrid}>
-        {LANGUAGES.map((lang) => (
+        {SAATHI_LANGUAGES.map((lang) => (
           <button
             key={lang.code}
             type="button"
