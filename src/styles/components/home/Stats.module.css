@@ -63,7 +63,10 @@
 .statCard:hover {
   transform: translateY(-8px);
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.25),
+    0 0 32px rgba(16, 185, 129, 0.12);
 }
 
 .iconContainer {

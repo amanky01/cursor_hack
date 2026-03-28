@@ -1,10 +1,13 @@
 "use client";
 
 import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
 import NatureBackground from '../ui/NatureBackground';
 import SaathiChatDock from '../saathi/SaathiChatDock';
+import ChatButton from '../ui/ChatButton';
+import { pageEnter } from '@/animations/variants';
 import styles from '../../styles/components/layout/Layout.module.css';
 
 interface LayoutProps {
@@ -22,14 +25,20 @@ const Layout: React.FC<LayoutProps> = ({
   keywords: _keywords = 'mental health, psychological intervention, college students, therapy, counseling, mindfulness, CBT',
   header,
 }) => {
+  const reduceMotion = useReducedMotion();
+
   return (
     <>
       <div className={styles.layout}>
         <NatureBackground />
         {header ? header : <Header />}
-        <main className={styles.main}>
+        <motion.main
+          className={styles.main}
+          initial={reduceMotion ? false : pageEnter.initial}
+          animate={reduceMotion ? undefined : pageEnter.animate}
+        >
           {children}
-        </main>
+        </motion.main>
         <Footer />
         <SaathiChatDock />
       </div>

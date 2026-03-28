@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Heart, User, LogIn, UserPlus, Home, Info, BookOpen, MessageCircle, LogOut, Shield, Stethoscope } from 'lucide-react';
 import styles from '../../styles/components/layout/Header.module.css';
 import { useAuth } from '@/context/AuthContext';
+import ThemeToggle from './ThemeToggle';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -58,7 +59,9 @@ const Header: React.FC = () => {
           </ul>
         </nav>
 
-        <div className={styles.authButtons}>
+        <div className={styles.headerActions}>
+          <ThemeToggle />
+          <div className={styles.authButtons}>
           {isAuthenticated ? (
             <>
               {user?.role === 'admin' && (
@@ -98,7 +101,7 @@ const Header: React.FC = () => {
               </Link>
             </>
           )}
-        </div>
+          </div>
 
         <button
           className={styles.mobileMenuButton}
@@ -107,6 +110,7 @@ const Header: React.FC = () => {
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

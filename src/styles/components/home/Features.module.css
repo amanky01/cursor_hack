@@ -1,6 +1,6 @@
 .features {
   padding: var(--spacing-3xl) 0;
-  background: var(--card-bg);
+  background: var(--page-bg);
 }
 
 .container {
@@ -24,8 +24,8 @@
 .subtitle {
   font-size: 1.25rem;
   color: var(--gray-600);
-  line-height: 1.6;
-  max-width: 600px;
+  line-height: 1.75;
+  max-width: 640px;
   margin: 0 auto;
 }
 
@@ -37,47 +37,21 @@
 }
 
 .featureCard {
-  background: var(--card-bg);
-  border: 1px solid var(--gray-200);
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   text-align: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease,
+    border-color 0.35s ease;
   position: relative;
   overflow: hidden;
   word-wrap: break-word;
   overflow-wrap: break-word;
   min-width: 0;
-}
-
-.featureCard:nth-child(1) {
-  background: linear-gradient(135deg, rgba(191, 227, 192, 0.05), rgba(191, 227, 192, 0.02));
-  border-color: rgba(191, 227, 192, 0.2);
-}
-
-.featureCard:nth-child(2) {
-  background: linear-gradient(135deg, rgba(168, 195, 160, 0.05), rgba(168, 195, 160, 0.02));
-  border-color: rgba(168, 195, 160, 0.2);
-}
-
-.featureCard:nth-child(3) {
-  background: linear-gradient(135deg, rgba(184, 198, 219, 0.05), rgba(184, 198, 219, 0.02));
-  border-color: rgba(184, 198, 219, 0.2);
-}
-
-.featureCard:nth-child(4) {
-  background: linear-gradient(135deg, rgba(242, 198, 160, 0.05), rgba(242, 198, 160, 0.02));
-  border-color: rgba(242, 198, 160, 0.2);
-}
-
-.featureCard:nth-child(5) {
-  background: linear-gradient(135deg, rgba(168, 195, 160, 0.05), rgba(168, 195, 160, 0.02));
-  border-color: rgba(168, 195, 160, 0.2);
-}
-
-.featureCard:nth-child(6) {
-  background: linear-gradient(135deg, rgba(191, 227, 192, 0.05), rgba(191, 227, 192, 0.02));
-  border-color: rgba(191, 227, 192, 0.2);
+  box-shadow: var(--shadow-sm);
 }
 
 .featureCard::before {
@@ -113,9 +87,11 @@
 }
 
 .featureCard:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(62, 98, 87, 0.15);
-  border-color: var(--primary-200);
+  box-shadow:
+    0 16px 40px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(16, 185, 129, 0.2),
+    0 0 28px rgba(14, 165, 233, 0.08);
+  border-color: rgba(16, 185, 129, 0.35);
 }
 
 .featureCard:hover::before {
@@ -171,8 +147,8 @@
 
 .featureDescription {
   color: var(--gray-600);
-  line-height: 1.6;
-  font-size: 1rem;
+  line-height: 1.7;
+  font-size: 1.0625rem;
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;

@@ -29,10 +29,40 @@
   margin: 0 auto;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-xl);
+.carouselViewport {
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 280px;
+  position: relative;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xl);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: var(--gray-300);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.dot:hover {
+  transform: scale(1.15);
+  background: var(--primary-300);
+}
+
+.dotActive {
+  background: var(--primary-500);
+  transform: scale(1.2);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.45);
 }
 
 .testimonialCard {
@@ -41,7 +71,7 @@
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
   border: 1px solid var(--gray-200);
-  transition: all var(--transition-normal);
+  transition: var(--theme-transition);
   position: relative;
   overflow: hidden;
 }
@@ -140,9 +170,8 @@
     font-size: 1.1rem;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
+  .carouselViewport {
+    min-height: 320px;
   }
 
   .testimonialCard {

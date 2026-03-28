@@ -1,8 +1,88 @@
 .hero {
-  background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-200) 100%);
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-100) 45%, var(--primary-100) 100%);
+  background-size: 200% 200%;
+  animation: heroGradientShift 18s ease-in-out infinite;
   padding: var(--spacing-3xl) 0;
   position: relative;
   overflow: hidden;
+}
+
+@keyframes heroGradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+.floatingHealthIcons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floatingIcon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  color: var(--primary-600);
+  box-shadow: var(--shadow-sm);
+  animation: floatIcon 10s ease-in-out infinite;
+}
+
+.floatingIcon:nth-child(1) {
+  top: 12%;
+  left: 8%;
+  animation-delay: 0s;
+}
+
+.floatingIcon:nth-child(2) {
+  top: 22%;
+  right: 12%;
+  animation-delay: 1.2s;
+}
+
+.floatingIcon:nth-child(3) {
+  bottom: 28%;
+  left: 14%;
+  animation-delay: 0.6s;
+}
+
+.floatingIcon:nth-child(4) {
+  bottom: 18%;
+  right: 8%;
+  animation-delay: 1.8s;
+}
+
+@keyframes floatIcon {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floatingIcon {
+    animation: none;
+  }
 }
 
 .hero::before {
@@ -36,6 +116,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+  position: relative;
+  z-index: 2;
 }
 
 .title {
@@ -114,9 +196,28 @@
 }
 
 .primaryButton:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(62, 98, 87, 0.25);
-  background: linear-gradient(135deg, #6BBF8E, var(--primary-700));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(5, 150, 105, 0.35);
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+}
+
+.primaryPulse {
+  animation: ctaPulse 3s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%, 100% {
+    box-shadow: var(--shadow-md), 0 0 0 0 rgba(16, 185, 129, 0.35);
+  }
+  50% {
+    box-shadow: var(--shadow-lg), 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryPulse {
+    animation: none;
+  }
 }
 
 .secondaryButton {
@@ -159,7 +260,7 @@
 .secondaryButton:hover {
   border-color: var(--primary-500);
   color: var(--primary-600);
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-2px);
   box-shadow: 0 0 0 3px rgba(168, 195, 160, 0.2), 0 8px 25px rgba(62, 98, 87, 0.15);
 }
 
@@ -187,6 +288,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 1;
 }
 
 .heroImage {
@@ -1089,5 +1191,185 @@
   .organicShape {
     width: 40%;
     height: 40%;
+  }
+}
+
+/* --- Motion helpers (ripple + CTA) --- */
+.ctaMotion {
+  display: inline-flex;
+  max-width: 100%;
+}
+
+.rippleFill {
+  display: inline-flex;
+  width: 100%;
+}
+
+.rippleFill :is(a, button) {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .ctaMotion {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
+
+/* --- Ambient blobs (desktop only; omitted in JSX on mobile) --- */
+.heroBlobs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heroBlob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  opacity: 0.22;
+  will-change: transform;
+}
+
+.heroBlob1 {
+  width: min(380px, 55vw);
+  height: min(380px, 55vw);
+  top: -12%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.55) 0%, transparent 68%);
+}
+
+.heroBlob2 {
+  width: min(300px, 48vw);
+  height: min(300px, 48vw);
+  bottom: 5%;
+  left: -6%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.45) 0%, transparent 70%);
+}
+
+.heroBlob3 {
+  width: min(260px, 42vw);
+  height: min(260px, 42vw);
+  top: 38%;
+  left: 35%;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.35) 0%, transparent 72%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroBlob {
+    animation: none !important;
+  }
+}
+
+/* --- Dark mode: medical-grade depth + contrast --- */
+[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, #0f172a 0%, #022c22 48%, #064e3b 100%);
+  background-size: 220% 220%;
+  animation: heroGradientShiftDark 22s ease-in-out infinite;
+}
+
+@keyframes heroGradientShiftDark {
+  0%, 100% {
+    background-position: 0% 40%;
+  }
+  50% {
+    background-position: 100% 60%;
+  }
+}
+
+[data-theme="dark"] .hero::before {
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.12'%3E%3Ccircle cx='40' cy='40' r='1'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+[data-theme="dark"] .title {
+  color: #ffffff;
+  text-shadow:
+    0 0 48px rgba(16, 185, 129, 0.32),
+    0 0 96px rgba(5, 150, 105, 0.14);
+}
+
+[data-theme="dark"] .highlight {
+  filter: drop-shadow(0 0 28px rgba(16, 185, 129, 0.35));
+}
+
+[data-theme="dark"] .subtitle,
+[data-theme="dark"] .heroTagline {
+  color: #cbd5f5;
+}
+
+[data-theme="dark"] .trustItem {
+  color: #cbd5f5;
+}
+
+[data-theme="dark"] .trustItem svg {
+  color: var(--primary-400);
+}
+
+[data-theme="dark"] .floatingIcon {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--primary-300);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .secondaryButton {
+  background: rgba(255, 255, 255, 0.06);
+  color: #f1f5f9;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+[data-theme="dark"] .secondaryButton:hover {
+  color: #ecfdf5;
+  border-color: var(--primary-400);
+}
+
+[data-theme="dark"] .imagePlaceholder {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 28px 56px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .imagePlaceholder::before {
+  opacity: 0.35;
+}
+
+[data-theme="dark"] .bubbleTitle {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .bubbleSubtitle {
+  color: #cbd5e1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="dark"] .hero {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .floatingIcon {
+    animation: none;
   }
 }

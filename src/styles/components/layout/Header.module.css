@@ -1,5 +1,5 @@
 .header {
-  background: white;
+  background: var(--card-bg);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
   position: sticky;
   top: 0;
@@ -100,6 +100,37 @@
   height: 2px;
   background-color: var(--primary-600);
   border-radius: 1px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  cursor: pointer;
+  transition: var(--theme-transition);
+}
+
+.themeToggle:hover {
+  background-color: var(--gray-100);
+  border-color: var(--primary-300);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.themeToggleIcon {
+  font-size: 1.125rem;
+  line-height: 1;
 }
 
 .authButtons {
