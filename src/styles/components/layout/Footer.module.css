@@ -89,6 +89,16 @@
   flex-shrink: 0;
 }
 
+.contactItem a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contactItem a:hover {
+  color: var(--footer-text);
+  text-decoration: underline;
+}
+
 .linksSection {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

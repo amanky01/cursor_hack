@@ -7,6 +7,7 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
   position: sticky;
   top: 0;
+  padding-top: env(safe-area-inset-top, 0px);
   z-index: 1000;
   border-bottom: 1px solid color-mix(in srgb, var(--gray-200) 70%, var(--primary-200));
   backdrop-filter: blur(12px);
@@ -662,6 +663,11 @@
   border-bottom: 1px solid var(--gray-200);
   box-shadow: var(--shadow-lg);
   z-index: 999;
+  max-height: min(70dvh, calc(100dvh - env(safe-area-inset-top, 0px) - 4.5rem));
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .mobileNav {

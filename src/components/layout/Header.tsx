@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import styles from '../../styles/components/layout/Header.module.css';
 import { useAuth } from '@/context/AuthContext';
+import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 import ThemeToggle from './ThemeToggle';
 
 const BASE_NAV = [
@@ -71,6 +72,8 @@ const Header: React.FC = () => {
   useEffect(() => {
     setStaffMenuOpen(false);
   }, [pathname]);
+
+  useBodyScrollLock(isMenuOpen);
 
   const navigation = useMemo(() => {
     if (user?.role === 'student') {

@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { useMutation } from "convex/react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Activity, MessageCircle, Sparkles } from "lucide-react";
@@ -63,6 +64,8 @@ export default function SaathiChatDock() {
     if (!open || isLoading) return;
     setMode(isAuthenticated ? "memory" : "anonymous");
   }, [open, isAuthenticated, isLoading]);
+
+  useBodyScrollLock(open);
 
   if (
     pathname === "/saathi" ||

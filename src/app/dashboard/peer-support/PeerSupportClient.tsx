@@ -33,6 +33,7 @@ import {
   type PeerMessage,
   type PeerVisibility,
 } from "@/lib/peerSupportApi";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import styles from "@/styles/pages/PeerSupport.module.css";
 
 type Overlay = null | "settings" | "requests" | "find";
@@ -120,6 +121,8 @@ function PeerSupportPageContent() {
 
   const [privateTargetId, setPrivateTargetId] = useState("");
   const privatePrefill = useRef(false);
+
+  useBodyScrollLock(overlay !== null);
 
   const loadSettings = useCallback(async () => {
     setSettingsLoading(true);

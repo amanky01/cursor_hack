@@ -42,14 +42,14 @@ const ContactPage: React.FC = () => {
     {
       icon: Phone,
       title: 'Call Us',
-      details: '+1 (555) 123-4567',
-      description: 'Mon-Fri 9AM-6PM EST',
+      details: '+91 98765 43210',
+      description: 'Mon–Sat 9AM–6PM IST',
     },
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: '123 University Ave',
-      description: 'College Town, CA 90210',
+      details: 'NIT Srinagar',
+      description: 'Jammu And Kashmir, India',
     },
   ];
 
