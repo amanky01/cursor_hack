@@ -1,9 +1,10 @@
-# Mann Mitra (SIH 2025) — deployment
+# Sehat-Saathi — deployment
 
 ## Stack
 
 - **Next.js 15** (App Router) in the repo root (`src/app`).
-- **Convex** (`convex/`) exposes the same `/api/*` REST routes as the old Express server, with **JWT** auth (`JWT_SECRET` in Convex env) and optional **FastAPI** chatbot (`CHATBOT_SERVICE_URL`, `CHATBOT_API_KEY`).
+- **Convex** (`convex/`) exposes REST routes under `/api/auth/*`, `/api/sticky-notes`, `/api/user/*`, `/api/admin/*`, `/api/chatbot/*`, `/api/counsellor/*`, and `/api/health`, with **JWT** auth (`JWT_SECRET` in Convex env) and optional **FastAPI** chatbot (`CHATBOT_SERVICE_URL`, `CHATBOT_API_KEY`).
+- **Next.js route handlers** serve other APIs such as `/api/symptom-check`, `/api/medicines`, `/api/appointments`, and `/api/verify-medicine`. `next.config.ts` rewrites only the Convex paths above to `CONVEX_SITE_URL`; remaining `/api/*` requests stay on the Next.js server.
 
 ## Local development
 
@@ -25,7 +26,7 @@
    - **Counsellor only:**  
      `npx convex run internal/seed:seedCounsellor '{"email":"counsellor@example.com","password":"...","firstName":"Dr.","lastName":"Counsellor","contactNo":9876543211,"qualifications":"M.Phil Psychology","specialization":["Stress","Academic"],"availability":["Mon 10-12","Wed 14-16"]}'`
 6. Run Next.js: `npm run dev`  
-   API calls go to `http://localhost:3000/api/...` and rewrite to Convex.
+   Convex-backed paths go to `http://localhost:3000/api/...` and are rewritten to your Convex HTTP deployment. Health tools APIs are handled by Next.js on the same origin.
 
 ## MongoDB migration
 
