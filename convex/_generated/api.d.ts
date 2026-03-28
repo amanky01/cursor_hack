@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as adminAnalytics from "../adminAnalytics.js";
 import type * as adminCounsellors from "../adminCounsellors.js";
 import type * as agents_extraction from "../agents/extraction.js";
 import type * as agents_types from "../agents/types.js";
@@ -15,6 +16,7 @@ import type * as chatbotNode from "../chatbotNode.js";
 import type * as commitments from "../commitments.js";
 import type * as counsellors from "../counsellors.js";
 import type * as dashboard from "../dashboard.js";
+import type * as doctorDashboard from "../doctorDashboard.js";
 import type * as guestAppointments from "../guestAppointments.js";
 import type * as helplines from "../helplines.js";
 import type * as hospitalsNode from "../hospitalsNode.js";
@@ -63,6 +65,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  adminAnalytics: typeof adminAnalytics;
   adminCounsellors: typeof adminCounsellors;
   "agents/extraction": typeof agents_extraction;
   "agents/types": typeof agents_types;
@@ -70,6 +73,7 @@ declare const fullApi: ApiFromModules<{
   commitments: typeof commitments;
   counsellors: typeof counsellors;
   dashboard: typeof dashboard;
+  doctorDashboard: typeof doctorDashboard;
   guestAppointments: typeof guestAppointments;
   helplines: typeof helplines;
   hospitalsNode: typeof hospitalsNode;
