@@ -2,26 +2,7 @@
   min-height: 100vh;
 }
 
-/* Dark: same ambient shell as Health Tools (full page) */
-[data-theme="dark"] .contact {
-  background: linear-gradient(
-    180deg,
-    #0f172a 0%,
-    #0a1f1d 24%,
-    #064e3b 48%,
-    #1e293b 74%,
-    #0f172a 100%
-  );
-  background-size: 100% 320%;
-  animation: healthFlowBgShift 26s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-theme="dark"] .contact {
-    animation: none;
-    background-size: 100% 100%;
-  }
-}
+/* Dark page shell: use global .ambient-health-tools-dark on the page root (globals.css). */
 
 /* Light: match home Hero mint/teal diagonal (Hero.module.css — do not edit that file) */
 .hero {
@@ -122,6 +103,29 @@
 
 [data-theme="dark"] .contact .contactInfo {
   background: transparent;
+}
+
+/* Reach Out (marketing contact): match Health Tools dark form shell */
+[data-theme="dark"] .contact .contactForm {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.2) 0%,
+    rgba(30, 41, 59, 0.45) 45%,
+    rgba(15, 23, 42, 0.35) 100%
+  );
+}
+
+[data-theme="dark"] .contact .formContainer {
+  background: linear-gradient(
+    165deg,
+    rgba(30, 41, 59, 0.78) 0%,
+    rgba(15, 23, 42, 0.9) 52%,
+    rgba(6, 78, 59, 0.22) 100%
+  );
+  border-color: rgba(52, 211, 153, 0.14);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(52, 211, 153, 0.06);
 }
 
 .contactGrid {
@@ -437,35 +441,7 @@
   position: relative;
 }
 
-/* Verify-medicine & any flow using .healthFlow without .contact */
-[data-theme="dark"] .healthFlow {
-  background: linear-gradient(
-    180deg,
-    #0f172a 0%,
-    #0a1f1d 24%,
-    #064e3b 48%,
-    #1e293b 74%,
-    #0f172a 100%
-  );
-  background-size: 100% 320%;
-  animation: healthFlowBgShift 26s ease-in-out infinite;
-}
-
-@keyframes healthFlowBgShift {
-  0%, 100% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 0% 50%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-theme="dark"] .healthFlow {
-    animation: none;
-    background-size: 100% 100%;
-  }
-}
+/* Page background for health flows: use .ambient-health-tools-dark on the wrapper (globals.css). */
 
 [data-theme="dark"] .healthFlow .contactInfo {
   background: transparent;
@@ -508,6 +484,18 @@
     rgba(15, 23, 42, 0.88) 100%
   );
   border-color: rgba(52, 211, 153, 0.12);
+}
+
+[data-theme="dark"] .contactInfo .contactCard {
+  background: linear-gradient(
+    165deg,
+    rgba(30, 41, 59, 0.72) 0%,
+    rgba(15, 23, 42, 0.88) 100%
+  );
+  border-color: rgba(52, 211, 153, 0.12);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(52, 211, 153, 0.06);
 }
 
 /* Responsive Design */

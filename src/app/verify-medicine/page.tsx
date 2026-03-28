@@ -123,7 +123,9 @@ export default function VerifyMedicinePage() {
 
   return (
     <Layout title="Verify medicine - Sehat-Saathi" description="Upload a medicine package to identify it.">
-      <div className={`${styles.page} ${contactStyles.healthFlow}`}>
+      <div
+        className={`${styles.page} ${contactStyles.healthFlow} ambient-health-tools-dark`}
+      >
         <div className={styles.topBar}>
           <Link href="/health" className={styles.backLink}>
             ← Back to Health tools

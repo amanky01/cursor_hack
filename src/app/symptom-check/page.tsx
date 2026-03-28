@@ -66,7 +66,9 @@ export default function SymptomCheckPage() {
 
   return (
     <Layout title="Symptom check - Sehat-Saathi" description="General symptom guidance (educational only).">
-      <div className={`${contactStyles.contact} ${contactStyles.healthFlow}`}>
+      <div
+        className={`${contactStyles.contact} ${contactStyles.healthFlow} ambient-health-tools-dark`}
+      >
         <section className={contactStyles.hero}>
           <div className={contactStyles.container}>
             <div className={contactStyles.heroContent}>

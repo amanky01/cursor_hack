@@ -58,7 +58,7 @@ const ContactPage: React.FC = () => {
       title="Contact Us - Sehat-Saathi"
       description="Get in touch with the Sehat-Saathi team for support, questions, or feedback."
     >
-      <div className={styles.contact}>
+      <div className={`${styles.contact} ambient-health-tools-dark`}>
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>

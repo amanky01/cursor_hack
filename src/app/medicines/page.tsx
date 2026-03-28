@@ -81,7 +81,9 @@ export default function MedicinesPage() {
 
   return (
     <Layout title="Medicine information - Sehat-Saathi" description="Reference information for common medicines.">
-      <div className={`${LayoutStyles.contact} ${LayoutStyles.healthFlow}`}>
+      <div
+        className={`${LayoutStyles.contact} ${LayoutStyles.healthFlow} ambient-health-tools-dark`}
+      >
         <section className={LayoutStyles.hero}>
           <div className={LayoutStyles.container}>
             <div className={LayoutStyles.heroContent}>

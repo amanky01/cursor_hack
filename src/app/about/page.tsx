@@ -48,7 +48,7 @@ const AboutPage: React.FC = () => {
       title="About Us - Sehat-Saathi"
       description="Learn about Sehat-Saathi's mission to provide evidence-based psychological interventions for college students."
     >
-      <div className={styles.about}>
+      <div className={`${styles.about} ambient-health-tools-dark`}>
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>

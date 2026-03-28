@@ -175,7 +175,7 @@ function ResourcesPageInner() {
       title="Resources - Sehat-Saathi"
       description="Search our Exa-powered library of curated mental health resources, articles, and self-help guides."
     >
-      <div className={styles.resources}>
+      <div className={`${styles.resources} ambient-health-tools-dark`}>
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
@@ -325,7 +325,7 @@ function ResourcesPageFallback() {
       title="Resources - Sehat-Saathi"
       description="Search our Exa-powered library of curated mental health resources, articles, and self-help guides."
     >
-      <div className={styles.resources}>
+      <div className={`${styles.resources} ambient-health-tools-dark`}>
         <section className={styles.hero}>
           <div className={styles.container}>
             <div className={styles.heroContent}>

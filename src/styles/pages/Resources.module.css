@@ -2,34 +2,7 @@
   min-height: 100vh;
 }
 
-[data-theme="dark"] .resources {
-  background: linear-gradient(
-    180deg,
-    #0f172a 0%,
-    #0a1f1d 24%,
-    #064e3b 48%,
-    #1e293b 74%,
-    #0f172a 100%
-  );
-  background-size: 100% 320%;
-  animation: resourcesShellDarkShift 26s ease-in-out infinite;
-}
-
-@keyframes resourcesShellDarkShift {
-  0%, 100% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 0% 50%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-theme="dark"] .resources {
-    animation: none;
-    background-size: 100% 100%;
-  }
-}
+/* Dark shell: use global .ambient-health-tools-dark on page root (globals.css). */
 
 /* Light: match home Hero mint/teal (Hero.module.css unchanged) */
 .hero {
@@ -184,6 +157,18 @@
   border-color: var(--warning-400);
 }
 
+[data-theme="dark"] .quickLinkCard:not(.urgent) {
+  background: linear-gradient(
+    165deg,
+    rgba(30, 41, 59, 0.72) 0%,
+    rgba(15, 23, 42, 0.88) 100%
+  );
+  border-color: rgba(52, 211, 153, 0.14);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(52, 211, 153, 0.06);
+}
+
 .quickLinkIcon {
   width: 60px;
   height: 60px;
@@ -245,6 +230,18 @@
 .categoryCard:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .categoryCard {
+  background: linear-gradient(
+    165deg,
+    rgba(30, 41, 59, 0.72) 0%,
+    rgba(15, 23, 42, 0.88) 100%
+  );
+  border-color: rgba(52, 211, 153, 0.14);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(52, 211, 153, 0.06);
 }
 
 .categoryHeader {
@@ -484,6 +481,26 @@
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--primary-200);
+}
+
+[data-theme="dark"] .resultCard {
+  background: linear-gradient(
+    165deg,
+    rgba(30, 41, 59, 0.75) 0%,
+    rgba(15, 23, 42, 0.9) 100%
+  );
+  border-color: rgba(52, 211, 153, 0.14);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(52, 211, 153, 0.06);
+}
+
+[data-theme="dark"] .resultCard:hover {
+  border-color: rgba(45, 212, 191, 0.28);
+  box-shadow:
+    0 16px 44px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(45, 212, 191, 0.12),
+    0 0 32px rgba(45, 212, 191, 0.06);
 }
 
 .resultTitle {

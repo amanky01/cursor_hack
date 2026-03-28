@@ -261,7 +261,9 @@ function AppointmentsPageInner() {
       title="Appointments - Sehat-Saathi"
       description="Request an appointment at a hospital with a specific doctor."
     >
-      <div className={`${styles.contact} ${styles.healthFlow}`}>
+      <div
+        className={`${styles.contact} ${styles.healthFlow} ambient-health-tools-dark`}
+      >
         <section className={styles.hero}>
           <div className={styles.container}>
             <div className={styles.heroContent}>
@@ -630,7 +632,7 @@ function AppointmentsPageFallback() {
       description="Request an appointment at a hospital with a specific doctor."
     >
       <div
-        className={`${styles.contact} ${styles.healthFlow}`}
+        className={`${styles.contact} ${styles.healthFlow} ambient-health-tools-dark`}
         style={{ padding: "48px 16px", textAlign: "center", color: "#6b7280" }}
       >
         Loading…
