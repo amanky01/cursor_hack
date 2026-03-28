@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
     platform: [
       { name: 'About Us', href: '/about' },
       { name: 'How It Works', href: '/how-it-works' },
-      { name: 'Interventions', href: '/interventions' },
+      { name: 'Health Tools', href: '/health' },
       { name: 'Resources', href: '/resources' },
     ],
     support: [

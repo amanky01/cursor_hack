@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Heart, User, LogIn, UserPlus, Home, Info, Activity, BookOpen, MessageCircle, LogOut, Shield, Stethoscope } from 'lucide-react';
+import { Menu, X, Heart, User, LogIn, UserPlus, Home, Info, BookOpen, MessageCircle, LogOut, Shield, Stethoscope } from 'lucide-react';
 import styles from '../../styles/components/layout/Header.module.css';
 import { useAuth } from '@/context/AuthContext';
 
@@ -15,7 +15,6 @@ const Header: React.FC = () => {
   const navigation = [
     { name: 'My Space', href: '/', icon: Home, description: 'Your personal sanctuary' },
     { name: 'Our Story', href: '/about', icon: Info, description: 'Why we care' },
-    { name: 'Wellness Kit', href: '/interventions', icon: Activity, description: 'Tools for you' },
     { name: 'Health Tools', href: '/health', icon: Stethoscope, description: 'Symptoms, medicines & care' },
     { name: 'Guides', href: '/resources', icon: BookOpen, description: 'Help & resources' },
     { name: 'Reach Out', href: '/contact', icon: MessageCircle, description: 'We\'re here for you' },
