@@ -1,0 +1,1084 @@
+.hero {
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-200) 100%);
+  padding: var(--spacing-3xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e0f2fe' fill-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: 1;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+  min-height: 600px;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-md);
+}
+
+.highlight {
+  background: linear-gradient(135deg, var(--primary-600), var(--secondary-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-lg);
+}
+
+.buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.primaryButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  color: white;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.primaryButton:hover::before {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+}
+
+.primaryButton:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(62, 98, 87, 0.25);
+  background: linear-gradient(135deg, #6BBF8E, var(--primary-700));
+}
+
+.secondaryButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: white;
+  color: var(--gray-700);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.secondaryButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, var(--primary-100) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.secondaryButton:hover::before {
+  width: 200px;
+  height: 200px;
+  opacity: 0.3;
+}
+
+.secondaryButton:hover {
+  border-color: var(--primary-500);
+  color: var(--primary-600);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 0 3px rgba(168, 195, 160, 0.2), 0 8px 25px rgba(62, 98, 87, 0.15);
+}
+
+.trustIndicators {
+  display: flex;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.trustItem svg {
+  color: var(--success-500);
+}
+
+.visualContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.heroImage {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  padding: var(--spacing-lg);
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-100), var(--secondary-100));
+  border-radius: var(--radius-2xl);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-xl);
+  overflow: visible;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.imagePlaceholder::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.floatingBubble {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  box-shadow: 
+    0 8px 32px rgba(191, 227, 192, 0.3),
+    0 4px 16px rgba(168, 195, 160, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bubbleFloat 10s ease-in-out infinite;
+  border: 2px solid rgba(191, 227, 192, 0.3);
+  z-index: 10;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  opacity: 0;
+  animation-fill-mode: both;
+}
+
+.bubble1 {
+  background: radial-gradient(circle at 30% 30%, rgba(191, 227, 192, 0.2), rgba(191, 227, 192, 0.1));
+  border-color: rgba(191, 227, 192, 0.4);
+  animation-delay: 0.5s;
+  box-shadow: 
+    0 8px 32px rgba(191, 227, 192, 0.4),
+    0 4px 16px rgba(191, 227, 192, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.bubble2 {
+  background: radial-gradient(circle at 30% 30%, rgba(168, 195, 160, 0.2), rgba(168, 195, 160, 0.1));
+  border-color: rgba(168, 195, 160, 0.4);
+  animation-delay: 1.5s;
+  box-shadow: 
+    0 8px 32px rgba(168, 195, 160, 0.4),
+    0 4px 16px rgba(168, 195, 160, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.bubble3 {
+  background: radial-gradient(circle at 30% 30%, rgba(184, 198, 219, 0.2), rgba(184, 198, 219, 0.1));
+  border-color: rgba(184, 198, 219, 0.4);
+  animation-delay: 2.5s;
+  box-shadow: 
+    0 8px 32px rgba(184, 198, 219, 0.4),
+    0 4px 16px rgba(184, 198, 219, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.floatingCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(168, 195, 160, 0.1), transparent);
+  transition: left 0.6s ease-in-out;
+}
+
+.floatingCard:hover::before {
+  left: 100%;
+}
+
+.floatingBubble:hover {
+  transform: translateY(-15px) scale(1.1) rotate(2deg);
+  box-shadow: 
+    0 20px 50px rgba(191, 227, 192, 0.5),
+    0 10px 25px rgba(168, 195, 160, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  border-color: rgba(191, 227, 192, 0.6);
+  animation-play-state: paused;
+}
+
+.bubble1 {
+  top: 10%;
+  left: -10%;
+}
+
+.bubble2 {
+  top: 40%;
+  right: -12%;
+}
+
+.bubble3 {
+  bottom: 10%;
+  left: 0%;
+}
+
+@keyframes bubbleFloat {
+  0% {
+    transform: translateY(30px) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-5px) scale(1) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05) rotate(-0.5deg);
+  }
+  75% {
+    transform: translateY(-8px) scale(1.02) rotate(0.5deg);
+  }
+  100% {
+    transform: translateY(30px) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+.cardIcon {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-50);
+  border-radius: var(--radius-md);
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.cardTitle {
+  font-weight: 600;
+  color: var(--gray-900);
+  font-size: 0.9rem;
+}
+
+.cardSubtitle {
+  color: var(--gray-600);
+  font-size: 0.8rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    text-align: center;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .heroImage {
+    max-width: 400px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .trustIndicators {
+    justify-content: center;
+  }
+
+  .heroImage {
+    max-width: 350px;
+    height: 250px;
+  }
+
+  .floatingBubble {
+    width: 140px;
+    height: 140px;
+  }
+
+  .bubble1 {
+    left: -5%;
+    top: 5%;
+  }
+
+  .bubble2 {
+    right: -8%;
+    top: 35%;
+  }
+
+  .bubble3 {
+    left: 0%;
+    bottom: 5%;
+  }
+
+  .bubbleIcon {
+    font-size: 2rem;
+  }
+
+  .bubbleTitle {
+    font-size: 0.8rem;
+  }
+
+  .bubbleSubtitle {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .trustIndicators {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .heroImage {
+    max-width: 300px;
+    height: 200px;
+    padding: var(--spacing-sm);
+  }
+
+  .floatingBubble {
+    width: 120px;
+    height: 120px;
+  }
+
+  .bubble1 {
+    left: 0%;
+    top: 0%;
+  }
+
+  .bubble2 {
+    right: -5%;
+    top: 30%;
+  }
+
+  .bubble3 {
+    left: 0%;
+    bottom: 0%;
+  }
+
+  .bubbleIcon {
+    font-size: 1.8rem;
+  }
+
+  .bubbleTitle {
+    font-size: 0.75rem;
+  }
+
+  .bubbleSubtitle {
+    font-size: 0.65rem;
+  }
+}
+
+/* Bubble Content Styles */
+.bubbleGlow {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent 70%);
+  border-radius: 50%;
+  animation: bubbleGlowPulse 4s ease-in-out infinite;
+  z-index: -1;
+}
+
+.bubbleContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-md);
+  z-index: 2;
+  position: relative;
+}
+
+.bubbleIcon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-sm);
+  animation: iconFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.bubbleText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.bubbleTitle {
+  font-weight: 600;
+  color: var(--gray-800);
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.bubbleSubtitle {
+  color: var(--gray-600);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  opacity: 0.9;
+}
+
+/* Network Connection Lines */
+.networkConnections {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.connectionSvg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+}
+
+.connectionLine1 {
+  stroke-dasharray: 5, 5;
+  animation: connectionFlow 8s linear infinite;
+}
+
+.connectionLine2 {
+  stroke-dasharray: 3, 7;
+  animation: connectionFlow 12s linear infinite reverse;
+}
+
+.connectionLine3 {
+  stroke-dasharray: 2, 8;
+  animation: connectionFlow 10s linear infinite;
+}
+
+/* Enhanced Bubble Animations */
+@keyframes bubbleGlowPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+@keyframes connectionFlow {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    stroke-dashoffset: -20;
+    opacity: 0.3;
+  }
+}
+
+/* Enhanced Background Elements for Bubbles */
+.natureElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.floatingLeaf {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--primary-300);
+  border-radius: 50% 0 50% 0;
+  opacity: 0.3;
+  animation: leafFloatBubble 12s ease-in-out infinite;
+}
+
+.floatingLeaf:nth-child(1) {
+  top: 15%;
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 10s;
+}
+
+.floatingLeaf:nth-child(2) {
+  top: 70%;
+  right: 15%;
+  animation-delay: 4s;
+  animation-duration: 14s;
+}
+
+.floatingLeaf:nth-child(3) {
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 8s;
+  animation-duration: 11s;
+}
+
+.glowOrb {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, var(--secondary-300), transparent);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: orbFloatBubble 18s ease-in-out infinite;
+}
+
+.glowOrb:nth-child(4) {
+  top: 25%;
+  right: 25%;
+  animation-delay: 2s;
+  animation-duration: 16s;
+}
+
+.glowOrb:nth-child(5) {
+  bottom: 35%;
+  right: 10%;
+  animation-delay: 10s;
+  animation-duration: 13s;
+}
+
+.waveShape {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  width: 30px;
+  height: 15px;
+  background: linear-gradient(90deg, transparent, var(--primary-200), transparent);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: waveFloatBubble 11s ease-in-out infinite;
+}
+
+/* Bubble-specific Nature Animations */
+@keyframes leafFloatBubble {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-12px) rotate(3deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-6px) rotate(-2deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(-18px) rotate(1deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes orbFloatBubble {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.4;
+  }
+  33% {
+    transform: translateY(-15px) scale(1.3);
+    opacity: 0.7;
+  }
+  66% {
+    transform: translateY(-8px) scale(0.7);
+    opacity: 0.3;
+  }
+}
+
+@keyframes waveFloatBubble {
+  0%, 100% {
+    transform: translateX(0px) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateX(8px) scale(1.2);
+    opacity: 0.4;
+  }
+}
+
+/* Background Glow and Organic Shapes */
+.backgroundGlow {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(
+    circle at 30% 30%, 
+    rgba(191, 227, 192, 0.15) 0%, 
+    rgba(168, 195, 160, 0.1) 30%, 
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: gentlePulse 8s ease-in-out infinite;
+  z-index: 1;
+}
+
+.organicShape {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 60%;
+  height: 60%;
+  background: linear-gradient(
+    135deg, 
+    rgba(184, 198, 219, 0.08) 0%, 
+    rgba(191, 227, 192, 0.05) 50%, 
+    transparent 100%
+  );
+  border-radius: 60% 40% 70% 30%;
+  animation: organicFloat 12s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Nature Elements */
+.natureElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.floatingLeaf {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--primary-300);
+  border-radius: 50% 0 50% 0;
+  opacity: 0.4;
+  animation: leafFloat 10s ease-in-out infinite;
+}
+
+.floatingLeaf:nth-child(1) {
+  top: 20%;
+  left: 15%;
+  animation-delay: 0s;
+  animation-duration: 8s;
+}
+
+.floatingLeaf:nth-child(2) {
+  top: 60%;
+  right: 20%;
+  animation-delay: 3s;
+  animation-duration: 12s;
+}
+
+.floatingLeaf:nth-child(3) {
+  bottom: 25%;
+  left: 25%;
+  animation-delay: 6s;
+  animation-duration: 10s;
+}
+
+.glowOrb {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, var(--secondary-300), transparent);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: orbFloat 15s ease-in-out infinite;
+}
+
+.glowOrb:nth-child(4) {
+  top: 30%;
+  right: 30%;
+  animation-delay: 2s;
+  animation-duration: 14s;
+}
+
+.glowOrb:nth-child(5) {
+  bottom: 40%;
+  right: 15%;
+  animation-delay: 8s;
+  animation-duration: 11s;
+}
+
+.waveShape {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  width: 40px;
+  height: 20px;
+  background: linear-gradient(90deg, transparent, var(--primary-200), transparent);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: waveFloat 9s ease-in-out infinite;
+}
+
+/* Meditation Illustration */
+.meditationIllustration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  z-index: 3;
+  opacity: 0.6;
+}
+
+.meditationSvg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 8px rgba(62, 98, 87, 0.1));
+}
+
+.treeSilhouette {
+  animation: treeSway 8s ease-in-out infinite;
+}
+
+.personHead {
+  animation: gentleBreathe 4s ease-in-out infinite;
+}
+
+.personBody {
+  animation: gentleBreathe 4s ease-in-out infinite 0.2s;
+}
+
+.peacefulAura {
+  animation: auraPulse 6s ease-in-out infinite;
+}
+
+.peacefulAura:nth-child(2) {
+  animation-delay: 1s;
+}
+
+/* Enhanced Animations */
+@keyframes organicFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    border-radius: 60% 40% 70% 30%;
+  }
+  25% {
+    transform: translateY(-10px) rotate(2deg);
+    border-radius: 50% 60% 40% 50%;
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+    border-radius: 70% 30% 60% 40%;
+  }
+  75% {
+    transform: translateY(-15px) rotate(1deg);
+    border-radius: 40% 70% 30% 60%;
+  }
+}
+
+@keyframes leafFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translateY(-15px) rotate(5deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-8px) rotate(-3deg);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-20px) rotate(2deg);
+    opacity: 0.7;
+  }
+}
+
+@keyframes orbFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.6;
+  }
+  33% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translateY(-10px) scale(0.8);
+    opacity: 0.4;
+  }
+}
+
+@keyframes waveFloat {
+  0%, 100% {
+    transform: translateX(0px) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(10px) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes treeSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1deg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
+}
+
+@keyframes gentleBreathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.25;
+  }
+}
+
+@keyframes auraPulse {
+  0%, 100% {
+    stroke-opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    stroke-opacity: 0.2;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+}
+
+/* Responsive Nature Elements */
+@media (max-width: 768px) {
+  .floatingLeaf {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .glowOrb {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .waveShape {
+    width: 30px;
+    height: 15px;
+  }
+  
+  .meditationIllustration {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .backgroundGlow {
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+  }
+  
+  .organicShape {
+    width: 50%;
+    height: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .floatingLeaf {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .glowOrb {
+    width: 5px;
+    height: 5px;
+  }
+  
+  .waveShape {
+    width: 25px;
+    height: 12px;
+  }
+  
+  .meditationIllustration {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .backgroundGlow {
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+  }
+  
+  .organicShape {
+    width: 40%;
+    height: 40%;
+  }
+}

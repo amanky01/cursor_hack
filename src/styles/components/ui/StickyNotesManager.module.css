@@ -1,0 +1,241 @@
+.managerButton {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: #4ecdc4;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.managerButton:hover {
+  background: #45b7aa;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.noteCount {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff6b6b;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.managerPanel {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  width: 320px;
+  max-height: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  overflow: hidden;
+  border: 1px solid #e1e8ed;
+}
+
+.panelHeader {
+  padding: 20px;
+  border-bottom: 1px solid #e1e8ed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+.panelHeader h3 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.addButton {
+  background: #4ecdc4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.addButton:hover:not(:disabled) {
+  background: #45b7aa;
+}
+
+.addButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.notesList {
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.emptyState p {
+  margin: 16px 0;
+  font-size: 16px;
+}
+
+.createFirstNote {
+  background: #4ecdc4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.createFirstNote:hover {
+  background: #45b7aa;
+}
+
+.noteItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: #f8f9fa;
+  transition: background-color 0.2s ease;
+}
+
+.noteItem:hover {
+  background: #e9ecef;
+}
+
+.notePreview {
+  flex: 1;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.deleteButton {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.deleteButton:hover {
+  background: #ff5252;
+}
+
+.panelFooter {
+  padding: 12px 20px;
+  border-top: 1px solid #e1e8ed;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+.panelFooter small {
+  color: #666;
+  font-size: 12px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .managerButton {
+    top: 15px;
+    right: 15px;
+    width: 48px;
+    height: 48px;
+  }
+  
+  .managerPanel {
+    top: 75px;
+    right: 15px;
+    left: 15px;
+    width: auto;
+    max-height: 60vh;
+  }
+  
+  .panelHeader {
+    padding: 16px;
+  }
+  
+  .panelHeader h3 {
+    font-size: 16px;
+  }
+  
+  .addButton {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  
+  .notesList {
+    max-height: 250px;
+    padding: 10px;
+  }
+  
+  .noteItem {
+    padding: 10px;
+  }
+  
+  .notePreview {
+    padding: 10px;
+    font-size: 12px;
+    min-height: 35px;
+  }
+}

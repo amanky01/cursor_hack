@@ -1,0 +1,378 @@
+.cta {
+  padding: var(--spacing-3xl) 0;
+  background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-900) 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: 1;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: var(--spacing-lg);
+}
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.checkIcon {
+  color: var(--success-400);
+  flex-shrink: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.primaryButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  color: white;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.primaryButton:hover::before {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+}
+
+.primaryButton:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(62, 98, 87, 0.25);
+  background: linear-gradient(135deg, var(--primary-700), var(--primary-800));
+}
+
+.secondaryButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: transparent;
+  color: white;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all var(--transition-normal);
+}
+
+.secondaryButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.visualContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctaImage {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: var(--radius-2xl);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: visible;
+  padding: var(--spacing-md);
+}
+
+.floatingElement {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  animation: float 6s ease-in-out infinite;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  max-width: 180px;
+  min-width: 120px;
+  z-index: 10;
+}
+
+.floatingElement::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.6s ease-in-out;
+}
+
+.floatingElement:hover::before {
+  left: 100%;
+}
+
+.floatingElement:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.floatingElement:nth-child(1) {
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.floatingElement:nth-child(2) {
+  top: 40%;
+  right: 5%;
+  animation-delay: 1.5s;
+}
+
+.floatingElement:nth-child(3) {
+  bottom: 40%;
+  left: 5%;
+  animation-delay: 3s;
+}
+
+.floatingElement:nth-child(4) {
+  bottom: 10%;
+  right: 5%;
+  animation-delay: 4.5s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.elementIcon {
+  font-size: 1.2rem;
+}
+
+.elementText {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 140px;
+  line-height: 1.2;
+  text-align: center;
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    text-align: center;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .ctaImage {
+    max-width: 350px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cta {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .ctaImage {
+    max-width: 300px;
+    height: 200px;
+  }
+
+  .floatingElement {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.8rem;
+    max-width: 160px;
+    min-width: 100px;
+  }
+
+  .floatingElement:nth-child(1) {
+    top: 5%;
+    left: 5%;
+  }
+
+  .floatingElement:nth-child(2) {
+    top: 35%;
+    right: 5%;
+  }
+
+  .floatingElement:nth-child(3) {
+    bottom: 35%;
+    left: 5%;
+  }
+
+  .floatingElement:nth-child(4) {
+    bottom: 5%;
+    right: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .benefit {
+    font-size: 0.9rem;
+  }
+
+  .ctaImage {
+    max-width: 250px;
+    height: 150px;
+  }
+
+  .floatingElement {
+    padding: var(--spacing-xs);
+    font-size: 0.75rem;
+    max-width: 140px;
+    min-width: 100px;
+  }
+
+  .elementIcon {
+    font-size: 1rem;
+  }
+
+  .elementText {
+    max-width: 100px;
+    font-size: 0.7rem;
+  }
+}

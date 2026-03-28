@@ -1,0 +1,328 @@
+.checkInWidget {
+  background: white;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--gray-200);
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.4s ease-out;
+}
+
+.checkInWidget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-500), var(--secondary-500));
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.heartIcon {
+  color: var(--primary-500);
+  width: 20px;
+  height: 20px;
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+.header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: var(--gray-400);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.closeButton:hover {
+  color: var(--gray-600);
+  background: var(--gray-100);
+}
+
+/* Content */
+.content {
+  padding: var(--spacing-lg);
+}
+
+/* Mood Selector */
+.moodSelector {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.moodButton {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.moodButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, var(--mood-color, var(--primary-200)) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.moodButton:hover::before {
+  width: 100px;
+  height: 100px;
+  opacity: 0.1;
+}
+
+.moodButton:hover {
+  transform: translateY(-2px) scale(1.05);
+  border-color: var(--mood-color, var(--primary-300));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.moodButton.selected {
+  border-color: var(--mood-color, var(--primary-500));
+  background: var(--primary-50);
+  transform: scale(1.05);
+}
+
+.moodEmoji {
+  font-size: 1.5rem;
+  z-index: 1;
+  position: relative;
+}
+
+.moodLabel {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  z-index: 1;
+  position: relative;
+}
+
+/* Note Section */
+.noteSection {
+  margin-bottom: var(--spacing-lg);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.noteLabel {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  margin-bottom: var(--spacing-sm);
+}
+
+.noteInput {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: all var(--transition-fast);
+  background: var(--gray-50);
+}
+
+.noteInput:focus {
+  outline: none;
+  border-color: var(--primary-300);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(168, 195, 160, 0.1);
+}
+
+.noteInput::placeholder {
+  color: var(--gray-400);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.submitButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.submitButton:hover::before {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(62, 98, 87, 0.3);
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submitButton:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Submitted State */
+.submittedContent {
+  padding: var(--spacing-xl);
+  text-align: center;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.successIcon {
+  width: 48px;
+  height: 48px;
+  color: var(--success-500);
+  margin: 0 auto var(--spacing-md) auto;
+  animation: bounceIn 0.6s ease-out;
+}
+
+.submittedContent h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.submittedContent p {
+  font-size: 1rem;
+  color: var(--gray-600);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .checkInWidget {
+    max-width: 100%;
+    margin: 0 var(--spacing-sm);
+  }
+
+  .moodSelector {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .moodButton {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  .moodEmoji {
+    font-size: 1.25rem;
+  }
+
+  .moodLabel {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,229 @@
+.selectorContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.selectorHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.selectorHeader h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-700);
+  margin-bottom: 1rem;
+}
+
+.selectorHeader p {
+  font-size: 1.1rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.disclaimer {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.1));
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.5rem;
+  color: var(--gray-700);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.assessmentsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.assessmentCard {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gray-200);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.assessmentCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary-300);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cardIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardInfo h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary-700);
+  margin-bottom: 0.5rem;
+}
+
+.cardInfo p {
+  color: var(--gray-600);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.cardDetails {
+  margin-bottom: 1.5rem;
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.detailItem:last-child {
+  border-bottom: none;
+}
+
+.detailLabel {
+  font-weight: 500;
+  color: var(--gray-600);
+}
+
+.detailValue {
+  color: var(--primary-600);
+  font-weight: 600;
+}
+
+.startButton {
+  width: 100%;
+  background: var(--primary-600);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.startButton:hover {
+  background: var(--primary-700);
+  transform: translateY(-1px);
+}
+
+.completedSection {
+  background: var(--gray-50);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.completedSection h3 {
+  color: var(--primary-700);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.completedList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.completedItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+}
+
+.completedTest {
+  font-weight: 600;
+  color: var(--primary-700);
+}
+
+.completedScore {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+}
+
+.completedSeverity {
+  background: var(--primary-100);
+  color: var(--primary-700);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.viewResultsButton {
+  background: var(--secondary-600);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewResultsButton:hover {
+  background: var(--secondary-700);
+  transform: translateY(-1px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .selectorContainer {
+    padding: 1rem;
+  }
+  
+  .selectorHeader h1 {
+    font-size: 2rem;
+  }
+  
+  .assessmentsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .assessmentCard {
+    padding: 1.5rem;
+  }
+  
+  .cardHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .cardIcon {
+    align-self: center;
+  }
+}
+

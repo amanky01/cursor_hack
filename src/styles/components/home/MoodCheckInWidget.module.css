@@ -1,0 +1,202 @@
+.widget {
+  background: white;
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--gray-200);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.5s ease-out;
+}
+
+.widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-500), var(--secondary-500));
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.heartIcon {
+  color: var(--primary-500);
+  width: 24px;
+  height: 24px;
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+.header h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin: 0;
+}
+
+/* Mood Options */
+.moodOptions {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.moodButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-xl);
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.moodButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, var(--mood-color, var(--primary-200)) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.moodButton:hover::before {
+  width: 120px;
+  height: 120px;
+  opacity: 0.1;
+}
+
+.moodButton:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: var(--mood-color, var(--primary-300));
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.moodEmoji {
+  font-size: 2rem;
+  z-index: 1;
+  position: relative;
+}
+
+.moodLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  z-index: 1;
+  position: relative;
+}
+
+/* Submitted State */
+.submittedContent {
+  text-align: center;
+  padding: var(--spacing-lg) 0;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.encouragementMessage {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--primary-600);
+  line-height: 1.5;
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary-50), var(--secondary-50));
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--primary-100);
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .widget {
+    margin: 0 var(--spacing-md);
+    padding: var(--spacing-lg);
+  }
+
+  .moodOptions {
+    gap: var(--spacing-sm);
+  }
+
+  .moodButton {
+    min-width: 80px;
+    padding: var(--spacing-md);
+  }
+
+  .moodEmoji {
+    font-size: 1.5rem;
+  }
+
+  .moodLabel {
+    font-size: 0.8rem;
+  }
+
+  .header h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .moodOptions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .moodButton {
+    width: 100%;
+    max-width: 200px;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  .moodEmoji {
+    font-size: 1.25rem;
+  }
+
+  .moodLabel {
+    font-size: 0.9rem;
+  }
+}
