@@ -1,10 +1,10 @@
 .hero {
-  /* Slightly richer than primary-50 — same mint/teal family, a touch deeper for day mode */
+  /* Mint + soft sky — same stops as inner-page heroes (Our Story, Guides) for consistency */
   background: linear-gradient(
     135deg,
-    var(--primary-50) 0%,
-    var(--primary-100) 35%,
-    var(--primary-200) 68%,
+    var(--primary-100) 0%,
+    var(--secondary-200) 38%,
+    var(--primary-200) 72%,
     var(--primary-50) 100%
   );
   background-size: 200% 200%;

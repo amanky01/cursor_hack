@@ -9,7 +9,7 @@
   background: linear-gradient(
     135deg,
     var(--primary-100) 0%,
-    var(--primary-200) 38%,
+    var(--secondary-200) 38%,
     var(--primary-200) 72%,
     var(--primary-50) 100%
   );
@@ -219,11 +219,12 @@
   background: linear-gradient(
     135deg,
     var(--primary-100) 0%,
-    var(--primary-100) 42%,
-    var(--primary-200) 100%
+    var(--secondary-200) 38%,
+    var(--primary-200) 72%,
+    var(--primary-50) 100%
   );
   background-size: 200% 200%;
-  animation: aboutStatsMintShift 22s ease-in-out infinite;
+  animation: aboutStatsMintShift 18s ease-in-out infinite;
   color: var(--gray-900);
   position: relative;
   overflow: hidden;
@@ -231,10 +232,10 @@
 
 @keyframes aboutStatsMintShift {
   0%, 100% {
-    background-position: 0% 40%;
+    background-position: 0% 50%;
   }
   50% {
-    background-position: 100% 55%;
+    background-position: 100% 50%;
   }
 }
 
