@@ -68,7 +68,6 @@ const MoodCheckInWidget: React.FC<MoodCheckInWidgetProps> = ({ onMoodSelect }) =
       
       <div className={styles.moodOptions}>
         {moodOptions.map((mood) => {
-          const IconComponent = mood.icon;
           return (
             <button
               key={mood.value}

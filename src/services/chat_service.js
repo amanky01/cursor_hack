@@ -31,7 +31,7 @@ export async function getChatbotHealth() {
   try {
     const res = await api.get('/api/chatbot/health');
     return Boolean(res?.data?.ok);
-  } catch (e) {
+  } catch {
     return false;
   }
 }

@@ -16,7 +16,7 @@ import homeStyles from '@/styles/pages/Home.module.css';
 
 const HomePage: React.FC = () => {
   const [showCheckIn, setShowCheckIn] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // This would come from auth context
+  const [isLoggedIn] = useState(false); // This would come from auth context
 
   const handleMoodSubmit = (mood: string, note?: string) => {
     console.log('Mood submitted:', mood, note);

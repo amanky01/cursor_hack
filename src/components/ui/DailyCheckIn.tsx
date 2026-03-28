@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Smile, Meh, Frown, CheckCircle, X } from 'lucide-react';
+import { Heart, CheckCircle, X } from 'lucide-react';
 import styles from '../../styles/components/ui/DailyCheckIn.module.css';
 
 interface DailyCheckInProps {

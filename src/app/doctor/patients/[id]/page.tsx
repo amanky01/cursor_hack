@@ -25,7 +25,7 @@ const sectionCard: React.CSSProperties = {
   borderRadius: 12,
   padding: 20,
 };
-const sectionTitle = (iconColor: string): React.CSSProperties => ({
+const sectionTitle = (_iconColor: string): React.CSSProperties => ({
   margin: "0 0 12px",
   fontSize: 14,
   fontWeight: 800,

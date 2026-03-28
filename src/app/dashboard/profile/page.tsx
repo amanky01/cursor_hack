@@ -8,7 +8,7 @@ import { useMutation } from "convex/react";
 import { api } from "@cvx/_generated/api";
 import type { Id } from "@cvx/_generated/dataModel";
 import {
-  User, Mail, Phone, GraduationCap, Briefcase, BookOpen,
+  User, Mail, Phone, GraduationCap, Briefcase,
   CheckCircle, ArrowLeft, Save
 } from "lucide-react";
 import Link from "next/link";

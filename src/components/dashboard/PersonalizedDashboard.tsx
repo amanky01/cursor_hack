@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Smile, Meh, Frown, TrendingUp, Calendar, MessageCircle } from 'lucide-react';
+import { Heart, TrendingUp, Calendar, MessageCircle } from 'lucide-react';
 import styles from '../../styles/components/dashboard/PersonalizedDashboard.module.css';
 
 interface PersonalizedDashboardProps {

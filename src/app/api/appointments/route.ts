@@ -4,7 +4,6 @@ import { api } from "@cvx/_generated/api";
 import {
   createAppointmentOnProvider,
   fetchAppointmentsFromProvider,
-  healthAppointmentsConfigErrorMessage,
   isHealthAppointmentsApiConfigured,
 } from "@/lib/healthAppointmentsApi";
 import { MEDICAL_DISCLAIMER } from "@/lib/medicalDisclaimer";
