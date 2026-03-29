@@ -1650,3 +1650,41 @@
     transform: none;
   }
 }
+
+/* Chat shells: fewer layered gradients + no backdrop blur on narrow / touch — smoother scroll & compositing */
+@media (max-width: 768px), (pointer: coarse) {
+  .surfaceGradientScreen {
+    background: linear-gradient(
+      168deg,
+      rgba(250, 252, 250, 0.98) 0%,
+      rgba(241, 250, 247, 0.96) 100%
+    );
+  }
+
+  [data-theme="dark"] .surfaceGradientScreen {
+    background: linear-gradient(168deg, #0b1220 0%, #0f172a 52%, #0a1624 100%);
+  }
+
+  .header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .inputBar {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .headerHeartbeat {
+    animation: none;
+  }
+
+  .anonStatusOnline {
+    animation: none;
+  }
+
+  .anonymousChatCard {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

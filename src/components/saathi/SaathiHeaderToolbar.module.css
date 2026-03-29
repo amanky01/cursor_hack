@@ -449,3 +449,16 @@
   border-color: rgba(255, 255, 255, 0.15);
   background: #6ee7b7;
 }
+
+@media (max-width: 768px), (pointer: coarse) {
+  .langMenuPanel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .modeToggleMemory:not(:hover):not(:active):not(.modeToggleMemoryGradient),
+  .modeToggleMemory.modeToggleMemoryGradient:not(:hover):not(:active),
+  [data-theme="dark"] .modeToggleMemory:not(:hover):not(:active):not(.modeToggleMemoryGradient) {
+    animation: none;
+  }
+}

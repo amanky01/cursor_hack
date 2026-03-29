@@ -208,6 +208,31 @@
   }
 }
 
+/* Lighter motion on phones / touch — animated full-viewport gradients are a common jank source */
+@media (max-width: 900px), (pointer: coarse) {
+  .gradientWaves {
+    animation: none;
+    opacity: 0.36;
+  }
+
+  [data-theme="dark"] .gradientWaves {
+    animation: none;
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+  }
+
+  .leafPatterns {
+    animation: none;
+  }
+
+  .branchSilhouette {
+    animation: none;
+  }
+
+  .floatingLeaf {
+    animation: none;
+  }
+}
+
 /*
  * Page shell matching Health Tools dark ambient (patternSection-style).
  * Apply to Our Story, Guides, Reach Out, health subpages.
@@ -302,6 +327,18 @@
     opacity: 0.1;
   }
 
+  [data-theme="dark"] .ambient-health-tools-dark::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+  [data-theme="dark"] .ambient-health-tools-dark {
+    animation: none;
+    background-size: 100% 100%, 100% 100%;
+  }
+
+  [data-theme="dark"] .ambient-health-tools-dark::before,
   [data-theme="dark"] .ambient-health-tools-dark::after {
     animation: none;
   }

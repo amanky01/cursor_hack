@@ -4,8 +4,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  Menu,
-  X,
   Heart,
   User,
   UserPlus,
@@ -244,19 +242,33 @@ const Header: React.FC = () => {
           </div>
 
         <button
-          className={styles.mobileMenuButton}
+          type="button"
+          className={`${styles.mobileMenuButton} ${isMenuOpen ? styles.mobileMenuButtonOpen : ""}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="site-mobile-nav"
         >
-          {isMenuOpen ? <X size={26} strokeWidth={2} /> : <Menu size={26} strokeWidth={2} />}
+          <span className={styles.hamburger} aria-hidden>
+            <span className={styles.hamburgerLine} />
+            <span className={styles.hamburgerLine} />
+            <span className={styles.hamburgerLine} />
+          </span>
         </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className={styles.mobileMenu}>
-          <nav className={styles.mobileNav}>
+        <>
+          <button
+            type="button"
+            className={styles.mobileMenuBackdrop}
+            aria-label="Close menu"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          <div className={styles.mobileMenu} id="site-mobile-nav">
+            <nav className={styles.mobileNav} aria-label="Primary">
             <ul className={styles.mobileNavList}>
               {navigation.map((item) => {
                 const IconComponent = item.icon;
@@ -269,7 +281,7 @@ const Header: React.FC = () => {
                     >
                       <IconComponent size={22} strokeWidth={2} aria-hidden />
                       <div>
-                        <span>{item.name}</span>
+                        <span className={styles.mobileNavTitle}>{item.name}</span>
                         <small>{item.description}</small>
                       </div>
                     </Link>
@@ -277,6 +289,9 @@ const Header: React.FC = () => {
                 );
               })}
             </ul>
+            <p className={styles.mobileMenuFootnote} role="note">
+              You&apos;re not alone in this <span aria-hidden>🤗</span>
+            </p>
             <div className={styles.mobileAuthButtons}>
               {isAuthenticated ? (
                 <>
@@ -359,6 +374,7 @@ const Header: React.FC = () => {
             </div>
           </nav>
         </div>
+        </>
       )}
     </header>
   );
