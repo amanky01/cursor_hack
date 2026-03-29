@@ -1,0 +1,9 @@
+SEHAT SAATHI — PROJECT BLURB
+
+Live demo: https://REPLACE_WITH_YOUR_DEMO_URL
+
+What it is: A student-focused health and wellbeing web app. AI chat (Saathi), mood/dashboard, peer support, counsellor bookings, plus tools for symptom guidance, medicine search, label photo check, hospitals, and mental-health articles.
+
+Stack: Next.js, React, Clerk, Convex, Gemini/OpenAI, Exa, Apify.
+
+Note: General information only—not a substitute for professional or emergency care.
