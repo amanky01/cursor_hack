@@ -58,3 +58,19 @@ export const listRecent = query({
     return await ctx.db.query("appointments").order("desc").take(n);
   },
 });
+
+/** Returns booked dates (YYYY-MM-DD) for a counsellor that are pending or confirmed. */
+export const getBookedDates = query({
+  args: { counsellorId: v.string() },
+  handler: async (ctx, { counsellorId }) => {
+    if (!counsellorId) return [];
+    const appts = await ctx.db
+      .query("appointments")
+      .withIndex("by_counsellorId", (q) => q.eq("counsellorId", counsellorId))
+      .collect();
+    return appts
+      .filter((a) => a.status === "pending" || a.status === "confirmed")
+      .map((a) => a.preferredDate ?? "")
+      .filter(Boolean);
+  },
+});

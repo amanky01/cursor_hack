@@ -39,7 +39,7 @@ const tools = [
   {
     href: "/appointments",
     title: "Appointments",
-    description: "Book with a hospital and doctor via your connected appointment API.",
+    description: "Book a session with our registered portal counsellors — available anytime.",
     Icon: CalendarCheck,
     accent: "calendar" as const,
     iconMotion: "calendarTick" as const,
