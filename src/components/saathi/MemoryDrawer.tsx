@@ -3,6 +3,7 @@
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@cvx/_generated/api";
 import { useEffect, useRef, useState } from "react";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { NotebookPen, X } from "lucide-react";
 import styles from "@/styles/components/saathi-chat.module.css";
 
@@ -20,6 +21,8 @@ export default function MemoryDrawer({ anonymousId, onClose }: Props) {
   const [text, setText] = useState<string>("");
   const [saving, setSaving] = useState(false);
   const initialized = useRef(false);
+
+  useBodyScrollLock(true);
 
   // Initialise textarea once profile loads (don't overwrite mid-edit)
   useEffect(() => {

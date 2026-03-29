@@ -60,11 +60,11 @@ const Footer: React.FC = () => {
               </div>
               <div className={styles.contactItem}>
                 <Phone size={14} strokeWidth={2} aria-hidden />
-                <span>+1 (555) 123-4567</span>
+                <a href="tel:+919876543210">+91 98765 43210</a>
               </div>
               <div className={styles.contactItem}>
                 <MapPin size={14} strokeWidth={2} aria-hidden />
-                <span>123 University Ave, College Town</span>
+                <span>NIT Srinagar, Jammu And Kashmir</span>
               </div>
             </div>
           </div>

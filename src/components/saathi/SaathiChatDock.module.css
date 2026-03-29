@@ -1,7 +1,7 @@
 .fab {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  right: calc(2rem + env(safe-area-inset-right, 0px));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,6 +45,8 @@
   background: rgba(15, 23, 42, 0.35);
   z-index: 1998;
   animation: fadeIn 0.22s ease-out;
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
 @keyframes fadeIn {
@@ -58,15 +60,16 @@
 
 .sheet {
   position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  width: min(400px, calc(100vw - 2rem));
-  height: min(70vh, 620px);
-  max-height: calc(100vh - 5.5rem);
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  right: calc(1rem + env(safe-area-inset-right, 0px));
+  width: min(400px, calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)));
+  height: min(70dvh, 620px);
+  max-height: calc(100dvh - 5.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
   z-index: 1999;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  overscroll-behavior: contain;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.55);
@@ -198,6 +201,16 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+
+/* Tablet / small laptop: slightly wider sheet, clear of notches */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .sheet {
+    width: min(420px, calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)));
+    height: min(72dvh, 640px);
+  }
 }
 
 @media (max-width: 480px) {
@@ -206,13 +219,14 @@
     right: 0;
     left: 0;
     width: 100%;
-    height: min(85vh, 100%);
-    max-height: none;
+    height: min(88dvh, 100%);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px));
     border-radius: 20px 20px 0 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   .fab {
-    bottom: 1.25rem;
-    right: 1rem;
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    right: calc(1rem + env(safe-area-inset-right, 0px));
   }
 }

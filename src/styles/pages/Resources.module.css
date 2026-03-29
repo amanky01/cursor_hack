@@ -9,7 +9,7 @@
   background: linear-gradient(
     135deg,
     var(--primary-100) 0%,
-    var(--primary-200) 38%,
+    var(--secondary-200) 38%,
     var(--primary-200) 72%,
     var(--primary-50) 100%
   );
